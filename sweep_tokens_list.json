@@ -1,0 +1,363 @@
+{
+  "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e": {
+    "symbol": "YFI",
+    "threshold": 8972881948721543.0
+  },
+  "0x0d438F3b5175Bebc262bF23753C1E53d03432bDE": {
+    "symbol": "wNXM",
+    "threshold": 1.7156447794542067e+18
+  },
+  "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599": {
+    "symbol": "WBTC",
+    "threshold": 297818.12485369685
+  },
+  "0x2ba592F78dB6436527729929AAf6c908497cB200": {
+    "symbol": "CREAM",
+    "threshold": 4.27168278415298e+18
+  },
+  "0x408e41876cCCDC0F92210600ef50372656052a38": {
+    "symbol": "REN",
+    "threshold": 8.59697386519945e+20
+  },
+  "0x4Fabb145d64652a948d72533023f6E7A623C7C53": {
+    "symbol": "BUSD",
+    "threshold": 5.015512981652251e+19
+  },
+  "0x514910771AF9Ca656af840dff83E8264EcF986CA": {
+    "symbol": "LINK",
+    "threshold": 8.329589182995577e+18
+  },
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": {
+    "symbol": "USDC",
+    "threshold": 50010002.00040008
+  },
+  "0xba100000625a3754423978a60c9317c58a424e3D": {
+    "symbol": "BAL",
+    "threshold": 9.066676337788093e+18
+  },
+  "0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55": {
+    "symbol": "BAND",
+    "threshold": 3.133212934404307e+19
+  },
+  "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD": {
+    "symbol": "LRC",
+    "threshold": 2.4297085321644815e+20
+  },
+  "0xc00e94Cb662C3520282E6f5717214004A7f26888": {
+    "symbol": "COMP",
+    "threshold": 1.4957022640714396e+18
+  },
+  "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F": {
+    "symbol": "SNX",
+    "threshold": 3.19693094629156e+19
+  },
+  "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2": {
+    "symbol": "WETH",
+    "threshold": 4.116141035456438e+16
+  },
+  "0xdAC17F958D2ee523a2206206994597C13D831ec7": {
+    "symbol": "USDT",
+    "threshold": 50015004.5013504
+  },
+  "0xdB25f211AB05b1c97D595516F45794528a807ad8": {
+    "symbol": "EURS",
+    "threshold": 4721.39073285427
+  },
+  "0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D": {
+    "symbol": "renBTC",
+    "threshold": 282093.09968138183
+  },
+  "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0": {
+    "symbol": "MATIC",
+    "threshold": 6.299212598425197e+19
+  },
+  "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
+    "symbol": "DAI",
+    "threshold": 4.9986653563498545e+19
+  },
+  "0x57Ab1ec28D129707052df4dF418D58a2D46d5f51": {
+    "symbol": "sUSD",
+    "threshold": 5.001000200040008e+19
+  },
+  "0x0000000000085d4780B73119b644AE5ecd22b376": {
+    "symbol": "TUSD",
+    "threshold": 5.022036697026553e+19
+  },
+  "0x056Fd409E1d7A124BD7017459dFEa2F387b6d5Cd": {
+    "symbol": "GUSD",
+    "threshold": 6687.397599224262
+  },
+  "0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa": {
+    "symbol": "TBTC",
+    "threshold": 2.2357874901876874e+18
+  },
+  "0x45804880De22913dAFE09f4980848ECE6EcbAf78": {
+    "symbol": "PAXG",
+    "threshold": 2.8560069823658705e+19
+  },
+  "0xFca59Cd816aB1eaD66534D82bc21E7515cE441CF": {
+    "symbol": "RARI",
+    "threshold": 2.9528244947422007e+19
+  },
+  "0xD533a949740bb3306d119CC777fa900bA034cd52": {
+    "symbol": "CRV",
+    "threshold": 9.539144834743855e+19
+  },
+  "0x674C6Ad92Fd080e4004b2312b45f796a192D27a0": {
+    "symbol": "USDN",
+    "threshold": 7.953943485640745e+19
+  },
+  "0x6B3595068778DD592e39A122f4f5a5cF09C90fE2": {
+    "symbol": "SUSHI",
+    "threshold": 5.327769721006011e+19
+  },
+  "0x1494CA1F11D487c2bBe4543E90080AeBa4BA3C2b": {
+    "symbol": "DPI",
+    "threshold": 8.315408915056335e+17
+  },
+  "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984": {
+    "symbol": "UNI",
+    "threshold": 9.368043057024776e+18
+  },
+  "0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5": {
+    "symbol": "PICKLE",
+    "threshold": 5.90929934619512e+19
+  },
+  "0xa0246c9032bC3A600820415aE600c6388619A14D": {
+    "symbol": "FARM",
+    "threshold": 1.5959874067656077e+18
+  },
+  "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9": {
+    "symbol": "AAVE",
+    "threshold": 6.155988286237745e+17
+  },
+  "0xbC396689893D065F41bc2C6EcbeE5e0085233447": {
+    "symbol": "PERP",
+    "threshold": 1.2712553901228542e+20
+  },
+  "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5": {
+    "symbol": "mUSD",
+    "threshold": 5.001000200040008e+19
+  },
+  "0x584bC13c7D411c00c01A62e8019472dE68768430": {
+    "symbol": "HEGIC",
+    "threshold": 3.4504175005175623e+21
+  },
+  "0xfF20817765cB7f73d4bde2e66e067E58D11095C2": {
+    "symbol": "AMP",
+    "threshold": 1.5807777426493835e+22
+  },
+  "0x0391D2021f89DC339F60Fff84546EA23E337750f": {
+    "symbol": "BOND",
+    "threshold": 4.1195554307604895e+18
+  },
+  "0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44": {
+    "symbol": "KP3R",
+    "threshold": 3.0479232593881754e+17
+  },
+  "0x0954906da0Bf32d5479e25f46056d22f08464cab": {
+    "symbol": "INDEX",
+    "threshold": 3.13634769801488e+19
+  },
+  "0x8888801aF4d980682e47f1A9036e589479e835C5": {
+    "symbol": "MPH",
+    "threshold": 4.614700219844319e+19
+  },
+  "0x3472A5A71965499acd81997a54BBA8D852C6E53d": {
+    "symbol": "BADGER",
+    "threshold": 1.7680677070920026e+19
+  },
+  "0xc944E90C64B2c07662A292be6244BDf05Cda44a7": {
+    "symbol": "GRT",
+    "threshold": 8.604815254616484e+20
+  },
+  "0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32": {
+    "symbol": "LDO",
+    "threshold": 5.588046944064768e+19
+  },
+  "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84": {
+    "symbol": "stETH",
+    "threshold": 4.181394776063918e+16
+  },
+  "0x111111111117dC0aa78b770fA6A738034120C302": {
+    "symbol": "1INCH",
+    "threshold": 3.676830160596588e+19
+  },
+  "0xc770EEfAd204B5180dF6a14Ee197D99d808ee52d": {
+    "symbol": "FOX",
+    "threshold": 1.7590768364762172e+21
+  },
+  "0xfFffFffF2ba8F66D4e51811C5190992176930278": {
+    "symbol": "COMBO",
+    "threshold": 1.5151056028605193e+21
+  },
+  "0x853d955aCEf822Db058eb8505911ED77F175b99e": {
+    "symbol": "FRAX",
+    "threshold": 4.984513117743172e+19
+  },
+  "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F": {
+    "symbol": "SDT",
+    "threshold": 1.5998976065531802e+20
+  },
+  "0x8290333ceF9e6D528dD5618Fb97a76f268f3EDD4": {
+    "symbol": "ANKR",
+    "threshold": 2.883672645481285e+21
+  },
+  "0x4E15361FD6b4BB609Fa63C81A2be19d873717870": {
+    "symbol": "FTM",
+    "threshold": 2.449719507116435e+20
+  },
+  "0x3832d2F059E55934220881F831bE501D180671A7": {
+    "symbol": "renDOGE",
+    "threshold": 68619109049.4881
+  },
+  "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE": {
+    "symbol": "SHIB",
+    "threshold": 6.25e+24
+  },
+  "0x875773784Af8135eA0ef43b5a374AaD105c5D39e": {
+    "symbol": "IDLE",
+    "threshold": 1.9577287214465263e+20
+  },
+  "0x03ab458634910AaD20eF5f1C8ee96F1D6ac54919": {
+    "symbol": "RAI",
+    "threshold": 2.071720476843759e+19
+  },
+  "0xf99d58e463A2E07e5692127302C20A191861b4D6": {
+    "symbol": "ANY",
+    "threshold": 1.2037761977813922e+19
+  },
+  "0xdBdb4d16EdA451D0503b854CF79D55697F90c8DF": {
+    "symbol": "ALCX",
+    "threshold": 3.200023101606775e+17
+  },
+  "0x41D5D79431A913C4aE7d69a668ecdfE5fF9DFB68": {
+    "symbol": "INV",
+    "threshold": 1.0007161925646948e+18
+  },
+  "0x956F47F50A910163D8BF957Cf5846D573E7f87CA": {
+    "symbol": "FEI",
+    "threshold": 9.570678503681838e+19
+  },
+  "0x5f98805A4E8be255a32880FDeC7F6728C6568bA0": {
+    "symbol": "LUSD",
+    "threshold": 5.001000200040008e+19
+  },
+  "0xf16e81dce15B08F326220742020379B855B87DF9": {
+    "symbol": "ICE",
+    "threshold": 1.1899463810160715e+20
+  },
+  "0x2d94AA3e47d9D5024503Ca8491fcE9A2fB4DA198": {
+    "symbol": "BANK",
+    "threshold": 5.46448087431694e+21
+  },
+  "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B": {
+    "symbol": "CVX",
+    "threshold": 1.410859100323369e+19
+  },
+  "0xDe30da39c46104798bB5aA3fe8B9e0e1F348163F": {
+    "symbol": "GTC",
+    "threshold": 2.871009010374678e+19
+  },
+  "0xBC6DA0FE9aD5f3b0d58160288917AA56653660E9": {
+    "symbol": "alUSD",
+    "threshold": 5.023681635228467e+19
+  },
+  "0xC581b735A1688071A1746c968e0798D642EDE491": {
+    "symbol": "EURT",
+    "threshold": 47213907.328542694
+  },
+  "0x92D6C1e31e14520e676a687F0a93788B716BEff5": {
+    "symbol": "DYDX",
+    "threshold": 4.094913544090343e+19
+  },
+  "0x15b7c0c907e4C6b9AdaAaabC300C08991D6CEA05": {
+    "symbol": "GEL",
+    "threshold": 3.452347250895884e+20
+  },
+  "0x99D8a9C45b2ecA8864373A26D1459e3Dff1e17F3": {
+    "symbol": "MIM",
+    "threshold": 5.473022378093899e+19
+  },
+  "0x090185f2135308BaD17527004364eBcC2D37e5F6": {
+    "symbol": "SPELL",
+    "threshold": 9.25925925925926e+22
+  },
+  "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0": {
+    "symbol": "wstETH",
+    "threshold": 3.768775183393896e+16
+  },
+  "0xfE18be6b3Bd88A2D2A7f928d00292E7a9963CfC6": {
+    "symbol": "sBTC",
+    "threshold": 2978181248536968.0
+  },
+  "0x5e74C9036fb86BD7eCdcb084a0673EFc32eA31cb": {
+    "symbol": "sETH",
+    "threshold": 4.116141035456438e+16
+  },
+  "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72": {
+    "symbol": "ENS",
+    "threshold": 4.5079419117424317e+18
+  },
+  "0xae78736Cd615f374D3085123A210448E74Fc6393": {
+    "symbol": "rETH",
+    "threshold": 3.8177048557939336e+16
+  },
+  "0x47110d43175f7f2C2425E7d15792acC5817EB44f": {
+    "symbol": "GMI",
+    "threshold": 4.01062269569673e+18
+  },
+  "0x31429d1856aD1377A8A0079410B297e1a9e214c2": {
+    "symbol": "ANGLE",
+    "threshold": 1.9620153822005963e+21
+  },
+  "0xF57e7e7C23978C3cAEC3C3548E3D615c346e79fF": {
+    "symbol": "IMX",
+    "threshold": 1.1559357299734135e+20
+  },
+  "0x2e9d63788249371f1DFC918a52f8d799F4a38C94": {
+    "symbol": "TOKE",
+    "threshold": 5.72206117798929e+19
+  },
+  "0x0f2D719407FdBeFF09D87557AbB7232601FD9F29": {
+    "symbol": "SYN",
+    "threshold": 1.0074429888012637e+20
+  },
+  "0x4d224452801ACEd8B2F0aebE155379bb5D594381": {
+    "symbol": "APE",
+    "threshold": 1.393751921635462e+19
+  },
+  "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6": {
+    "symbol": "STG",
+    "threshold": 1.347432870894372e+20
+  },
+  "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB": {
+    "symbol": "COW",
+    "threshold": 6.146205947068873e+20
+  },
+  "0xc5102fE9359FD9a28f877a67E36B0F050d81a3CC": {
+    "symbol": "HOP",
+    "threshold": 6.130230619275897e+20
+  },
+  "0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490": {
+    "symbol": "3Crv",
+    "threshold": 4.886205167846034e+19
+  },
+  "0x2aF1dF3AB0ab157e1E2Ad8F88A7D04fbea0c7dc6": {
+    "symbol": "BED",
+    "threshold": 1.1860250666397834e+18
+  },
+  "0xD33526068D116cE69F19A9ee46F0bd304F21A51f": {
+    "symbol": "RPL",
+    "threshold": 2.572990200046386e+18
+  },
+  "0xf1Dc500FdE233A4055e25e5BbF516372BC4F6871": {
+    "symbol": "SDL",
+    "threshold": 7.109341674960898e+21
+  },
+  "0x865377367054516e17014CcdED1e7d814EDC9ce4": {
+    "symbol": "DOLA",
+    "threshold": 5.001000200040008e+19
+  },
+  "last_updated": 1671752786.9550998
+}

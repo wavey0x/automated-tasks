@@ -1,0 +1,130 @@
+import time, re, json, requests, datetime, time, os, telebot
+from multicall import Call, Multicall
+from dotenv import load_dotenv, find_dotenv
+from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
+
+load_dotenv(find_dotenv())
+AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
+telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
+PASS = os.environ.get('PASS')
+worker = accounts.load('automate', PASS)
+telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
+env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
+bot = telebot.TeleBot(telegram_bot_key)
+CHAT_IDS = {
+    "WAVEY_ALERTS": "-789090497",
+    "CURVE_WARS": "-1001712241544",
+    "SEASOLVER": "-1001516144118",
+    "YBRIBE": "-1001862925311",
+    "VEYFI": "-1001558128423",
+}
+
+def main():
+    # setup_test()
+    # bribe_splitter()
+    th_sweeper()
+
+def setup_test():
+    ytrades = accounts.at(web3.ens.resolve('ytrades.ychad.eth'), force=True)
+    bribe_splitter = Contract(web3.ens.resolve('bribe-splitter.ychad.eth'), owner=web3.ens.resolve('ychad.eth'))
+    bribe_splitter.setOperator(AUTOMATION_EOA, True)
+    spell = Contract('0x090185f2135308BaD17527004364eBcC2D37e5F6',owner=ytrades)
+    spell.transfer(bribe_splitter,spell.balanceOf(ytrades))
+    treasury = accounts.at(web3.ens.resolve('treasury.ychad.eth'), force=True)
+    crv = Contract('0xD533a949740bb3306d119CC777fa900bA034cd52',owner=treasury)
+    crv.transfer(bribe_splitter,crv.balanceOf(treasury))
+
+def bribe_splitter():
+    bribe_splitter = Contract(web3.ens.resolve('bribe-splitter.ychad.eth'), owner=worker)
+    ybribe = Contract(web3.ens.resolve('ybribe.ychad.eth'))
+    voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'))
+    f = open('splitter.json')
+    data = json.load(f)
+    st_balance = Contract('0x27B5739e22ad9033bcBf192059122d163b60349D').totalAssets()
+    for token_address in data:
+        token = Contract(token_address)
+        gauge = data[token_address]['gauge']
+        should_claim = data[token_address]['should_claim']
+        split_threshold = data[token_address]['split_threshold']
+        balance = token.balanceOf(bribe_splitter)
+        print(f'{token.symbol()} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}')
+        if balance > split_threshold:
+            if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
+                should_claim = False # Override if claim not worth it
+            try:    
+                tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim)
+            except Exception as e:
+                transaction_failure(e)
+
+def th_sweeper():
+    f = open('sweep_tokens_list.json')
+    try:
+        sweep_tokens = json.load(f)
+    except:
+        generate_token_data()
+        sweep_tokens = json.load(f)
+    last_update = sweep_tokens['last_updated']
+    if time.time() - last_update > 60 * 60 * 24:
+        generate_token_data()
+    sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
+    th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
+    calls, token_list, balance_list = ([] for i in range(3))
+    # Use multicall to reduce http requests
+    for token_address in sweep_tokens:
+        if token_address == 'last_updated':
+            continue
+        calls.append(
+            Call(token_address, ['balanceOf(address)(uint256)', th], [[token_address, None]])
+        )
+    return_values = Multicall(calls)()
+    for token_address in return_values:
+        balance = return_values[token_address]
+        if balance >= sweep_tokens[token_address]['threshold']:
+            token_list.append(token_address)
+            balance_list.append(balance)
+
+    if len(token_list) > 0:
+        try:
+            tx = sweeper.sweep(token_list, balance_list)
+            m = f'🧹 Sweep Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['SEASOLVER'], m, True)
+        except Exception as e:
+            transaction_failure(e)
+
+def generate_token_data():
+    f = open('th_approved_tokens.json')
+    tokens = json.load(f)
+    TARGET_USD_VALUE = 50
+    oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
+    data = {}
+    for t in tokens:
+        try:
+            t = web3.toChecksumAddress(t)
+            token = Contract(t)
+            p = oracle.getPriceUsdcRecommended(t) / 1e6
+            decimals = token.decimals()
+            symbol = token.symbol()
+            if symbol == 0x4d4b520000000000000000000000000000000000000000000000000000000000:
+                symbol = "MKR"
+            threshold = (TARGET_USD_VALUE / p) * 10 ** decimals
+            print(f'{symbol} {threshold/10**decimals}')
+            data[t] = {}
+            data[t]['symbol'] = symbol
+            data[t]['threshold'] = threshold
+        except:
+            continue
+    data['last_updated'] = time.time()
+    f = open("sweep_tokens_list.json", "w")
+    f.write(json.dumps(data, indent=2))
+    f.close()
+
+def transaction_failure(e):
+    worker = accounts.at(AUTOMATION_EOA, force=True)
+    print(e,flush=True)
+    bal = worker.balance()
+    msg = f'🤬 Unable to send transaction.\n\nCurrent ETH balance available: {bal/10**18}'
+    send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, False)
+
+def send_alert(chat_id, msg, success):
+    bot.send_message(chat_id, msg, parse_mode="markdown", disable_web_page_preview = True)
