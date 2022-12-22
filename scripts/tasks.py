@@ -21,7 +21,7 @@ CHAT_IDS = {
 
 def main():
     # setup_test()
-    # bribe_splitter()
+    bribe_splitter()
     th_sweeper()
 
 def setup_test():
@@ -47,12 +47,16 @@ def bribe_splitter():
         should_claim = data[token_address]['should_claim']
         split_threshold = data[token_address]['split_threshold']
         balance = token.balanceOf(bribe_splitter)
-        print(f'{token.symbol()} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}')
+        symbol = token.symbol()
+        print(f'{symbol} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}')
         if balance > split_threshold:
             if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
                 should_claim = False # Override if claim not worth it
             try:    
                 tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim)
+                m = f'🖖 {symbol} Split Detected!'
+                m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+                send_alert(CHAT_IDS['CURVE_WARS'], m, True)
             except Exception as e:
                 transaction_failure(e)
 
