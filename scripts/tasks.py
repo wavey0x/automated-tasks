@@ -87,7 +87,7 @@ def bribe_splitter():
             if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
                 should_claim = False # Override if claim not worth it
             try:
-                tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim)
+                tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim, tx_params)
                 m = f'🖖 {symbol} Split Detected!'
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
                 send_alert(CHAT_IDS['CURVE_WARS'], m, True)
