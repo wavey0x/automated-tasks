@@ -48,7 +48,7 @@ def bribe_splitter():
         split_threshold = data[token_address]['split_threshold']
         balance = token.balanceOf(bribe_splitter)
         symbol = token.symbol()
-        print(f'{symbol} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}')
+        print(f'{symbol} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}',flush=True)
         if balance > split_threshold:
             if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
                 should_claim = False # Override if claim not worth it
@@ -86,7 +86,7 @@ def th_sweeper():
         if balance >= sweep_tokens[token_address]['threshold']:
             token_list.append(token_address)
             balance_list.append(balance)
-
+    print(f'{len(token_list)}/{len(sweep_tokens)} tokens eligible for sweep',flush=True)
     if len(token_list) > 0:
         try:
             tx = sweeper.sweep(token_list, balance_list)
@@ -97,9 +97,10 @@ def th_sweeper():
             transaction_failure(e)
 
 def generate_token_data():
+    print(f'Generating new token data...',flush=True)
+    TARGET_USD_VALUE = 50
     f = open('th_approved_tokens.json')
     tokens = json.load(f)
-    TARGET_USD_VALUE = 50
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
     data = {}
     for t in tokens:
@@ -112,16 +113,17 @@ def generate_token_data():
             if symbol == 0x4d4b520000000000000000000000000000000000000000000000000000000000:
                 symbol = "MKR"
             threshold = (TARGET_USD_VALUE / p) * 10 ** decimals
-            print(f'{symbol} {threshold/10**decimals}')
+            # print(f'{symbol} {threshold/10**decimals}')
             data[t] = {}
             data[t]['symbol'] = symbol
             data[t]['threshold'] = threshold
         except:
             continue
-    data['last_updated'] = time.time()
+    data['last_updated'] = int(time.time())
     f = open("sweep_tokens_list.json", "w")
     f.write(json.dumps(data, indent=2))
     f.close()
+    print(f'New token + price data written with timestamp {int(time.time())}',flush=True)
 
 def transaction_failure(e):
     worker = accounts.at(AUTOMATION_EOA, force=True)
