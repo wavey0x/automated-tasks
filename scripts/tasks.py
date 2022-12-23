@@ -8,6 +8,9 @@ AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 PASS = os.environ.get('PASS')
 worker = accounts.load('automate', PASS)
+tx_params = {}
+tx_params['max_fee'] = 80e9
+tx_params['priority_fee'] = 3e9
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
 bot = telebot.TeleBot(telegram_bot_key)
@@ -20,9 +23,35 @@ CHAT_IDS = {
 }
 
 def main():
-    # setup_test()
+    setup_test()
     bribe_splitter()
     th_sweeper()
+    temple_split()
+    ycrv_donator()
+
+def ycrv_donator():
+    donator = Contract('0xc368Ed8EfC69D8e38ED4b4d726C40F9F9AD28839', owner=worker)
+    if donator.canDonate():
+        try:
+            tx = donator.donate(tx_params)
+            m = f'🫴 Donation Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        except Exception as e:
+            transaction_failure(e)
+
+def temple_split():
+    WEEK = 60 * 60 * 24 * 7
+    split = Contract('0x77Ff318a33cf832671D2F9E0393cd1f854Fe8111', owner=worker)
+    current_week = int(chain.time() / WEEK) * WEEK
+    if current_week > split.period()['period']:
+        try:
+            tx = split.split(tx_params)
+            m = f'🕍 Temple Split Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        except Exception as e:
+            transaction_failure(e)
 
 def setup_test():
     ytrades = accounts.at(web3.ens.resolve('ytrades.ychad.eth'), force=True)
@@ -33,6 +62,12 @@ def setup_test():
     treasury = accounts.at(web3.ens.resolve('treasury.ychad.eth'), force=True)
     crv = Contract('0xD533a949740bb3306d119CC777fa900bA034cd52',owner=treasury)
     crv.transfer(bribe_splitter,crv.balanceOf(treasury))
+    ychad = accounts.at(web3.ens.resolve('ychad.eth'), force=True)
+    usdt = Contract('0xdAC17F958D2ee523a2206206994597C13D831ec7', owner=ychad)
+    th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
+    usdt.transfer(th, 100e6)
+    # sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
+    # tx = sweeper.sweep([usdt.address], [100e6], txn_params)
 
 def bribe_splitter():
     bribe_splitter = Contract(web3.ens.resolve('bribe-splitter.ychad.eth'), owner=worker)
