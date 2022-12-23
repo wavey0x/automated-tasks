@@ -23,7 +23,7 @@ CHAT_IDS = {
 }
 
 def main():
-    setup_test()
+    # setup_test()
     bribe_splitter()
     th_sweeper()
     temple_split()
