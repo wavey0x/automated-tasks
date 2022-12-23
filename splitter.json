@@ -10,5 +10,11 @@
         "gauge": "0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6",
         "should_claim": "true",
         "split_threshold": 100e18
+    },
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
+        "token_name": "DAI",
+        "gauge": "0x8Fa728F393588E8D8dD1ca397E9a710E53fA553a",
+        "should_claim": "false",
+        "split_threshold": 100e18
     }
 }
