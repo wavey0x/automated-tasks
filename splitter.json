@@ -16,5 +16,11 @@
         "gauge": "0xBE266d68Ce3dDFAb366Bb866F4353B6FC42BA43c",
         "should_claim": "false",
         "split_threshold": 100e18
+    },
+    "0xd395DEC4F1733ff09b750D869eEfa7E0D37C3eE6": {
+        "token_name": "yvCurve-DOLA-FRAXBP-U",
+        "gauge": "0xBE266d68Ce3dDFAb366Bb866F4353B6FC42BA43c",
+        "should_claim": "false",
+        "split_threshold": 100e18
     }
 }

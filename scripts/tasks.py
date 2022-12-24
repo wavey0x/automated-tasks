@@ -23,10 +23,18 @@ CHAT_IDS = {
 }
 
 def main():
+    yearn_fed()
     bribe_splitter()
     th_sweeper()
     temple_split()
     ycrv_donator()
+
+def yearn_fed():
+    puller = Contract('0xb7e60DAB3799E238D01e0F90c4506eef8F6A1503',owner=worker)
+    strat = Contract('0x57505ac8Dac3ce916A48b115e4003dc5587372c7',owner=worker)
+    token = Contract(strat.vault())
+    if token.balanceOf(strat) > 10e18:
+        puller.pull(token, strat, tx_params)
 
 def ycrv_donator():
     donator = Contract('0xc368Ed8EfC69D8e38ED4b4d726C40F9F9AD28839', owner=worker)
