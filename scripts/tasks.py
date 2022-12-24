@@ -30,7 +30,7 @@ def main():
     ycrv_donator()
 
 def yearn_fed():
-    puller = Contract('0xb7e60DAB3799E238D01e0F90c4506eef8F6A1503',owner=worker)
+    puller = interface.IPuller('0xb7e60DAB3799E238D01e0F90c4506eef8F6A1503',owner=worker)
     strat = Contract('0x57505ac8Dac3ce916A48b115e4003dc5587372c7',owner=worker)
     token = Contract(strat.vault())
     if token.balanceOf(strat) > 10e18:
