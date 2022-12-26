@@ -114,7 +114,10 @@ def th_sweeper():
     except:
         generate_token_data()
         sweep_tokens = json.load(f)
-    last_update = sweep_tokens['last_updated']
+    try:
+        last_update = sweep_tokens['last_updated']
+    except:
+        last_update = 0
     if time.time() - last_update > 60 * 60 * 24:
         generate_token_data()
     sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
