@@ -34,7 +34,12 @@ def yearn_fed():
     strat = Contract('0x57505ac8Dac3ce916A48b115e4003dc5587372c7',owner=worker)
     token = Contract(strat.vault())
     if token.balanceOf(strat) > 10e18:
-        puller.pull(token, strat, tx_params)
+        tx = puller.pull(token, strat, tx_params)
+        m = f'🤳 Reward Pull Detected!'
+        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+    else:
+        print(f'No rewards balance to pull.',flush=True)
 
 def ycrv_donator():
     donator = Contract('0xc368Ed8EfC69D8e38ED4b4d726C40F9F9AD28839', owner=worker)
