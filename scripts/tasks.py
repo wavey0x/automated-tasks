@@ -182,7 +182,7 @@ def th_sweeper():
 
 def get_new_price_data():
     print(f'Generating new token data...',flush=True)
-    TARGET_USD_VALUE = 50
+    TARGET_USD_VALUE = 100
     scripts.generate_token_data.generate_token_data()
     # get_new_price_data.generate_token_data()
     # f = open('th_approved_tokens.json')

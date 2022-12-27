@@ -3,9 +3,7 @@ from multicall import Call, Multicall
 from dotenv import load_dotenv, find_dotenv
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
-TARGET_USD_VALUE = 50
-
-def generate_token_data():
+def generate_token_data(TARGET_USD_VALUE):
     f = open('th_approved_tokens.json')
     tokens = json.load(f)
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
