@@ -1,4 +1,4 @@
-import time, re, json, requests, datetime, time, os, telebot
+import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data
 from multicall import Call, Multicall
 from dotenv import load_dotenv, find_dotenv
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
@@ -23,21 +23,55 @@ CHAT_IDS = {
 }
 
 def main():
+    claim_bribes()
     yearn_fed()
     bribe_splitter()
     th_sweeper()
     temple_split()
     ycrv_donator()
 
+def claim_bribes():
+    voters, gauges, tokens = ([] for i in range(3))
+    claims = [
+        {
+            'gauge': '0xd8b712d29381748dB89c36BCa0138d7c75866ddF',
+            'token': '0x090185f2135308BaD17527004364eBcC2D37e5F6',
+        },
+    ]
+    ybribe = Contract(web3.ens.resolve('ybribe.ychad.eth'),owner=worker)
+    voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'),owner=worker)
+    claims_to_make = 0
+    for c in claims:
+        gauge = c['gauge']
+        token = c['token']
+        if ybribe.claimable(voter, gauge, token):
+            claims_to_make += 1
+            voters.append(voter)
+            gauges.append(gauge)
+            tokens.append(token)
+    if claims_to_make > 0:
+        try:
+            tx = ybribe.claim_reward_for_many(voters, gauges, tokens, tx_params)
+            m = f'🤖 {claims_to_make} Bribe Claim(s) Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        except Exception as e:
+            transaction_failure(e)
+    else:
+        print(f'No ybribe claims available.',flush=True)
+
 def yearn_fed():
     puller = interface.IPuller('0xb7e60DAB3799E238D01e0F90c4506eef8F6A1503',owner=worker)
     strat = Contract('0x57505ac8Dac3ce916A48b115e4003dc5587372c7',owner=worker)
     token = Contract(strat.vault())
     if token.balanceOf(strat) > 10e18:
-        tx = puller.pull(token, strat, tx_params)
-        m = f'🤳 Reward Pull Detected!'
-        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-        send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        try:
+            tx = puller.pull(token, strat, tx_params)
+            m = f'🤳 Reward Pull Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        except Exception as e:
+            transaction_failure(e)
     else:
         print(f'No rewards balance to pull.',flush=True)
 
@@ -112,14 +146,14 @@ def th_sweeper():
     try:
         sweep_tokens = json.load(f)
     except:
-        generate_token_data()
+        get_new_price_data()
         sweep_tokens = json.load(f)
     try:
         last_update = sweep_tokens['last_updated']
     except:
         last_update = 0
     if time.time() - last_update > 60 * 60 * 24:
-        generate_token_data()
+        get_new_price_data()
     sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
     calls, token_list, balance_list = ([] for i in range(3))
@@ -146,40 +180,41 @@ def th_sweeper():
         except Exception as e:
             transaction_failure(e)
 
-def generate_token_data():
+def get_new_price_data():
     print(f'Generating new token data...',flush=True)
     TARGET_USD_VALUE = 50
-    f = open('th_approved_tokens.json')
-    tokens = json.load(f)
-    oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
-    data = {}
-    for t in tokens:
-        try:
-            t = web3.toChecksumAddress(t)
-            token = Contract(t)
-            p = oracle.getPriceUsdcRecommended(t) / 1e6
-            decimals = token.decimals()
-            symbol = token.symbol()
-            if symbol == 0x4d4b520000000000000000000000000000000000000000000000000000000000:
-                symbol = "MKR"
-            threshold = (TARGET_USD_VALUE / p) * 10 ** decimals
-            # print(f'{symbol} {threshold/10**decimals}')
-            data[t] = {}
-            data[t]['symbol'] = symbol
-            data[t]['threshold'] = threshold
-        except:
-            continue
-    data['last_updated'] = int(time.time())
-    f = open("sweep_tokens_list.json", "w")
-    f.write(json.dumps(data, indent=2))
-    f.close()
-    print(f'New token + price data written with timestamp {int(time.time())}',flush=True)
+    scripts.generate_token_data.generate_token_data()
+    # get_new_price_data.generate_token_data()
+    # f = open('th_approved_tokens.json')
+    # tokens = json.load(f)
+    # oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
+    # data = {}
+    # for t in tokens:
+    #     try:
+    #         t = web3.toChecksumAddress(t)
+    #         token = Contract(t)
+    #         p = oracle.getPriceUsdcRecommended(t) / 1e6
+    #         decimals = token.decimals()
+    #         symbol = token.symbol()
+    #         if symbol == 0x4d4b520000000000000000000000000000000000000000000000000000000000:
+    #             symbol = "MKR"
+    #         threshold = (TARGET_USD_VALUE / p) * 10 ** decimals
+    #         # print(f'{symbol} {threshold/10**decimals}')
+    #         data[t] = {}
+    #         data[t]['symbol'] = symbol
+    #         data[t]['threshold'] = threshold
+    #     except:
+    #         continue
+    # f = open("sweep_tokens_list.json", "w")
+    # f.write(json.dumps(data, indent=2))
+    # f.close()
+    # print(f'New token + price data written with timestamp {int(time.time())}',flush=True)
 
 def transaction_failure(e):
     worker = accounts.at(AUTOMATION_EOA, force=True)
     print(e,flush=True)
     bal = worker.balance()
-    msg = f'🤬 Unable to send transaction.\n\nCurrent ETH balance available: {bal/10**18}'
+    msg = f'🤬 Unable to send transaction.\n\n🔗 [automation EOA](https://etherscan.io/address/0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3)\n\nCurrent ETH balance available: {bal/10**18}'
     send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, False)
 
 def send_alert(chat_id, msg, success):

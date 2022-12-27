@@ -5,7 +5,7 @@ from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, Z
 
 TARGET_USD_VALUE = 50
 
-def main():
+def generate_token_data():
     f = open('th_approved_tokens.json')
     tokens = json.load(f)
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
@@ -13,7 +13,6 @@ def main():
     vaults = list(helper.getVaults())
     for v in vaults:
         tokens[v] = Contract(v).symbol()
-
     data = {}
     for t in tokens:
         try:
@@ -33,6 +32,12 @@ def main():
             data[t]['threshold'] = threshold
         except:
             continue
+    data['last_updated'] = int(time.time())
     f = open("sweep_tokens_list.json", "w")
     f.write(json.dumps(data, indent=2))
     f.close()
+
+if __name__ == '__main__':
+    # test1.py executed as script
+    # do something
+    generate_token_data()
