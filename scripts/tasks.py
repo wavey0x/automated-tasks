@@ -26,7 +26,7 @@ def main():
     claim_bribes()
     yearn_fed()
     bribe_splitter()
-    th_sweeper()
+    # th_sweeper()
     temple_split()
     ycrv_donator()
 
