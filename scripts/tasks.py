@@ -4,6 +4,7 @@ from dotenv import load_dotenv, find_dotenv
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
 load_dotenv(find_dotenv())
+TARGET_USD_VALUE = 50
 AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 PASS = os.environ.get('PASS')
@@ -23,10 +24,10 @@ CHAT_IDS = {
 }
 
 def main():
+    th_sweeper()
     claim_bribes()
     yearn_fed()
     bribe_splitter()
-    # th_sweeper()
     temple_split()
     ycrv_donator()
 
@@ -146,14 +147,14 @@ def th_sweeper():
     try:
         sweep_tokens = json.load(f)
     except:
-        get_new_price_data()
+        scripts.generate_token_data.generate_token_data(TARGET_USD_VALUE)
         sweep_tokens = json.load(f)
     try:
         last_update = sweep_tokens['last_updated']
     except:
         last_update = 0
     if time.time() - last_update > 60 * 60 * 24:
-        get_new_price_data()
+        scripts.generate_token_data.generate_token_data(TARGET_USD_VALUE)
     sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
     calls, token_list, balance_list = ([] for i in range(3))
@@ -182,8 +183,7 @@ def th_sweeper():
 
 def get_new_price_data():
     print(f'Generating new token data...',flush=True)
-    TARGET_USD_VALUE = 100
-    scripts.generate_token_data.generate_token_data()
+    
     # get_new_price_data.generate_token_data()
     # f = open('th_approved_tokens.json')
     # tokens = json.load(f)
