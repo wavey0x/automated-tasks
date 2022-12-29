@@ -140,22 +140,21 @@ def bribe_splitter():
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
                 send_alert(CHAT_IDS['CURVE_WARS'], m, True)
             except Exception as e:
-                pass
-                # transaction_failure(e)
+                transaction_failure(e)
 
 def th_sweeper():
     f = open('sweep_tokens_list.json')
     try:
         sweep_tokens = json.load(f)
     except:
-        scripts.generate_token_data.generate_token_data(TARGET_USD_VALUE)
+        scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
         sweep_tokens = json.load(f)
     try:
         last_update = sweep_tokens['last_updated']
     except:
         last_update = 0
     if time.time() - last_update > 60 * 60 * 24:
-        scripts.generate_token_data.generate_token_data(TARGET_USD_VALUE)
+        scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
     sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
     calls, token_list, balance_list = ([] for i in range(3))
@@ -181,35 +180,6 @@ def th_sweeper():
             send_alert(CHAT_IDS['SEASOLVER'], m, True)
         except Exception as e:
             transaction_failure(e)
-
-def get_new_price_data():
-    print(f'Generating new token data...',flush=True)
-    
-    # get_new_price_data.generate_token_data()
-    # f = open('th_approved_tokens.json')
-    # tokens = json.load(f)
-    # oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
-    # data = {}
-    # for t in tokens:
-    #     try:
-    #         t = web3.toChecksumAddress(t)
-    #         token = Contract(t)
-    #         p = oracle.getPriceUsdcRecommended(t) / 1e6
-    #         decimals = token.decimals()
-    #         symbol = token.symbol()
-    #         if symbol == 0x4d4b520000000000000000000000000000000000000000000000000000000000:
-    #             symbol = "MKR"
-    #         threshold = (TARGET_USD_VALUE / p) * 10 ** decimals
-    #         # print(f'{symbol} {threshold/10**decimals}')
-    #         data[t] = {}
-    #         data[t]['symbol'] = symbol
-    #         data[t]['threshold'] = threshold
-    #     except:
-    #         continue
-    # f = open("sweep_tokens_list.json", "w")
-    # f.write(json.dumps(data, indent=2))
-    # f.close()
-    # print(f'New token + price data written with timestamp {int(time.time())}',flush=True)
 
 def transaction_failure(e):
     worker = accounts.at(AUTOMATION_EOA, force=True)

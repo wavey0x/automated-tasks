@@ -1,967 +1,967 @@
 {
   "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b": {
     "symbol": "yCRV",
-    "threshold": 3.918510652471208e+19
+    "threshold": 9.612870480028298e+19
   },
   "0x3175Df0976dFA876431C2E9eE6Bc45b65d3473CC": {
     "symbol": "crvFRAX",
-    "threshold": 2.0008903962263208e+19
+    "threshold": 4.989736112815937e+19
   },
   "0x111111517e4929D3dcbdfa7CCe55d30d4B6BC4d6": {
     "symbol": "ICHI",
-    "threshold": 4.85884331347848e+18
+    "threshold": 1.2231209987125428e+19
   },
   "0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8": {
     "symbol": "agEUR",
-    "threshold": 1.8878681814920954e+19
+    "threshold": 4.704589421072044e+19
   },
   "0x62B9c7356A2Dc64a1969e19C23e4f579F9810Aa7": {
     "symbol": "cvxCRV",
-    "threshold": 4.439353985208072e+19
+    "threshold": 1.1202373110719775e+20
   },
   "0x9aE380F0272E2162340a5bB646c354271c0F5cFC": {
     "symbol": "CNC",
-    "threshold": 6.647793580691084e+18
+    "threshold": 1.6520067586900509e+19
   },
   "0xc55126051B22eBb829D00368f4B12Bde432de5Da": {
     "symbol": "BTRFLY",
-    "threshold": 1.927158886493377e+17
+    "threshold": 4.7790318105929766e+17
   },
   "0xBe9895146f7AF43049ca1c1AE358B0541Ea49704": {
     "symbol": "cbETH",
-    "threshold": 1.7121552677455652e+16
+    "threshold": 4.232717657827444e+16
   },
   "0x3432B6A60D23Ca0dFCa7761B7ab56459D9C964D0": {
     "symbol": "FXS",
-    "threshold": 4.643194852368459e+18
+    "threshold": 1.144089621574052e+19
   },
   "0xFEEf77d3f69374f66429C91d732A244f074bdf74": {
     "symbol": "cvxFXS",
-    "threshold": 5.10284399355715e+18
+    "threshold": 1.2540829806642979e+19
   },
   "0x320623b8E4fF03373931769A31Fc52A4E78B5d70": {
     "symbol": "RSR",
-    "threshold": 7.145409074669525e+21
+    "threshold": 1.7998560115190783e+22
   },
   "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39": {
     "symbol": "HEX",
-    "threshold": 105652403592.18173
+    "threshold": 269498194362.09778
   },
   "0x9E32b13ce7f2E80A01932B42553652E053D6ed8e": {
     "symbol": "Metis",
-    "threshold": 1.2378410739558671e+18
+    "threshold": 3.0049501746206597e+18
   },
   "0x3aaDA3e213aBf8529606924d8D1c55CbDc70Bf74": {
     "symbol": "XMON",
-    "threshold": 1322820350789282.5
+    "threshold": 3269566438514664.0
   },
   "0x9813037ee2218799597d83D4a5B6F3b6778218d9": {
     "symbol": "BONE",
-    "threshold": 2.55290903985091e+19
+    "threshold": 8.960573476702509e+22
   },
   "0xd084944d3c05CD115C09d072B9F44bA3E0E45921": {
     "symbol": "FOLD",
-    "threshold": 1.7788207201306652e+18
+    "threshold": 4.291529430708022e+18
   },
   "0xcAfE001067cDEF266AfB7Eb5A286dCFD277f3dE5": {
     "symbol": "PSP",
-    "threshold": 2.2572344363685613e+20
+    "threshold": 5.57911180540058e+20
   },
   "0xC0c293ce456fF0ED870ADd98a0828Dd4d2903DBF": {
     "symbol": "AURA",
-    "threshold": 1.1929992418489817e+19
+    "threshold": 2.98996388721617e+19
   },
   "0x6f80310CA7F2C654691D1383149Fa1A57d8AB1f8": {
     "symbol": "Silo",
-    "threshold": 3.920108194986182e+20
+    "threshold": 9.689171382063405e+20
   },
   "0xB6Ca7399B4F9CA56FC27cBfF44F4d2e4Eef1fc81": {
     "symbol": "MUSE",
-    "threshold": 3.555216782898554e+18
+    "threshold": 8.787298346880711e+18
   },
   "0x29059568bB40344487d62f7450E78b8E6C74e0e5": {
     "symbol": "YFIETH-f",
-    "threshold": 3977343656078292.0
+    "threshold": 9894734730006434.0
   },
   "0x3b6831c0077a1e44ED0a21841C3bC4dC11bCE833": {
     "symbol": "crvEURTUSD",
-    "threshold": 9.533270159529742e+18
+    "threshold": 2.380041165191993e+19
   },
   "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942": {
     "symbol": "MANA",
-    "threshold": 6.5586672788089455e+19
+    "threshold": 1.6546538795014858e+20
   },
   "0x4a220E6096B25EADb88358cb44068A3248254675": {
     "symbol": "QNT",
-    "threshold": 1.8004744952480032e+17
+    "threshold": 4.478289766216704e+17
   },
   "0x33349B282065b0284d756F0577FB39c158F935e6": {
     "symbol": "MPL",
-    "threshold": 6.116494135658335e+18
+    "threshold": 1.6102540980966797e+19
   },
   "0x579CEa1889991f68aCc35Ff5c3dd0621fF29b0C9": {
     "symbol": "IQ",
-    "threshold": 4.606172270842929e+21
+    "threshold": 1.1663167716351761e+22
   },
   "0x69af81e73A73B40adF4f3d4223Cd9b1ECE623074": {
     "symbol": "MASK",
-    "threshold": 1.130288975330878e+19
+    "threshold": 2.7936940737367613e+19
   },
   "0x892A6f9dF0147e5f079b0993F486F9acA3c87881": {
     "symbol": "xFUND",
-    "threshold": 21071673.784377802
+    "threshold": 49117917.93373949
   },
   "0x3845badAde8e6dFF049820680d1F14bD3903a5d0": {
     "symbol": "SAND",
-    "threshold": 4.865659150845165e+19
+    "threshold": 1.2301121616268971e+20
   },
   "0x5CAc718A3AE330d361e39244BF9e67AB17514CE8": {
     "symbol": "COT",
-    "threshold": 5.5878408582923564e+20
+    "threshold": 1.3811391635821227e+21
   },
   "0x8a854288a5976036A725879164Ca3e91d30c6A1B": {
     "symbol": "GET",
-    "threshold": 1.8078720171241634e+19
+    "threshold": 4.550513889533546e+19
   },
   "0xABe580E7ee158dA464b51ee1a83Ac0289622e6be": {
     "symbol": "XFT",
-    "threshold": 1.707538011930568e+19
+    "threshold": 4.440832567289716e+19
   },
   "0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E": {
     "symbol": "ILV",
-    "threshold": 5.142286290309932e+17
+    "threshold": 1.254584723047286e+18
   },
   "0xF411903cbC70a74d22900a5DE66A2dda66507255": {
     "symbol": "VRA",
-    "threshold": 8.643042350907519e+21
+    "threshold": 2.2441651705565533e+22
   },
   "0x48C3399719B582dD63eB5AADf12A40B4C3f52FA2": {
     "symbol": "SWISE",
-    "threshold": 2.714035635287891e+20
+    "threshold": 6.599091964945624e+20
   },
   "0xA13a9247ea42D743238089903570127DdA72fE44": {
     "symbol": "bb-a-USD",
-    "threshold": 1.9986888601077694e+19
+    "threshold": 4.987237658831052e+19
   },
   "0x4EdcB2B46377530Bc18BB4D2c7Fe46a992c73e10": {
     "symbol": "cbETH-wstETH-BPT",
-    "threshold": 1.7251953121647328e+16
+    "threshold": 4.265122756831086e+16
   },
   "0x6468e79A80C0eaB0F9A2B574c8d5bC374Af59414": {
     "symbol": "eXRD",
-    "threshold": 5.668452229118839e+20
+    "threshold": 1.4342263782915498e+21
   },
   "0x5b3240B6BE3E7487d61cd1AFdFC7Fe4Fa1D81e64": {
     "symbol": "DOLA BSP",
-    "threshold": 1.9989925077760807e+19
+    "threshold": 4.98623798316646e+19
   },
   "0x23B608675a2B2fB1890d3ABBd85c5775c51691d5": {
     "symbol": "SOCKS",
-    "threshold": 817577274776625.1
+    "threshold": 1990293682191980.2
   },
   "0x01597E397605Bf280674Bf292623460b4204C375": {
     "symbol": "BENT",
-    "threshold": 2.2874658309791498e+20
+    "threshold": 5.653806142294993e+20
   },
   "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e": {
     "symbol": "YFI",
-    "threshold": 3843612790866738.0
+    "threshold": 9607110460093000.0
   },
   "0x0d438F3b5175Bebc262bF23753C1E53d03432bDE": {
     "symbol": "wNXM",
-    "threshold": 7.030670985795337e+17
+    "threshold": 1.7377450741878126e+18
   },
   "0x0D8775F648430679A709E98d2b0Cb6250d2887EF": {
     "symbol": "BAT",
-    "threshold": 1.1973036721303624e+20
+    "threshold": 2.97000297000297e+20
   },
   "0x1F573D6Fb3F13d689FF844B4cE37794d79a7FF1C": {
     "symbol": "BNT",
-    "threshold": 5.876683669871418e+19
+    "threshold": 1.452517212328966e+20
   },
   "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599": {
     "symbol": "WBTC",
-    "threshold": 120923.40630474345
+    "threshold": 300451.51854206505
   },
   "0x2ba592F78dB6436527729929AAf6c908497cB200": {
     "symbol": "CREAM",
-    "threshold": 1.909021568221129e+18
+    "threshold": 4.774048577471971e+18
   },
   "0x408e41876cCCDC0F92210600ef50372656052a38": {
     "symbol": "REN",
-    "threshold": 3.048129972262017e+20
+    "threshold": 7.88618655562916e+20
   },
   "0x4Fabb145d64652a948d72533023f6E7A623C7C53": {
     "symbol": "BUSD",
-    "threshold": 2.0114269163115663e+19
+    "threshold": 5.006994771696059e+19
   },
   "0x514910771AF9Ca656af840dff83E8264EcF986CA": {
     "symbol": "LINK",
-    "threshold": 3.5191751053553044e+18
+    "threshold": 8.802125748576784e+18
   },
   "0x6810e776880C02933D47DB1b9fc05908e5386b96": {
     "symbol": "GNO",
-    "threshold": 2.3810373613096336e+17
+    "threshold": 5.897493680776545e+17
   },
   "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": {
     "symbol": "USDC",
-    "threshold": 20030025.007486224
+    "threshold": 49950049.95004996
   },
   "0xba100000625a3754423978a60c9317c58a424e3D": {
     "symbol": "BAL",
-    "threshold": 3.810317807177343e+18
+    "threshold": 9.351197112200712e+18
   },
   "0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55": {
     "symbol": "BAND",
-    "threshold": 1.4200077674424881e+19
+    "threshold": 3.3236239199884067e+19
   },
   "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD": {
     "symbol": "LRC",
-    "threshold": 1.0327057924467899e+20
+    "threshold": 2.5640105226991852e+20
   },
   "0xc00e94Cb662C3520282E6f5717214004A7f26888": {
     "symbol": "COMP",
-    "threshold": 6.256293831594584e+17
+    "threshold": 1.5734856341548344e+18
   },
   "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F": {
     "symbol": "SNX",
-    "threshold": 1.3806767387034753e+19
+    "threshold": 3.453360637904777e+19
   },
   "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2": {
     "symbol": "WETH",
-    "threshold": 1.6809971675197728e+16
+    "threshold": 4.162053723789467e+16
   },
   "0xdAC17F958D2ee523a2206206994597C13D831ec7": {
     "symbol": "USDT",
-    "threshold": 20044056.836927567
+    "threshold": 49975012.49375313
   },
   "0xdB25f211AB05b1c97D595516F45794528a807ad8": {
     "symbol": "EURS",
-    "threshold": 1881.803897215871
+    "threshold": 4690.167532784271
   },
   "0xE41d2489571d322189246DaFA5ebDe1F4699F498": {
     "symbol": "ZRX",
-    "threshold": 1.3005254122665556e+20
+    "threshold": 3.1926849203105844e+20
   },
   "0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D": {
     "symbol": "renBTC",
-    "threshold": 104684.40684566721
+    "threshold": 263075.39048671536
   },
   "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0": {
     "symbol": "MATIC",
-    "threshold": 2.4469321588058972e+19
+    "threshold": 6.047989587781125e+19
   },
   "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
     "symbol": "DAI",
-    "threshold": 2.0000880038721704e+19
+    "threshold": 5.0009201693111525e+19
   },
   "0x57Ab1ec28D129707052df4dF418D58a2D46d5f51": {
     "symbol": "sUSD",
-    "threshold": 2.0030025007486222e+19
+    "threshold": 4.995004995004996e+19
   },
   "0x0000000000085d4780B73119b644AE5ecd22b376": {
     "symbol": "TUSD",
-    "threshold": 2.012031951067383e+19
+    "threshold": 4.973065875219809e+19
   },
   "0x056Fd409E1d7A124BD7017459dFEa2F387b6d5Cd": {
     "symbol": "GUSD",
-    "threshold": 2740.480598082486
+    "threshold": 6773.544162153229
   },
   "0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa": {
     "symbol": "TBTC",
-    "threshold": 9.158266056329289e+17
+    "threshold": 2.2600179590067095e+18
   },
   "0x45804880De22913dAFE09f4980848ECE6EcbAf78": {
     "symbol": "PAXG",
-    "threshold": 1.1698820875843924e+19
+    "threshold": 2.886961040460759e+19
   },
   "0xFca59Cd816aB1eaD66534D82bc21E7515cE441CF": {
     "symbol": "RARI",
-    "threshold": 1.1840856520197245e+19
+    "threshold": 3.073323978135144e+19
   },
   "0xD533a949740bb3306d119CC777fa900bA034cd52": {
     "symbol": "CRV",
-    "threshold": 3.918510652471208e+19
+    "threshold": 9.612870480028298e+19
   },
   "0x674C6Ad92Fd080e4004b2312b45f796a192D27a0": {
     "symbol": "USDN",
-    "threshold": 3.5980735913991643e+19
+    "threshold": 8.87911791291006e+19
   },
   "0x6B3595068778DD592e39A122f4f5a5cF09C90fE2": {
     "symbol": "SUSHI",
-    "threshold": 2.100010920056784e+19
+    "threshold": 5.148132360542242e+19
   },
   "0x1494CA1F11D487c2bBe4543E90080AeBa4BA3C2b": {
     "symbol": "DPI",
-    "threshold": 3.496341210036492e+17
+    "threshold": 8.670341712386246e+17
   },
   "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984": {
     "symbol": "UNI",
-    "threshold": 4.032190590359073e+18
+    "threshold": 9.81882886115135e+18
   },
   "0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5": {
     "symbol": "PICKLE",
-    "threshold": 2.5368766735458304e+19
+    "threshold": 7.201705363830155e+19
   },
   "0xa0246c9032bC3A600820415aE600c6388619A14D": {
     "symbol": "FARM",
-    "threshold": 6.848868484739899e+17
+    "threshold": 1.6928096285928276e+18
   },
   "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9": {
     "symbol": "AAVE",
-    "threshold": 2.5227091120883805e+17
+    "threshold": 6.235287449557304e+17
   },
   "0xbC396689893D065F41bc2C6EcbeE5e0085233447": {
     "symbol": "PERP",
-    "threshold": 5.2461630874719e+19
+    "threshold": 1.3236617779425001e+20
   },
   "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5": {
     "symbol": "mUSD",
-    "threshold": 2.0030025007486222e+19
+    "threshold": 4.995004995004996e+19
   },
   "0x584bC13c7D411c00c01A62e8019472dE68768430": {
     "symbol": "HEGIC",
-    "threshold": 1.031778786628147e+21
+    "threshold": 2.7621257319633194e+21
   },
   "0xfF20817765cB7f73d4bde2e66e067E58D11095C2": {
     "symbol": "AMP",
-    "threshold": 6.453694740238786e+21
+    "threshold": 1.597444089456869e+22
   },
   "0x0391D2021f89DC339F60Fff84546EA23E337750f": {
     "symbol": "BOND",
-    "threshold": 1.6881838357917087e+18
+    "threshold": 4.172621693259897e+18
   },
   "0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44": {
     "symbol": "KP3R",
-    "threshold": 1.2491564914646822e+17
+    "threshold": 3.087494182003151e+17
   },
   "0x0954906da0Bf32d5479e25f46056d22f08464cab": {
     "symbol": "INDEX",
-    "threshold": 1.2873251892850774e+19
+    "threshold": 3.2218550023487324e+19
   },
   "0x8888801aF4d980682e47f1A9036e589479e835C5": {
     "symbol": "MPH",
-    "threshold": 1.959648870115453e+19
+    "threshold": 5.607493405587755e+19
   },
   "0x3472A5A71965499acd81997a54BBA8D852C6E53d": {
     "symbol": "BADGER",
-    "threshold": 7.245500001086825e+18
+    "threshold": 1.7908437739525353e+19
   },
   "0xc944E90C64B2c07662A292be6244BDf05Cda44a7": {
     "symbol": "GRT",
-    "threshold": 3.5580857498665714e+20
+    "threshold": 8.850810734263258e+20
   },
   "0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32": {
     "symbol": "LDO",
-    "threshold": 2.1006417460534194e+19
+    "threshold": 5.193634266352417e+19
   },
   "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84": {
     "symbol": "stETH",
-    "threshold": 1.7130115166089734e+16
+    "threshold": 4.233987602320333e+16
   },
   "0x111111111117dC0aa78b770fA6A738034120C302": {
     "symbol": "1INCH",
-    "threshold": 1.5067559168421409e+19
+    "threshold": 3.724195052481356e+19
   },
   "0xc770EEfAd204B5180dF6a14Ee197D99d808ee52d": {
     "symbol": "FOX",
-    "threshold": 7.394262052647145e+20
+    "threshold": 1.8276189779954675e+21
   },
   "0xfFffFffF2ba8F66D4e51811C5190992176930278": {
     "symbol": "COMBO",
-    "threshold": 6.533172181752851e+20
+    "threshold": 1.6121751467079384e+21
   },
   "0x853d955aCEf822Db058eb8505911ED77F175b99e": {
     "symbol": "FRAX",
-    "threshold": 2.009817960738206e+19
+    "threshold": 4.566927407775469e+19
   },
   "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F": {
     "symbol": "SDT",
-    "threshold": 6.679513597819807e+19
+    "threshold": 1.6483262894856562e+20
   },
   "0x8290333ceF9e6D528dD5618Fb97a76f268f3EDD4": {
     "symbol": "ANKR",
-    "threshold": 1.3301409949454641e+21
+    "threshold": 3.3366700033366703e+21
   },
   "0x4E15361FD6b4BB609Fa63C81A2be19d873717870": {
     "symbol": "FTM",
-    "threshold": 1.0058996011608082e+20
+    "threshold": 2.494213424854338e+20
   },
   "0x3832d2F059E55934220881F831bE501D180671A7": {
     "symbol": "renDOGE",
-    "threshold": 29071035074.20382
+    "threshold": 71739099243.86989
   },
   "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE": {
     "symbol": "SHIB",
-    "threshold": 2.857142857142857e+24
+    "threshold": 6.25e+24
   },
   "0x875773784Af8135eA0ef43b5a374AaD105c5D39e": {
     "symbol": "IDLE",
-    "threshold": 8.73618045454347e+19
+    "threshold": 2.2037887536252325e+20
   },
   "0x03ab458634910AaD20eF5f1C8ee96F1D6ac54919": {
     "symbol": "RAI",
-    "threshold": 8.489861619500532e+18
+    "threshold": 2.0984077701521637e+19
   },
   "0xf99d58e463A2E07e5692127302C20A191861b4D6": {
     "symbol": "ANY",
-    "threshold": 4.5729452213751347e+18
+    "threshold": 1.1284819592974615e+19
   },
   "0xdBdb4d16EdA451D0503b854CF79D55697F90c8DF": {
     "symbol": "ALCX",
-    "threshold": 1.3113617298225034e+17
+    "threshold": 3.241244583207743e+17
   },
   "0x41D5D79431A913C4aE7d69a668ecdfE5fF9DFB68": {
     "symbol": "INV",
-    "threshold": 5.6618391278435066e+17
+    "threshold": 1.4355431644573752e+18
   },
   "0x956F47F50A910163D8BF957Cf5846D573E7f87CA": {
     "symbol": "FEI",
-    "threshold": 3.922037733925038e+19
+    "threshold": 9.693961631299863e+19
   },
   "0x5f98805A4E8be255a32880FDeC7F6728C6568bA0": {
     "symbol": "LUSD",
-    "threshold": 2.0030025007486222e+19
+    "threshold": 4.995004995004996e+19
   },
   "0xf16e81dce15B08F326220742020379B855B87DF9": {
     "symbol": "ICE",
-    "threshold": 4.453123086548674e+19
+    "threshold": 1.1464944784825916e+20
   },
   "0x2d94AA3e47d9D5024503Ca8491fcE9A2fB4DA198": {
     "symbol": "BANK",
-    "threshold": 2.3499001292445073e+21
+    "threshold": 5.808550185873606e+21
   },
   "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B": {
     "symbol": "CVX",
-    "threshold": 6.232566343331512e+18
+    "threshold": 1.5452630733119158e+19
   },
   "0xDe30da39c46104798bB5aA3fe8B9e0e1F348163F": {
     "symbol": "GTC",
-    "threshold": 1.1765321831554712e+19
+    "threshold": 2.9079911597068743e+19
   },
   "0xBC6DA0FE9aD5f3b0d58160288917AA56653660E9": {
     "symbol": "alUSD",
-    "threshold": 2.051753428479979e+19
+    "threshold": 5.128731151913017e+19
   },
   "0xC581b735A1688071A1746c968e0798D642EDE491": {
     "symbol": "EURT",
-    "threshold": 18818038.97215871
+    "threshold": 46901675.32784271
   },
   "0x92D6C1e31e14520e676a687F0a93788B716BEff5": {
     "symbol": "DYDX",
-    "threshold": 1.9261958787112976e+19
+    "threshold": 4.732903333289159e+19
   },
   "0x15b7c0c907e4C6b9AdaAaabC300C08991D6CEA05": {
     "symbol": "GEL",
-    "threshold": 1.379281807962594e+20
+    "threshold": 3.41220066469669e+20
   },
   "0x99D8a9C45b2ecA8864373A26D1459e3Dff1e17F3": {
     "symbol": "MIM",
-    "threshold": 2.2428313502966145e+19
+    "threshold": 5.543526103910071e+19
   },
   "0x090185f2135308BaD17527004364eBcC2D37e5F6": {
     "symbol": "SPELL",
-    "threshold": 3.795066413662239e+22
+    "threshold": 9.451795841209831e+22
   },
   "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0": {
     "symbol": "wstETH",
-    "threshold": 1.543354288537429e+16
+    "threshold": 3.815415034174257e+16
   },
   "0xfE18be6b3Bd88A2D2A7f928d00292E7a9963CfC6": {
     "symbol": "sBTC",
-    "threshold": 1209234063047434.5
+    "threshold": 3004515185420650.5
   },
   "0x5e74C9036fb86BD7eCdcb084a0673EFc32eA31cb": {
     "symbol": "sETH",
-    "threshold": 1.6809971675197728e+16
+    "threshold": 4.162053723789467e+16
   },
   "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72": {
     "symbol": "ENS",
-    "threshold": 1.8220267916285522e+18
+    "threshold": 4.587521281511225e+18
   },
   "0xae78736Cd615f374D3085123A210448E74Fc6393": {
     "symbol": "rETH",
-    "threshold": 1.5619851696880706e+16
+    "threshold": 3.863790973056524e+16
   },
   "0x47110d43175f7f2C2425E7d15792acC5817EB44f": {
     "symbol": "GMI",
-    "threshold": 1.6557503049064187e+18
+    "threshold": 4.0924571186204426e+18
   },
   "0x31429d1856aD1377A8A0079410B297e1a9e214c2": {
     "symbol": "ANGLE",
-    "threshold": 7.259791643979818e+20
+    "threshold": 1.7968806152519226e+21
   },
   "0xF57e7e7C23978C3cAEC3C3548E3D615c346e79fF": {
     "symbol": "IMX",
-    "threshold": 5.085021560491417e+19
+    "threshold": 1.2846733332648174e+20
   },
   "0x2e9d63788249371f1DFC918a52f8d799F4a38C94": {
     "symbol": "TOKE",
-    "threshold": 2.371534003054536e+19
+    "threshold": 5.861630353866624e+19
   },
   "0x0f2D719407FdBeFF09D87557AbB7232601FD9F29": {
     "symbol": "SYN",
-    "threshold": 3.769012311478715e+19
+    "threshold": 9.315740247351535e+19
   },
   "0x4d224452801ACEd8B2F0aebE155379bb5D594381": {
     "symbol": "APE",
-    "threshold": 5.572778537223652e+18
+    "threshold": 1.3750633904222984e+19
   },
   "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6": {
     "symbol": "STG",
-    "threshold": 5.54443588137125e+19
+    "threshold": 1.3752018108657446e+20
   },
   "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB": {
     "symbol": "COW",
-    "threshold": 2.859757492564631e+20
+    "threshold": 7.068336679012696e+20
   },
   "0xc5102fE9359FD9a28f877a67E36B0F050d81a3CC": {
     "symbol": "HOP",
-    "threshold": 2.5325752491420903e+20
+    "threshold": 7.056366253634028e+20
   },
   "0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490": {
     "symbol": "3Crv",
-    "threshold": 1.954929109383171e+19
+    "threshold": 4.887934329624695e+19
   },
   "0x2aF1dF3AB0ab157e1E2Ad8F88A7D04fbea0c7dc6": {
     "symbol": "BED",
-    "threshold": 4.969898813854129e+17
+    "threshold": 1.228391608886401e+18
   },
   "0xD33526068D116cE69F19A9ee46F0bd304F21A51f": {
     "symbol": "RPL",
-    "threshold": 1.0402670740075124e+18
+    "threshold": 2.5565765272323466e+18
   },
   "0xf1Dc500FdE233A4055e25e5BbF516372BC4F6871": {
     "symbol": "SDL",
-    "threshold": 3.1426775612822127e+21
+    "threshold": 7.358351729212657e+21
   },
   "0x865377367054516e17014CcdED1e7d814EDC9ce4": {
     "symbol": "DOLA",
-    "threshold": 2.0034037830273634e+19
+    "threshold": 4.995004995004996e+19
   },
   "0xE14d13d8B3b85aF791b2AADD661cDBd5E6097Db1": {
     "symbol": "yvYFI",
-    "threshold": 3610130826164575.0
+    "threshold": 9023515155067244.0
   },
   "0xdb25cA703181E7484a155DD612b06f57E12Be5F0": {
     "symbol": "yvYFI",
-    "threshold": 3795456948897467.0
+    "threshold": 9486744930627498.0
   },
   "0xdCD90C7f6324cfa40d7169ef80b12031770B4325": {
     "symbol": "yvCurve-stETH",
-    "threshold": 1.4444001475807184e+16
+    "threshold": 3.5759807003520584e+16
   },
   "0x986b4AFF588a109c09B50A03f42E4110E29D353F": {
     "symbol": "yvCurve-sETH",
-    "threshold": 8580010306316960.0
+    "threshold": 2.12436192835069e+16
   },
   "0xcB550A6D4C8e3517A939BC79d0c7093eb7cF56B5": {
     "symbol": "yvWBTC",
-    "threshold": 120563.3306627137
+    "threshold": 299556.8590440235
   },
   "0xA696a63cc78DfFa1a63E9E50587C197387FF6C7E": {
     "symbol": "yvWBTC",
-    "threshold": 118422.66540960265
+    "threshold": 294238.0697005286
   },
   "0xa9fE4601811213c340e850ea305481afF02f5b28": {
     "symbol": "yvWETH",
-    "threshold": 1.610561045326014e+16
+    "threshold": 3.987657876668954e+16
   },
   "0xa258C4606Ca8206D8aA700cE2143D7db854D168c": {
     "symbol": "yvWETH",
-    "threshold": 1.6388891065197048e+16
+    "threshold": 4.0577965499417496e+16
   },
   "0xB8C3B7A2A618C552C23B1E4701109a9E756Bab67": {
     "symbol": "yv1INCH",
-    "threshold": 1.4088723737738408e+19
+    "threshold": 3.4822603212454793e+19
   },
   "0xBFa4D8AA6d8a379aBFe7793399D3DdaCC5bBECBB": {
     "symbol": "yvDAI",
-    "threshold": 1.962460100733077e+19
+    "threshold": 4.906833943907036e+19
   },
   "0x19D3364A399d251E894aC732651be8B0E4e85001": {
     "symbol": "yvDAI",
-    "threshold": 1.8030395640971553e+19
+    "threshold": 4.508228870156697e+19
   },
   "0xdA816459F1AB5631232FE5e97a05BBBb94970c95": {
     "symbol": "yvDAI",
-    "threshold": 1.920058369774441e+19
+    "threshold": 4.800219658051552e+19
   },
   "0xe11ba472F74869176652C35D30dB89854b5ae84D": {
     "symbol": "yvHEGIC",
-    "threshold": 1.0206164523372118e+21
+    "threshold": 2.73224043715847e+21
   },
   "0xe2F6b9773BF3A015E2aA70741Bde1498bdB9425b": {
     "symbol": "yvUSDC",
-    "threshold": 19667965.40798244
+    "threshold": 49037347.824850366
   },
   "0x5f18C75AbDAe578b483E5F43f12a39cF75b973a9": {
     "symbol": "yvUSDC",
-    "threshold": 18204524.18835129
+    "threshold": 45388608.18556315
   },
   "0xa354F35829Ae975e850e23e9615b11Da1B3dC4DE": {
     "symbol": "yvUSDC",
-    "threshold": 19552693.041294307
+    "threshold": 48748860.49538592
   },
   "0x27b7b1ad7288079A66d12350c828D3C00A6F07d7": {
     "symbol": "yvCurve-IronBank",
-    "threshold": 1.6631186801490151e+19
+    "threshold": 4.157876223351132e+19
   },
   "0x625b7DF2fa8aBe21B0A976736CDa4775523aeD1E": {
     "symbol": "yvCurve-HBTC",
-    "threshold": 1125460899141327.8
+    "threshold": 2796368696035263.5
   },
   "0x9d409a0A012CFbA9B15F6D4B36Ac57A46966Ab9a": {
     "symbol": "yvBOOST",
-    "threshold": 1.995577799596095e+19
+    "threshold": 4.936150888260353e+19
   },
   "0x8414Db07a7F743dEbaFb402070AB01a4E0d2E45e": {
     "symbol": "yvCurve-sBTC",
-    "threshold": 1162358479809704.0
+    "threshold": 2888016330474097.5
   },
   "0x7047F90229a057C13BF847C0744D646CFb6c9E1A": {
     "symbol": "yvCurve-renBTC",
-    "threshold": 1123743719523124.0
+    "threshold": 2792100678465097.0
   },
   "0xb4D1Be44BfF40ad6e506edf43156577a3f8672eC": {
     "symbol": "yvCurve-sAave",
-    "threshold": 1.7381147711945716e+19
+    "threshold": 4.3457892344370766e+19
   },
   "0xe9Dc63083c464d6EDcCFf23444fF3CFc6886f6FB": {
     "symbol": "yvCurve-oBTC",
-    "threshold": 1126186101877189.2
+    "threshold": 2798162543943907.5
   },
   "0x3c5DF3077BcF800640B5DAE8c91106575a4826E6": {
     "symbol": "yvCurve-pBTC",
-    "threshold": 1089419545984959.9
+    "threshold": 2706796303853211.5
   },
   "0x5fA5B62c8AF877CB37031e0a3B2f34A78e3C56A6": {
     "symbol": "yvCurve-LUSD",
-    "threshold": 1.7826392330372964e+19
+    "threshold": 4.457154267457782e+19
   },
   "0x8fA3A9ecd9EFb07A8CE90A6eb014CF3c0E3B32Ef": {
     "symbol": "yvCurve-BBTC",
-    "threshold": 1161610855404174.2
+    "threshold": 2886182547493007.5
   },
   "0x23D3D0f1c697247d5e0a9efB37d8b0ED0C464f7f": {
     "symbol": "yvCurve-tBTC",
-    "threshold": 1107906897872551.8
+    "threshold": 2752728879070899.0
   },
   "0x7Da96a3891Add058AdA2E826306D812C638D87a7": {
     "symbol": "yvUSDT",
-    "threshold": 18957112.376814317
+    "threshold": 47250806.335010104
   },
   "0x3B27F92C0e212C671EA351827EDF93DB27cc0c65": {
     "symbol": "yvUSDT",
-    "threshold": 19888109.495975643
+    "threshold": 49571307.33417407
   },
   "0xB4AdA607B9d6b2c9Ee07A275e9616B84AC560139": {
     "symbol": "yvCurve-FRAX",
-    "threshold": 1.7617016628701993e+19
+    "threshold": 4.4048477992939905e+19
   },
   "0xFBEB78a723b8087fD2ea7Ef1afEc93d35E8Bed42": {
     "symbol": "yvUNI",
-    "threshold": 3.986425424145699e+18
+    "threshold": 9.707384485036843e+18
   },
   "0x8ee57c05741aA9DB947A744E713C15d4d19D8822": {
     "symbol": "yvCurve-yBUSD",
-    "threshold": 1.682140961730452e+19
+    "threshold": 4.2059184001359356e+19
   },
   "0xD6Ea40597Be05c201845c0bFd2e96A60bACde267": {
     "symbol": "yvCurve-Compound",
-    "threshold": 1.7474421815068195e+19
+    "threshold": 4.369128437521026e+19
   },
   "0x2a38B9B0201Ca39B17B460eD2f11e4929559071E": {
     "symbol": "yvCurve-GUSD",
-    "threshold": 1.7987148182623517e+19
+    "threshold": 4.497280494484985e+19
   },
   "0x4B5BfD52124784745c1071dcB244C6688d2533d3": {
     "symbol": "yUSD",
-    "threshold": 1.748739377501244e+19
+    "threshold": 4.372429557973606e+19
   },
   "0x84E13785B5a27879921D6F685f041421C7F482dA": {
     "symbol": "yvCurve-3pool",
-    "threshold": 1.8893412811623227e+19
+    "threshold": 4.723942262088096e+19
   },
   "0xf8768814b88281DE4F532a3beEfA5b85B69b9324": {
     "symbol": "yvCurve-TUSD",
-    "threshold": 1.712492978778787e+19
+    "threshold": 4.281797053095996e+19
   },
   "0x6Ede7F19df5df6EF23bD5B9CeDb651580Bdf56Ca": {
     "symbol": "yvCurve-BUSD",
-    "threshold": 1.8588621718759727e+19
+    "threshold": 4.647781799658295e+19
   },
   "0x30FCf7c6cDfC46eC237783D94Fc78553E79d4E9C": {
     "symbol": "yvCurve-DUSD",
-    "threshold": 1.791490242200523e+19
+    "threshold": 4.47933548162263e+19
   },
   "0x1C6a9783F812b3Af3aBbf7de64c3cD7CC7D1af44": {
     "symbol": "yvCurve-UST",
-    "threshold": 1.7595674279435143e+19
+    "threshold": 4.399522387849575e+19
   },
   "0x8cc94ccd0f3841a468184aCA3Cc478D2148E1757": {
     "symbol": "yvCurve-mUSD",
-    "threshold": 1.798650113090126e+19
+    "threshold": 4.4972198187080745e+19
   },
   "0xa5cA62D95D24A4a350983D5B8ac4EB8638887396": {
     "symbol": "yvsUSD",
-    "threshold": 1.9245258689955996e+19
+    "threshold": 4.797865909243568e+19
   },
   "0xF29AE508698bDeF169B89834F76704C3B205aedf": {
     "symbol": "yvSNX",
-    "threshold": 1.2282484869513951e+19
+    "threshold": 3.07210601469204e+19
   },
   "0x5a770DbD3Ee6bAF2802D29a901Ef11501C44797A": {
     "symbol": "yvCurve-sUSD",
-    "threshold": 1.7169474734259456e+19
+    "threshold": 4.29295466038865e+19
   },
   "0xf2db9a7c0ACd427A680D640F02d90f6186E71725": {
     "symbol": "yvCurve-LINK",
-    "threshold": 3.4550268654251484e+18
+    "threshold": 8.641675517182675e+18
   },
   "0x3B96d491f067912D18563d56858Ba7d6EC67a6fa": {
     "symbol": "yvCurve-USDN",
-    "threshold": 1.53921456958943e+19
+    "threshold": 3.84856660136932e+19
   },
   "0xC4dAf3b5e2A9e93861c3FBDd25f1e943B8D87417": {
     "symbol": "yvCurve-USDP",
-    "threshold": 1.782977733282578e+19
+    "threshold": 4.458048426888452e+19
   },
   "0xA74d4B67b3368E83797a35382AFB776bAAE4F5C8": {
     "symbol": "yvCurve-alUSD",
-    "threshold": 1.8179240035049578e+19
+    "threshold": 4.532105434900838e+19
   },
   "0xBfedbcbe27171C418CDabC2477042554b1904857": {
     "symbol": "yvCurve-rETH",
-    "threshold": 1.6038248078169812e+16
+    "threshold": 3.970979336464998e+16
   },
   "0x132d8D2C76Db3812403431fAcB00F3453Fc42125": {
     "symbol": "yvCurve-ankrETH",
-    "threshold": 1.5286553799991582e+16
+    "threshold": 3.784624429471841e+16
   },
   "0x39CAF13a104FF567f71fd2A4c68C026FDB6E740B": {
     "symbol": "yvCurve-Aave",
-    "threshold": 1.763377644074566e+19
+    "threshold": 4.408906696952916e+19
   },
   "0x054AF22E1519b020516D72D749221c24756385C9": {
     "symbol": "yvCurve-HUSD",
-    "threshold": 1.857589740160347e+19
+    "threshold": 4.644617120987631e+19
   },
   "0x25212Df29073FfFA7A67399AcEfC2dd75a831A1A": {
     "symbol": "yvCurve-EURS",
-    "threshold": 1.7010476752631945e+19
+    "threshold": 4.239655875611889e+19
   },
   "0x671a912C10bba0CFA74Cfc2d6Fba9BA1ed9530B2": {
     "symbol": "yvLINK",
-    "threshold": 3.449511143904464e+18
+    "threshold": 8.62788203614565e+18
   },
   "0x873fB544277FD7b977B196a826459a69E27eA4ea": {
     "symbol": "yvRAI",
-    "threshold": 8.46445479177018e+18
+    "threshold": 2.0921281169047716e+19
   },
   "0x3D980E50508CFd41a13837A60149927a11c03731": {
     "symbol": "yvCurve-triCrypto",
-    "threshold": 2.332356954679169e+16
+    "threshold": 5.794387767850876e+16
   },
   "0x80bbeE2fa460dA291e796B9045e93d19eF948C6A": {
     "symbol": "yvCurve-Pax",
-    "threshold": 1.922890180857436e+19
+    "threshold": 4.807886472338307e+19
   },
   "0x28a5b95C101df3Ded0C0d9074DB80C438774B6a9": {
     "symbol": "yvCurve-USDT",
-    "threshold": 6.818329032104103e+18
+    "threshold": 1.7047914869532305e+19
   },
   "0x3D27705c64213A5DcD9D26880c1BcFa72d5b6B0E": {
     "symbol": "yvCurve-USDK",
-    "threshold": 9.621643309325728e+18
+    "threshold": 2.405732572031242e+19
   },
   "0xC116dF49c02c5fD147DE25Baa105322ebF26Bd97": {
     "symbol": "yvCurve-RSV",
-    "threshold": 1.741051647426595e+19
+    "threshold": 4.353189974081107e+19
   },
   "0xE537B5cc158EB71037D4125BDD7538421981E6AA": {
     "symbol": "yvCurve-3Crypto",
-    "threshold": 2.1233763516464972e+16
+    "threshold": 5.275341868740818e+16
   },
   "0xd9788f3931Ede4D5018184E198699dC6d66C1915": {
     "symbol": "yvAAVE",
-    "threshold": 2.41856445574645e+17
+    "threshold": 5.970696133851258e+17
   },
   "0x4A3FE75762017DB0eD73a71C9A06db7768DB5e66": {
     "symbol": "yvCOMP",
-    "threshold": 6.133577981313748e+17
+    "threshold": 1.5483399952726085e+18
   },
   "0x6d765CbE5bC922694afE112C140b8878b9FB0390": {
     "symbol": "yvSUSHI",
-    "threshold": 1.9016594831479693e+19
+    "threshold": 4.6618786065458364e+19
   },
   "0xFD0877d9095789cAF24c98F7CCe092fa8E120775": {
     "symbol": "yvTUSD",
-    "threshold": 1.9066031386500866e+19
+    "threshold": 4.712477603950187e+19
   },
   "0x0d4EA8536F9A13e4FBa16042a46c30f092b06aA5": {
     "symbol": "yvCurve-EURT",
-    "threshold": 1.6880414920598745e+19
+    "threshold": 4.20723846964225e+19
   },
   "0x2DfB14E32e2F8156ec15a2c21c3A6c053af52Be8": {
     "symbol": "yvCurve-MIM",
-    "threshold": 1.7375741726974968e+19
+    "threshold": 4.344505373718697e+19
   },
   "0x4560b99C904aAD03027B5178CCa81584744AC01f": {
     "symbol": "yvCurve-cvxCRV",
-    "threshold": 3.3411627914746896e+19
+    "threshold": 8.453985800685448e+19
   },
   "0x67e019bfbd5a67207755D04467D6A70c0B75bF60": {
     "symbol": "yvCurve-ibEUR",
-    "threshold": 1.7091402255552352e+19
+    "threshold": 4.25980009610109e+19
   },
   "0x528D50dC9a333f01544177a924893FA1F5b9F748": {
     "symbol": "yvCurve-ibKRW",
-    "threshold": 2.2522522522522522e+22
+    "threshold": 5.605381165919283e+22
   },
   "0x595a68a8c9D5C230001848B69b1947ee2A607164": {
     "symbol": "yvCurve-ibGBP",
-    "threshold": 1.451882438175216e+19
+    "threshold": 3.620234504310251e+19
   },
   "0x1b905331F7dE2748F4D6a0678e1521E20347643F": {
     "symbol": "yvCurve-ibAUD",
-    "threshold": 2.926817846564501e+19
+    "threshold": 7.292935333542398e+19
   },
   "0x490bD0886F221A5F79713D3E84404355A9293C50": {
     "symbol": "yvCurve-ibCHF",
-    "threshold": 1.6358004748728779e+19
+    "threshold": 4.069179303502993e+19
   },
   "0x59518884EeBFb03e90a18ADBAAAB770d4666471e": {
     "symbol": "yvCurve-ibJPY",
-    "threshold": 2.21483942414175e+21
+    "threshold": 5.508427894678859e+21
   },
   "0x6FAfCA7f49B4Fd9dC38117469cd31A1E5aec91F5": {
     "symbol": "yvCurve-USDM",
-    "threshold": 6.489168442265381e+18
+    "threshold": 1.6224926809355162e+19
   },
   "0x718AbE90777F5B778B52D553a5aBaa148DD0dc5D": {
     "symbol": "yvCurve-alETH",
-    "threshold": 1.5657406476690572e+16
+    "threshold": 3.876682948024324e+16
   },
   "0x8b9C0c24307344B6D7941ab654b2Aeee25347473": {
     "symbol": "yvCurve-EURN",
-    "threshold": 1.7941403376572115e+19
+    "threshold": 4.471603973288427e+19
   },
   "0xd8C620991b8E626C099eAaB29B1E3eEa279763bb": {
     "symbol": "yvCurve-MIMUST",
-    "threshold": 8.902737591809482e+20
+    "threshold": 2.2998022170093373e+21
   },
   "0xF59D66c1d593Fb10e2f8c2a6fD2C958792434B9c": {
     "symbol": "yvCurve-OUSD",
-    "threshold": 1.8369808118169303e+19
+    "threshold": 4.592996231905892e+19
   },
   "0x5e69e8b51B71C8596817fD442849BD44219bb095": {
     "symbol": "yvCurve-ibBTC",
-    "threshold": 1180068472693102.8
+    "threshold": 2932003333555968.0
   },
   "0x16825039dfe2a5b01F3E1E6a2BBF9a576c6F95c4": {
     "symbol": "yvCurve-d3pool",
-    "threshold": 1.998886620152575e+19
+    "threshold": 5.008444236983554e+19
   },
   "0xBCBB5b54Fa51e7b7Dc920340043B203447842A6b": {
     "symbol": "yvCurve-EURTUSD",
-    "threshold": 9.375766175892187e+18
+    "threshold": 2.340719864987278e+19
   },
   "0x801Ab06154Bf539dea4385a39f5fa8534fB53073": {
     "symbol": "yvCurve-EURSUSDC",
-    "threshold": 9.233265053338264e+18
+    "threshold": 2.301345550716593e+19
   },
   "0x378cb52b00F9D0921cb46dFc099CFf73b42419dC": {
     "symbol": "yvLUSD",
-    "threshold": 1.875695765898163e+19
+    "threshold": 4.6751910984361484e+19
   },
   "0x5AB64C599FcC59f0f2726A300b03166A395578Da": {
     "symbol": "yvCurve-3EUR",
-    "threshold": 1.7543228708441188e+19
+    "threshold": 4.372418087119556e+19
   },
   "0x6A5468752f8DB94134B6508dAbAC54D3b45efCE6": {
     "symbol": "yvCurve-CRVETH",
-    "threshold": 3.4929255682710464e+17
+    "threshold": 8.60840219997704e+17
   },
   "0x1635b506a88fBF428465Ad65d00e8d6B6E5846C3": {
     "symbol": "yvCurve-CVXETH",
-    "threshold": 1.3755709358753262e+17
+    "threshold": 3.4080929187906323e+17
   },
   "0x04d73c87b20d372cB3240C72eEFB9d79bA5e4959": {
     "symbol": "yvCurve-UST",
-    "threshold": 1.9311151900555293e+19
+    "threshold": 4.8283147829479375e+19
   },
   "0x2D5D4869381C4Fce34789BC1D38aCCe747E295AE": {
     "symbol": "yvCurve-RAI",
-    "threshold": 1.981863962875724e+19
+    "threshold": 4.955283521501967e+19
   },
   "0xd88dBBA3f9c4391Ee46f5FF548f289054db6E51C": {
     "symbol": "yvCurve-DOLA",
-    "threshold": 1.8444841623367401e+19
+    "threshold": 4.6114783385028e+19
   },
   "0xc97511a1dDB162C8742D39FF320CfDCd13fBcf7e": {
     "symbol": "yvCurve-USDP",
-    "threshold": 1.9337142105756766e+19
+    "threshold": 4.834851154272365e+19
   },
   "0x790a60024bC3aea28385b60480f15a0771f26D09": {
     "symbol": "yvCurve-YFIETH",
-    "threshold": 3846522809059986.5
+    "threshold": 9569281944142968.0
   },
   "0x5c0A86A32c129538D62C106Eb8115a8b02358d57": {
     "symbol": "yvCurve-rETHwstETH",
-    "threshold": 1.5371683400209482e+16
+    "threshold": 3.8001053851305576e+16
   },
   "0x5faF6a2D186448Dfa667c51CB3D695c7A6E52d8E": {
     "symbol": "yvCurve-stETH-WETH",
-    "threshold": 1.6339591801670596e+16
+    "threshold": 4.0451466422411224e+16
   },
   "0xF6B9DFE6bc42ed2eaB44D6B829017f7B78B29f88": {
     "symbol": "yvCurve-ibKRW-USDC",
-    "threshold": 3.5331943610218e+20
+    "threshold": 8.795848359574282e+20
   },
   "0x9A39f31DD5EDF5919A5C0c2433cE053fAD2E0336": {
     "symbol": "yvCurve-ibJPY-USDC",
-    "threshold": 1.1512911730505762e+20
+    "threshold": 2.8659536174066555e+20
   },
   "0xE5eDcE53e39Cbc6d819E2C340BCF295e0084ff7c": {
     "symbol": "yvCurve-ibEUR-USDC",
-    "threshold": 9.655860310600059e+18
+    "threshold": 2.4065465767837565e+19
   },
   "0x2e5c7e9B1Da0D9Cb2832eBb06241d18552A85400": {
     "symbol": "yvCurve-ibCHF-USDC",
-    "threshold": 9.615213575527743e+18
+    "threshold": 2.394108577612212e+19
   },
   "0x6B5ce31AF687a671a804d8070Ddda99Cab926dfE": {
     "symbol": "yvCurve-ibGBP-USDC",
-    "threshold": 8.913744369856213e+18
+    "threshold": 2.2218400657309164e+19
   },
   "0x1025b1641d1F23C289412Dd5E5701e9810103a93": {
     "symbol": "yvCurve-ibAUD-USDC",
-    "threshold": 1.1914172682827446e+19
+    "threshold": 2.9653598523488023e+19
   },
   "0x341bb10D8f5947f3066502DC8125d9b8949FD3D6": {
     "symbol": "yvCurve-STG-USDC",
-    "threshold": 1.6190438412786559e+19
+    "threshold": 4.025388933078714e+19
   },
   "0x4213458C69c19E6792510E1153cb0c5834665fdC": {
     "symbol": "yvBalancer-BoostedAaveUSD",
-    "threshold": 1.969839783081243e+19
+    "threshold": 4.9144589279009554e+19
   },
   "0x27B5739e22ad9033bcBf192059122d163b60349D": {
     "symbol": "st-yCRV",
-    "threshold": 3.6129321292634857e+19
+    "threshold": 8.853286871283833e+19
   },
   "0xc97232527B62eFb0D8ed38CF3EA103A6CcA4037e": {
     "symbol": "lp-yCRV",
-    "threshold": 3.75313386677876e+19
+    "threshold": 9.20589914016902e+19
   },
   "0xc5F3D11580c41cD07104e9AF154Fc6428bb93c73": {
     "symbol": "yvBalancer-BoostedAaveUSD",
-    "threshold": 1.995239358889689e+19
+    "threshold": 4.978329332415993e+19
   },
   "0xA9412Ffd7E0866755ae0dda3318470A61F62abe8": {
     "symbol": "yvBlpFUD",
-    "threshold": 1.8647479653268763e+19
+    "threshold": 4.63338782197412e+19
   },
-  "last_updated": 1672273350
+  "last_updated": 1672334394
 }

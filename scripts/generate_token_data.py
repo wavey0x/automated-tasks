@@ -7,6 +7,7 @@ import warnings
 warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
+TARGET_USD_VALUE = 50
 
 def needs_approval():
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
@@ -31,7 +32,7 @@ def needs_approval():
     assert False
 
 
-def generate_token_data(TARGET_USD_VALUE):
+def generate_token_data(target_usd_value=TARGET_USD_VALUE):
     tokens = get_tokens()
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
     data = {}
@@ -46,7 +47,7 @@ def generate_token_data(TARGET_USD_VALUE):
                 symbol = "MKR"
             if p == 0:
                 continue
-            threshold = (TARGET_USD_VALUE / p) * 10 ** decimals
+            threshold = (target_usd_value / p) * 10 ** decimals
             print(f'{symbol} {threshold/10**decimals}')
             data[t] = {}
             data[t]['symbol'] = symbol
@@ -198,7 +199,6 @@ def get_tokens():
     vaults = helper.getVaults()
     for v in vaults:
         new_list.append(v)
-    assert False
     return new_list
 
 if __name__ == '__main__':
