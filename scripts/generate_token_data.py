@@ -7,7 +7,7 @@ import warnings
 warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
-TARGET_USD_VALUE = 50
+TARGET_USD_VALUE = 20
 
 def needs_approval():
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
