@@ -140,7 +140,8 @@ def bribe_splitter():
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
                 send_alert(CHAT_IDS['CURVE_WARS'], m, True)
             except Exception as e:
-                transaction_failure(e)
+                pass
+                # transaction_failure(e)
 
 def th_sweeper():
     f = open('sweep_tokens_list.json')
