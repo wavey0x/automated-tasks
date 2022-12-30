@@ -4,7 +4,7 @@ from dotenv import load_dotenv, find_dotenv
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
 load_dotenv(find_dotenv())
-TARGET_USD_VALUE = 50
+TARGET_USD_VALUE = 20
 AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 PASS = os.environ.get('PASS')
