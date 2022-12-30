@@ -204,4 +204,7 @@ def get_tokens():
 if __name__ == '__main__':
     # test1.py executed as script
     # do something
-    generate_token_data()
+    generate_token_data(TARGET_USD_VALUE)
+
+def main():
+    generate_token_data(TARGET_USD_VALUE)
