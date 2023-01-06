@@ -13,13 +13,13 @@
     },
     "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
         "token_name": "DAI",
-        "gauge": "0xBE266d68Ce3dDFAb366Bb866F4353B6FC42BA43c",
+        "gauge": "0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6",
         "should_claim": "false",
         "split_threshold": 200e18
     },
     "0xd395DEC4F1733ff09b750D869eEfa7E0D37C3eE6": {
         "token_name": "yvCurve-DOLA-FRAXBP-U",
-        "gauge": "0xBE266d68Ce3dDFAb366Bb866F4353B6FC42BA43c",
+        "gauge": "0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6",
         "should_claim": "false",
         "split_threshold": 250e18
     }
