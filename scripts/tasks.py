@@ -24,12 +24,12 @@ CHAT_IDS = {
 }
 
 def main():
-    th_sweeper()
     claim_bribes()
     yearn_fed()
     bribe_splitter()
     temple_split()
     ycrv_donator()
+    th_sweeper()
 
 def claim_bribes():
     voters, gauges, tokens = ([] for i in range(3))
@@ -155,7 +155,7 @@ def th_sweeper():
         last_update = 0
     if time.time() - last_update > 60 * 60 * 24:
         scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
-    sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
+    sweeper = Contract('0x6B3d9Fe074c18a2Fa10a8206670Ef7f65F40ff26', owner=worker)
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
     calls, token_list, balance_list = ([] for i in range(3))
     # Use multicall to reduce http requests
@@ -173,6 +173,9 @@ def th_sweeper():
             balance_list.append(balance)
     print(f'{len(token_list)}/{len(sweep_tokens)} tokens eligible for sweep',flush=True)
     if len(token_list) > 0:
+        print(f'Sweeping...')
+        for t in token_list:
+            print(t)
         try:
             tx = sweeper.sweep(token_list, balance_list)
             m = f'🧹 Sweep Detected!'

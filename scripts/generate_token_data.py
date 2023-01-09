@@ -199,6 +199,8 @@ def get_tokens():
     vaults = helper.getVaults()
     for v in vaults:
         new_list.append(v)
+    for i in new_list:
+        print(f'{i}')
     return new_list
 
 if __name__ == '__main__':

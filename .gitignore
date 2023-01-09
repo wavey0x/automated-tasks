@@ -6,3 +6,4 @@ build/
 reports/
 env
 sweep_tokens_list.json
+sweep_tokens_list
