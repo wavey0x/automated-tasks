@@ -177,7 +177,7 @@ def th_sweeper():
         for t in token_list:
             print(t)
         try:
-            tx = sweeper.sweep(token_list, balance_list)
+            tx = sweeper.sweep(token_list, balance_list, tx_params)
             m = f'🧹 Sweep Detected!'
             m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
             send_alert(CHAT_IDS['SEASOLVER'], m, True)
