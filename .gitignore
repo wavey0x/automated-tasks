@@ -5,5 +5,7 @@ __pycache__
 build/
 reports/
 env
+xsweep_tokens_list.json
 sweep_tokens_list.json
-sweep_tokens_list
+xth_approved_tokens.json
+th_approved_tokens.json
