@@ -174,6 +174,7 @@ def th_sweeper():
     print(f'{len(token_list)}/{len(sweep_tokens)} tokens eligible for sweep',flush=True)
     if len(token_list) > 0:
         print(f'Sweeping...')
+        syms = ""
         for t in token_list:
             print(t)
         try:
