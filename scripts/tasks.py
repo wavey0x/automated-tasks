@@ -24,6 +24,7 @@ CHAT_IDS = {
 }
 
 def main():
+    claim_votemarket()
     claim_bribes()
     yearn_fed()
     bribe_splitter()
@@ -31,12 +32,39 @@ def main():
     ycrv_donator()
     th_sweeper()
 
+def claim_votemarket():
+    voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'),owner=worker)
+    v1_5 = Contract('0x7D0F747eb583D43D41897994c983F13eF7459e1f', owner=worker)
+    bribe_ids_to_claim = []
+    for i in range(0,200):
+        if v1_5.bribes(i).dict()['gauge'] == ZERO_ADDRESS:
+            break
+        if v1_5.claimable(voter, i) > 0:
+            bribe_ids_to_claim.append(i)
+    if len(bribe_ids_to_claim) > 0:
+        try:       
+            tx = v1_5.claimAllFor(voter, bribe_ids_to_claim, tx_params)
+            m = f'🤖 {len(bribe_ids_to_claim)} Bribe Claim(s) Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        except Exception as e:
+            transaction_failure(e)
+
 def claim_bribes():
+    WEEK = 60 * 60 * 24 * 7
     voters, gauges, tokens = ([] for i in range(3))
     claims = [
         {
             'gauge': '0xd8b712d29381748dB89c36BCa0138d7c75866ddF',
             'token': '0x090185f2135308BaD17527004364eBcC2D37e5F6',
+        },
+        {
+            'gauge': '0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6',
+            'token': '0xD533a949740bb3306d119CC777fa900bA034cd52',
+        },
+        {
+            'gauge': '0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168',
+            'token': '0xD533a949740bb3306d119CC777fa900bA034cd52',
         },
     ]
     ybribe = Contract(web3.ens.resolve('ybribe.ychad.eth'),owner=worker)
@@ -45,6 +73,8 @@ def claim_bribes():
     for c in claims:
         gauge = c['gauge']
         token = c['token']
+        if ybribe.active_period(gauge, token) + WEEK < chain.time():
+            ybribe.add_reward_amount(gauge, token, 0, tx_params)
         if ybribe.claimable(voter, gauge, token):
             claims_to_make += 1
             voters.append(voter)
