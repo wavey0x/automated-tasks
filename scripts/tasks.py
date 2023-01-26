@@ -4,6 +4,7 @@ from dotenv import load_dotenv, find_dotenv
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
 load_dotenv(find_dotenv())
+WEEK = 60 * 60 * 24 * 7
 TARGET_USD_VALUE = 10
 AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
@@ -24,6 +25,7 @@ CHAT_IDS = {
 }
 
 def main():
+    if int(chain.time())
     claim_votemarket()
     claim_bribes()
     yearn_fed()
@@ -33,6 +35,10 @@ def main():
     th_sweeper()
 
 def claim_votemarket():
+    buffer_time = 60 * 60 * 3
+    week_start = int(chain.time() / WEEK) * WEEK
+    if week_start + buffer_time > chain.time():
+        return # Only proceed if we've waited the buffer time
     voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'),owner=worker)
     v1_5 = Contract('0x7D0F747eb583D43D41897994c983F13eF7459e1f', owner=worker)
     bribe_ids_to_claim = []
@@ -51,7 +57,10 @@ def claim_votemarket():
             transaction_failure(e)
 
 def claim_bribes():
-    WEEK = 60 * 60 * 24 * 7
+    buffer_time = 60 * 60 * 3
+    week_start = int(chain.time() / WEEK) * WEEK
+    if week_start + buffer_time > chain.time():
+        return # Only proceed if we've waited the buffer time
     voters, gauges, tokens = ([] for i in range(3))
     claims = [
         {
