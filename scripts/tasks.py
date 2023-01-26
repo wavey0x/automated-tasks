@@ -25,7 +25,6 @@ CHAT_IDS = {
 }
 
 def main():
-    if int(chain.time())
     claim_votemarket()
     claim_bribes()
     yearn_fed()
