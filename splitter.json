@@ -11,6 +11,12 @@
         "should_claim": "true",
         "split_threshold": 500e18
     },
+    "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": {
+        "token_name": "USDC",
+        "gauge": "0xACc9F5CEDC631180a2aD4C945377930fCFCC782F",
+        "should_claim": "true",
+        "split_threshold": 200e18
+    },
     "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
         "token_name": "DAI",
         "gauge": "0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6",
