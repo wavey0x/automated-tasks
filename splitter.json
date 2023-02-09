@@ -28,5 +28,11 @@
         "gauge": "0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6",
         "should_claim": "false",
         "split_threshold": 250e18
+    },
+    "0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32": {
+        "token_name": "LDO",
+        "gauge": "0x99ac10631F69C753DDb595D074422a0922D9056B",
+        "should_claim": "true",
+        "split_threshold": 100e18
     }
 }
