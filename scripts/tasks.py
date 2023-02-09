@@ -170,6 +170,8 @@ def bribe_splitter():
         symbol = token.symbol()
         print(f'{symbol} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}',flush=True)
         if balance > split_threshold:
+            if token_address == '0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32':
+                assert False
             if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
                 should_claim = False # Override if claim not worth it
             try:
