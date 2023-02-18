@@ -193,15 +193,14 @@ def th_sweeper():
         last_update = 0
     if time.time() - last_update > 60 * 60 * 24:
         scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
-    sweeper = Contract('0x6B3d9Fe074c18a2Fa10a8206670Ef7f65F40ff26', owner=worker)
-    th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
+    th = Contract('0xb634316E06cC0B358437CbadD4dC94F1D3a92B3b', owner=worker)
     calls, token_list, balance_list = ([] for i in range(3))
     # Use multicall to reduce http requests
     for token_address in sweep_tokens:
         if token_address == 'last_updated':
             continue
         calls.append(
-            Call(token_address, ['balanceOf(address)(uint256)', th], [[token_address, None]])
+            Call(token_address, ['balanceOf(address)(uint256)', th.address], [[token_address, None]])
         )
     return_values = Multicall(calls)()
     for token_address in return_values:
@@ -216,7 +215,7 @@ def th_sweeper():
         for t in token_list:
             print(t)
         try:
-            tx = sweeper.sweep(token_list, balance_list, tx_params)
+            tx = th.sweep(token_list, balance_list, tx_params)
             m = f'🧹 Sweep Detected!'
             m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
             send_alert(CHAT_IDS['SEASOLVER'], m, True)
