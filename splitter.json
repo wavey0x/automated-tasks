@@ -31,8 +31,20 @@
     },
     "0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32": {
         "token_name": "LDO",
-        "gauge": "0xe5d5aa1bbe72f68df42432813485ca1fc998de32",
+        "gauge": "0xe5d5Aa1Bbe72F68dF42432813485cA1Fc998DE32",
         "should_claim": "true",
         "split_threshold": 100e18
+    },
+    "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F": {
+        "token_name": "SNX",
+        "gauge": "0x3C0FFFF15EA30C35d7A85B85c0782D6c94e1d238",
+        "should_claim": "false",
+        "split_threshold": 50e18
+    },
+    "0xdBdb4d16EdA451D0503b854CF79D55697F90c8DF": {
+        "token_name": "ALCX",
+        "gauge": "0x12dCD9E8D1577b5E4F066d8e7D404404Ef045342",
+        "should_claim": "false",
+        "split_threshold": 10e18
     }
 }
