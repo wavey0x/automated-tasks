@@ -25,13 +25,24 @@ CHAT_IDS = {
 }
 
 def main():
-    claim_votemarket()
-    claim_bribes()
-    yearn_fed()
-    bribe_splitter()
-    temple_split()
-    ycrv_donator()
-    th_sweeper()
+    if chain.id == 250:
+        ib_harvest()
+    else:
+        claim_votemarket()
+        claim_bribes()
+        yearn_fed()
+        bribe_splitter()
+        temple_split()
+        ycrv_donator()
+        th_sweeper()
+
+def ib_harvest():
+    threshold = 10e6
+    s = Contract('0x83a5Af7540E919dE74cf2D6d5F40e47f11D3E8d1', owner=worker)
+    market = '0x049d68029688eAbF473097a2fC38ef61633A3C7A'
+    token = Contract('0x049d68029688eAbF473097a2fC38ef61633A3C7A')
+    if token.balanceOf(market) > threshold:
+        s.harvest()
 
 def claim_votemarket():
     buffer_time = 60 * 60 * 3
