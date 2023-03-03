@@ -41,8 +41,13 @@ def ib_harvest():
     s = Contract('0x83a5Af7540E919dE74cf2D6d5F40e47f11D3E8d1', owner=worker)
     market = '0x049d68029688eAbF473097a2fC38ef61633A3C7A'
     token = Contract('0x049d68029688eAbF473097a2fC38ef61633A3C7A')
-    if token.balanceOf(market) > threshold:
+    available = token.balanceOf(market)
+    
+    if available > threshold:
+        print(f'✅ {available/1e6} available. Sending harvest...')
         s.harvest()
+    else:
+        print(f'❌ {available/1e6} available. Less than {threshold/1e6}')
 
 def claim_votemarket():
     buffer_time = 60 * 60 * 3
