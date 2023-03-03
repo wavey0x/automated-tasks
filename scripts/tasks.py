@@ -47,7 +47,10 @@ def ib_harvest():
     available = token.balanceOf(market)
     if available > threshold:
         print(f'✅ {available/1e6} available. Sending harvest...')
-        s.harvest()
+        tx = s.harvest()
+        m = f'Sent Fantom harvest for {available/1e6}'
+        m += f'\n\n🔗 [View on FTMScan](https://ftmscan.com/tx/{tx.txid})'
+        send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
     else:
         print(f'❌ {available/1e6} available. Less than {threshold/1e6}')
 
