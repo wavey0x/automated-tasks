@@ -42,7 +42,7 @@ def ib_harvest():
     market = '0x70faC71debfD67394D1278D98A29dea79DC6E57A'
     token = Contract('0x049d68029688eAbF473097a2fC38ef61633A3C7A')
     available = token.balanceOf(market)
-    if available > threshold:
+    if available > threshold and s.estimatedTotalAssets() > 10e6:
         print(f'✅ {available/1e6} available. Sending harvest...')
         s.harvest()
     else:
