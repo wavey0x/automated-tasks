@@ -39,10 +39,13 @@ def main():
 def ib_harvest():
     threshold = 10e6
     s = Contract('0x83a5Af7540E919dE74cf2D6d5F40e47f11D3E8d1', owner=worker)
+    if s.estimatedTotalAssets() < 10e6:
+        print(f'🥳 We are out!')
+        return
     market = '0x70faC71debfD67394D1278D98A29dea79DC6E57A'
     token = Contract('0x049d68029688eAbF473097a2fC38ef61633A3C7A')
     available = token.balanceOf(market)
-    if available > threshold and s.estimatedTotalAssets() > 10e6:
+    if available > threshold:
         print(f'✅ {available/1e6} available. Sending harvest...')
         s.harvest()
     else:
