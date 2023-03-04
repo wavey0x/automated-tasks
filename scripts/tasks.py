@@ -25,34 +25,32 @@ CHAT_IDS = {
 }
 
 def main():
-    if chain.id == 250:
-        ib_harvest()
-    else:
-        claim_votemarket()
-        claim_bribes()
-        yearn_fed()
-        bribe_splitter()
-        temple_split()
-        ycrv_donator()
-        th_sweeper()
+    stg_harvest()
+    claim_votemarket()
+    claim_bribes()
+    yearn_fed()
+    bribe_splitter()
+    temple_split()
+    ycrv_donator()
+    th_sweeper()
 
-def ib_harvest():
-    threshold = 10e6
-    s = Contract('0x83a5Af7540E919dE74cf2D6d5F40e47f11D3E8d1', owner=worker)
+def stg_harvest():
+    threshold = 10_000e6
+    s = Contract('0xE7A8Cbc43a0506d3A328393C1C30548835256d7D', owner=worker)
     if s.estimatedTotalAssets() < 10e6:
         print(f'🥳 We are out!')
         return
-    market = '0x70faC71debfD67394D1278D98A29dea79DC6E57A'
-    token = Contract('0x049d68029688eAbF473097a2fC38ef61633A3C7A')
-    available = token.balanceOf(market)
+    market = Contract('0x38EA452219524Bb87e18dE1C24D3bB59510BD783')
+    # token = Contract(s.want())
+    available = market.deltaCredit()
     if available > threshold:
         print(f'✅ {available/1e6} available. Sending harvest...')
         tx = s.harvest()
-        m = f'Sent Fantom harvest for {available/1e6}'
-        m += f'\n\n🔗 [View on FTMScan](https://ftmscan.com/tx/{tx.txid})'
+        m = f'Sent Starget USDT harvest. {"${:,.2f}".format(available/1e6)}'
+        m += f'\n\n🔗 [View on FTMScan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
     else:
-        print(f'❌ {available/1e6} available. Less than {threshold/1e6}')
+        print(f'❌ {"${:,.2f}".format(available/1e6)} available. Less than {"${:,.2f}".format(threshold/1e6)}')
 
 def claim_votemarket():
     buffer_time = 60 * 60 * 3
