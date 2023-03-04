@@ -35,7 +35,7 @@ def main():
     th_sweeper()
 
 def stg_harvest():
-    threshold = 10_000e6
+    threshold = 200_000e6
     s = Contract('0xE7A8Cbc43a0506d3A328393C1C30548835256d7D', owner=worker)
     if s.estimatedTotalAssets() < 10e6:
         print(f'🥳 We are out!')
@@ -46,8 +46,8 @@ def stg_harvest():
     if available > threshold:
         print(f'✅ {available/1e6} available. Sending harvest...')
         tx = s.harvest()
-        m = f'Sent Starget USDT harvest. {"${:,.2f}".format(available/1e6)}'
-        m += f'\n\n🔗 [View on FTMScan](https://etherscan.io/tx/{tx.txid})'
+        m = f'Sent Stargate USDT harvest. {"${:,.2f}".format(available/1e6)}'
+        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
     else:
         print(f'❌ {"${:,.2f}".format(available/1e6)} available. Less than {"${:,.2f}".format(threshold/1e6)}')
