@@ -45,10 +45,14 @@ def stg_harvest():
     available = market.deltaCredit()
     if available > threshold:
         print(f'✅ {available/1e6} available. Sending harvest...')
-        tx = s.harvest()
-        m = f'Sent Stargate USDT harvest. {"${:,.2f}".format(available/1e6)}'
-        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-        send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        try:
+            tx = s.harvest()
+            m = f'Sent Stargate USDT harvest. {"${:,.2f}".format(available/1e6)}'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+        except:
+            m += f'Harvest is blocked'
+            # send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
     else:
         print(f'❌ {"${:,.2f}".format(available/1e6)} available. Less than {"${:,.2f}".format(threshold/1e6)}')
 
