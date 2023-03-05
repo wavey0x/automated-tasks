@@ -51,7 +51,7 @@ def stg_harvest():
             m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
             send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
         except:
-            m += f'Harvest is blocked'
+            m = f'Harvest is blocked'
             # send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
     else:
         print(f'❌ {"${:,.2f}".format(available/1e6)} available. Less than {"${:,.2f}".format(threshold/1e6)}')
