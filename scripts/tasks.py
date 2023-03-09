@@ -11,8 +11,8 @@ telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 PASS = os.environ.get('PASS')
 worker = accounts.load('automate', PASS)
 tx_params = {}
-tx_params['max_fee'] = 80e9
-tx_params['priority_fee'] = 3e9
+tx_params['max_fee'] = int(80e9)
+tx_params['priority_fee'] = int(3e9)
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
 bot = telebot.TeleBot(telegram_bot_key)
@@ -25,6 +25,7 @@ CHAT_IDS = {
 }
 
 def main():
+    th_sweeper()
     stg_harvest()
     claim_votemarket()
     claim_bribes()
@@ -32,7 +33,6 @@ def main():
     bribe_splitter()
     temple_split()
     ycrv_donator()
-    th_sweeper()
 
 def stg_harvest():
     threshold = 200_000e6
@@ -62,21 +62,28 @@ def claim_votemarket():
     if week_start + buffer_time > chain.time():
         return # Only proceed if we've waited the buffer time
     voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'),owner=worker)
-    v1_5 = Contract('0x7D0F747eb583D43D41897994c983F13eF7459e1f', owner=worker)
-    bribe_ids_to_claim = []
-    for i in range(0,200):
-        if v1_5.bribes(i).dict()['gauge'] == ZERO_ADDRESS:
-            break
-        if v1_5.claimable(voter, i) > 0:
-            bribe_ids_to_claim.append(i)
-    if len(bribe_ids_to_claim) > 0:
-        try:       
-            tx = v1_5.claimAllFor(voter, bribe_ids_to_claim, tx_params)
-            m = f'🤖 {len(bribe_ids_to_claim)} Bribe Claim(s) Detected!'
-            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-            send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
-        except Exception as e:
-            transaction_failure(e)
+    markets = [
+        '0x0000000BE1d98523B5469AfF51A1e7b4891c6225',
+        '0x7D0F747eb583D43D41897994c983F13eF7459e1f',
+    ]
+    for m in markets:
+        market = Contract(m, owner=worker)
+        bribe_ids_to_claim = []
+        for i in range(0,200):
+            if market.bribes(i).dict()['gauge'] == ZERO_ADDRESS:
+                break
+            if market.claimable(voter, i) > 0:
+                bribe_ids_to_claim.append(i)
+        if len(bribe_ids_to_claim) > 0:
+            try:
+                tx = market.claimAllFor(voter, bribe_ids_to_claim, tx_params)
+                m = f'🤖 {len(bribe_ids_to_claim)} Bribe Claim(s) Detected!'
+                m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+                send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+            except Exception as e:
+                transaction_failure(e)
+
+    
 
 def claim_bribes():
     buffer_time = 60 * 60 * 3
