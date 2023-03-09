@@ -7,3 +7,4 @@ reports/
 env
 sweep_tokens_list.json
 th_approved_tokens.json
+cache

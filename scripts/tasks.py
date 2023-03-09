@@ -11,7 +11,7 @@ telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 PASS = os.environ.get('PASS')
 worker = accounts.load('automate', PASS)
 tx_params = {}
-tx_params['max_fee'] = int(80e9)
+tx_params['max_fee'] = int(120e9)
 tx_params['priority_fee'] = int(3e9)
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
@@ -26,7 +26,7 @@ CHAT_IDS = {
 
 def main():
     th_sweeper()
-    stg_harvest()
+    # stg_harvest()
     claim_votemarket()
     claim_bribes()
     yearn_fed()
