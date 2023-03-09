@@ -67,6 +67,8 @@ def claim_votemarket():
         '0x7D0F747eb583D43D41897994c983F13eF7459e1f',
     ]
     for m in markets:
+        if m == markets[0]:
+            market = interface.IMarket(m)
         market = Contract(m, owner=worker)
         bribe_ids_to_claim = []
         for i in range(0,200):
