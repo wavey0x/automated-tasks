@@ -10,9 +10,12 @@ AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 PASS = os.environ.get('PASS')
 worker = accounts.load('automate', PASS)
+max_fee = int(int(os.environ.get('MAX_FEE'))*1e9)
+priority_fee = int(int(os.environ.get('PRIORITY_FEE'))*1e9)
 tx_params = {}
-tx_params['max_fee'] = int(120e9)
-tx_params['priority_fee'] = int(5e9)
+tx_params['max_fee'] = max_fee
+tx_params['priority_fee'] = priority_fee
+
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
 bot = telebot.TeleBot(telegram_bot_key)
