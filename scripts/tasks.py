@@ -34,7 +34,7 @@ def main():
     claim_bribes()
     yearn_fed()
     bribe_splitter()
-    temple_split()
+    # temple_split()
     ycrv_donator()
 
 def stg_harvest():
