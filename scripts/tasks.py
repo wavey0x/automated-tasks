@@ -33,7 +33,7 @@ def main():
     claim_votemarket()
     claim_bribes()
     yearn_fed()
-    # bribe_splitter()
+    bribe_splitter()
     # temple_split()
     ycrv_donator()
 
