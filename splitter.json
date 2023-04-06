@@ -46,5 +46,11 @@
         "gauge": "0x12dCD9E8D1577b5E4F066d8e7D404404Ef045342",
         "should_claim": "false",
         "split_threshold": 10e18
+    },
+    "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6": {
+        "token_name": "STG",
+        "gauge": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+        "should_claim": "false",
+        "split_threshold": 200e18
     }
 }
