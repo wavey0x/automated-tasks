@@ -49,7 +49,7 @@
     },
     "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6": {
         "token_name": "STG",
-        "gauge": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+        "gauge": "0x8133e6b0b2420bba10574a6668ea275f5e7ed253",
         "should_claim": "false",
         "split_threshold": 200e18
     }
