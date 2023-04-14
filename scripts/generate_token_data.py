@@ -90,7 +90,7 @@ def main():
     generate_token_data(TARGET_USD_VALUE)
 
 def write_new_token_receipts():
-    th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
+    th = '0xb634316E06cC0B358437CbadD4dC94F1D3a92B3b'
     yfi = Contract('0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e')
     contract = web3.eth.contract(yfi.address, abi=yfi.abi)
     deploy_block = 14676661
@@ -120,6 +120,7 @@ def write_new_token_receipts():
         token = Contract(e.address)
         try:
             sym = token.symbol()
+            print(f'{e.address} {sym}')
         except:
             sym = 'MKR'
         if token.address == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
