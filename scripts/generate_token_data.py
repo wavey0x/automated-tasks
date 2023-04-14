@@ -34,14 +34,25 @@ def needs_approval():
 
 
 def generate_token_data(target_usd_value=TARGET_USD_VALUE):
+    from ypricemagic.magic import get_price
     tokens = get_tokens()
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
     data = {}
     for t in tokens:
+        if t == 'last_block':
+            continue
         try:
             t = web3.toChecksumAddress(t)
             token = Contract(t)
             p = oracle.getPriceUsdcRecommended(t) / 1e6
+        except:
+            try:
+                block_height = chain.height
+                p = get_price(token, block_height)
+            except:
+                print(f'Cannot find price for {t}')
+                continue
+        try:
             decimals = token.decimals()
             if t == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
                 symbol = "MKR"
@@ -62,9 +73,9 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
     f.close()
 
 def get_tokens():
-    write_approvals()
+    write_new_token_receipts()
     new_list = []
-    f = open('th_approved_tokens.json')
+    f = open('receipt_tokens.json')
     data = json.load(f)
     for t in data:
         new_list.append(t)
@@ -77,6 +88,48 @@ if __name__ == '__main__':
 
 def main():
     generate_token_data(TARGET_USD_VALUE)
+
+def write_new_token_receipts():
+    th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
+    yfi = Contract('0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e')
+    contract = web3.eth.contract(yfi.address, abi=yfi.abi)
+    deploy_block = 14676661
+    start_block = deploy_block
+    try:
+        f = open("receipt_tokens.json")
+        data = json.load(f)
+    except:
+        data = {}
+    if not 'last_block' in data:
+        start_block = deploy_block
+    else:
+        start_block = data['last_block']
+    print(f'Searching for all transfers since block: {start_block}')
+    topics = construct_event_topic_set(
+        contract.events.Transfer().abi, 
+        web3.codec,
+        {
+            'to': th
+        }
+    )
+    logs = web3.eth.get_logs(
+        { 'topics': topics, 'fromBlock': start_block, 'toBlock': chain.height }
+    )
+    events = contract.events.Transfer().processReceipt({'logs': logs})
+    for e in events:
+        token = Contract(e.address)
+        try:
+            sym = token.symbol()
+        except:
+            sym = 'MKR'
+        if token.address == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
+            sym = 'MKR'
+        print(f'{e.address} {sym}')
+        data[e.address] = str(sym)
+    data['last_block'] = chain.height
+    f = open("receipt_tokens.json", "w")
+    f.write(json.dumps(data, indent=2))
+    f.close()
 
 def write_approvals():
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
