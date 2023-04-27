@@ -46,6 +46,8 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
         if t == 'last_block':
             continue
         t = web3.toChecksumAddress(t)
+        if t in exceptions:
+            continue
         token = Contract(t)
         p = oracle.getPriceUsdcRecommended(t) / 1e6
         if p == 0:
