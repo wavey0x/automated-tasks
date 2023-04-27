@@ -10,6 +10,10 @@ warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
 TARGET_USD_VALUE = 10
 
+exceptions = [
+    '0xf3b9569F82B18aEf890De263B84189bd33EBe452' # CAW token not found by ypm
+]
+
 def needs_approval():
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
     sweeper = '0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d'
@@ -129,7 +133,8 @@ def write_new_token_receipts():
         if token.address == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
             sym = 'MKR'
         print(f'{e.address} {sym}')
-        data[e.address] = str(sym)
+        if e.address not in exceptions:
+            data[e.address] = str(sym)
     data['last_block'] = chain.height
     f = open("receipt_tokens.json", "w")
     f.write(json.dumps(data, indent=2))
