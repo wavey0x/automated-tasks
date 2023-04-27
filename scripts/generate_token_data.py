@@ -11,7 +11,9 @@ warnings.simplefilter("ignore", BrownieCompilerWarning)
 TARGET_USD_VALUE = 10
 
 exceptions = [
-    '0xf3b9569F82B18aEf890De263B84189bd33EBe452' # CAW token not found by ypm
+    '0xf3b9569F82B18aEf890De263B84189bd33EBe452', # CAW token not found by ypm
+    '0xF24d8651578a55b0C119B9910759a351A3458895', # sdBAL
+    '0x3301Ee63Fb29F863f2333Bd4466acb46CD8323E6', # AKITA
 ]
 
 def needs_approval():
