@@ -34,7 +34,6 @@ def needs_approval():
 
 
 def generate_token_data(target_usd_value=TARGET_USD_VALUE):
-    return
     from ypricemagic.magic import get_price
     tokens = get_tokens()
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
