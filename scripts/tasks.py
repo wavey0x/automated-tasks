@@ -68,6 +68,7 @@ def claim_votemarket():
     markets = [
         '0x0000000BE1d98523B5469AfF51A1e7b4891c6225',
         '0x7D0F747eb583D43D41897994c983F13eF7459e1f',
+        '0x0000000895cB182E6f983eb4D8b4E0Aa0B31Ae4c',
     ]
     for m in markets:
         if m == markets[0]:
@@ -220,14 +221,14 @@ def th_sweeper():
     try:
         sweep_tokens = json.load(f)
     except:
-        scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
+        # scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
         sweep_tokens = json.load(f)
     try:
         last_update = sweep_tokens['last_updated']
     except:
         last_update = 0
-    if time.time() - last_update > 60 * 60 * 24:
-        scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
+    # if time.time() - last_update > 60 * 60 * 24:
+        # scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
     th = Contract('0xb634316E06cC0B358437CbadD4dC94F1D3a92B3b', owner=worker)
     calls, token_list, balance_list = ([] for i in range(3))
     # Use multicall to reduce http requests
