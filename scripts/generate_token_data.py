@@ -45,20 +45,19 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
     for t in tokens:
         if t == 'last_block':
             continue
+        t = web3.toChecksumAddress(t)
+        token = Contract(t)
+        p = oracle.getPriceUsdcRecommended(t) / 1e6
+        if p == 0:
+            print(f'Starting ypm search for {t} token ....')
+            block_height = chain.height
+            p = get_price(token, block_height)
         try:
-            t = web3.toChecksumAddress(t)
-            token = Contract(t)
-            p = oracle.getPriceUsdcRecommended(t) / 1e6
-            if p == 0:
-                block_height = chain.height
-                p = get_price(token, block_height)
+            block_height = chain.height
+            p = get_price(token, block_height)
         except:
-            try:
-                block_height = chain.height
-                p = get_price(token, block_height)
-            except:
-                print(f'Cannot find price for {t}')
-                continue
+            print(f'Cannot find price for {t}')
+            continue
         try:
             decimals = token.decimals()
             if t == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
