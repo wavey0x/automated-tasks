@@ -71,11 +71,11 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
             if t == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
                 symbol = "MKR"
             else:
-                symbol = token.symbol()
+                symbol = str(token.symbol())
             if p == 0:
                 continue
             threshold = (target_usd_value / p) * 10 ** decimals
-            print(f'{symbol} {threshold/10**decimals}')
+            print(f'{t} {symbol} {threshold/10**decimals}')
             data[t] = {}
             data[t]['symbol'] = symbol
             data[t]['threshold'] = threshold
