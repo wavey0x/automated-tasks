@@ -8,6 +8,7 @@ import warnings
 warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
+warnings.simplefilter("ignore", DeprecationWarning)
 TARGET_USD_VALUE = 10
 
 exceptions = [
@@ -40,7 +41,7 @@ def needs_approval():
 
 
 def generate_token_data(target_usd_value=TARGET_USD_VALUE):
-    from ypricemagic.magic import get_price
+    from y import get_price, Contract
     tokens = get_tokens()
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
     data = {}
@@ -60,12 +61,12 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
             except:
                 print(f'Cannot find price for {t}')
                 continue
-        try:
-            block_height = chain.height
-            p = get_price(token, block_height)
-        except:
-            print(f'Cannot find price for {t}')
-            continue
+        # try:
+        #     block_height = chain.height
+        #     p = get_price(token, block_height)
+        # except:
+        #     print(f'Cannot find price for {t}')
+        #     continue
         try:
             decimals = token.decimals()
             if t == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
@@ -80,6 +81,7 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
             data[t]['symbol'] = symbol
             data[t]['threshold'] = threshold
         except:
+            print(f'{t} - Failed while attempting to get token info, skipping')
             continue
     data['last_updated'] = int(time.time())
     f = open("sweep_tokens_list.json", "w")
