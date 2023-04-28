@@ -55,7 +55,11 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
         if p == 0:
             print(f'Starting ypm search for {t} token ....')
             block_height = chain.height
-            p = get_price(token, block_height)
+            try:
+                p = get_price(token, block_height)
+            except:
+                print(f'Cannot find price for {t}')
+                continue
         try:
             block_height = chain.height
             p = get_price(token, block_height)
