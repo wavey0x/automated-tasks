@@ -53,4 +53,11 @@
         "should_claim": "false",
         "split_threshold": 200e18
     }
+    ,
+    "0xA1f82E14bc09A1b42710dF1A8a999B62f294e592": {
+        "token_name": "eCFX",
+        "gauge": "0x8c1DFF7B6c20240C31f4F5BdFbC09ec6fF788d7a",
+        "should_claim": "false",
+        "split_threshold": 200e18
+    }
 }
