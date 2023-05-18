@@ -21,7 +21,7 @@ env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
 bot = telebot.TeleBot(telegram_bot_key)
 CHAT_IDS = {
     "WAVEY_ALERTS": "-789090497",
-    "CURVE_WARS": "-1001712241544",
+    "YCRV": "-1001653990357",
     "SEASOLVER": "-1001516144118",
     "YBRIBE": "-1001862925311",
     "VEYFI": "-1001558128423",
@@ -216,7 +216,7 @@ def bribe_splitter():
                 tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim, tx_params)
                 m = f'🖖 {symbol} Split Detected!'
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-                send_alert(CHAT_IDS['CURVE_WARS'], m, True)
+                send_alert(CHAT_IDS['YCRV'], m, True)
             except Exception as e:
                 transaction_failure(e)
 
