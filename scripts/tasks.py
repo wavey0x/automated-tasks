@@ -31,7 +31,7 @@ def main():
     th_sweeper()
     # stg_harvest()
     claim_votemarket()
-    claim_bribes()
+    # claim_bribes()
     yearn_fed()
     bribe_splitter()
     # temple_split()
