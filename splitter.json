@@ -19,7 +19,7 @@
     },
     "0x6B175474E89094C44Da98b954EedeAC495271d0F": {
         "token_name": "DAI",
-        "gauge": "0x1cEBdB0856dd985fAe9b8fEa2262469360B8a3a6",
+        "gauge": "0xDeFd8FdD20e0f34115C7018CCfb655796F6B2168",
         "should_claim": "false",
         "split_threshold": 200e18
     },
