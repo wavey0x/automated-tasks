@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
 warnings.simplefilter("ignore", DeprecationWarning)
-TARGET_USD_VALUE = 10
+TARGET_USD_VALUE = 50
 
 exceptions = [
     '0xf3b9569F82B18aEf890De263B84189bd33EBe452', # CAW token not found by ypm
