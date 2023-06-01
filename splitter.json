@@ -52,8 +52,19 @@
         "gauge": "0x8133e6b0b2420bba10574a6668ea275f5e7ed253",
         "should_claim": "false",
         "split_threshold": 200e18
-    }
-    ,
+    },
+    "0x9c354503C38481a7A7a51629142963F98eCC12D0": {
+        "token_name": "OGV",
+        "gauge": "0x8c1DFF7B6c20240C31f4F5BdFbC09ec6fF788d7a",
+        "should_claim": "false",
+        "split_threshold": 20000e18
+    },
+    "0x85b6ACaBa696B9E4247175274F8263F99b4B9180": {
+        "token_name": "SPR",
+        "gauge": "0x8c1DFF7B6c20240C31f4F5BdFbC09ec6fF788d7a",
+        "should_claim": "false",
+        "split_threshold": 15000e18
+    },
     "0xA1f82E14bc09A1b42710dF1A8a999B62f294e592": {
         "token_name": "eCFX",
         "gauge": "0x8c1DFF7B6c20240C31f4F5BdFbC09ec6fF788d7a",
