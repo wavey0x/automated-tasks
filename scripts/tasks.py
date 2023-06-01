@@ -36,7 +36,8 @@ def main():
     bribe_splitter()
     # temple_split()
     ycrv_donator()
-
+    claim_warden_bribes()
+    
 def stg_harvest():
     threshold = 200_000e6
     s = Contract('0xE7A8Cbc43a0506d3A328393C1C30548835256d7D', owner=worker)
@@ -261,6 +262,35 @@ def th_sweeper():
             send_alert(CHAT_IDS['SEASOLVER'], m, True)
         except Exception as e:
             transaction_failure(e)
+
+def claim_warden_bribes():
+    txn_params = {'max_fee':80e9, 'priority_fee':1e8}
+    recipient = '0xF147b8125d2ef93FB6965Db97D6746952a133934'
+    recipient = '0x527e80008D212E2891C737Ba8a2768a7337D7Fd2'
+    url = f'https://claims.warden.vote/proof/crv/address/{recipient}'
+    data = requests.get(url).json()
+    distributor = Contract('0x3682518b529e4404fb05250f9ad590c3218e5f9f', owner=worker)
+    for d in data:
+        if d['questId'][:2] == 'd_':
+            # Use Dark Quest distributor
+            quest_id = int(d['questId'][2:len(d['questId'])])
+            distributor = Contract('0xce6dc32252d85e2e955Bfd3b85660917F040a933', owner=worker)
+        else:
+            quest_id = int(d['questId'])
+            distributor = Contract('0x3682518b529e4404fb05250f9ad590c3218e5f9f', owner=worker)
+        try:
+            print(f'Trying {quest_id}...')
+            tx = distributor.claim(
+                quest_id,               # questID
+                int(d['period']),       # period
+                int(d['index']),        # index
+                d['user'],              # account
+                int(d['amount']),       # amount
+                d['proofs'],            # proofs
+                txn_params,             # txn params
+            )
+        except:
+            pass
 
 def transaction_failure(e):
     worker = accounts.at(AUTOMATION_EOA, force=True)
