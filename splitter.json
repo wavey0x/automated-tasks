@@ -63,7 +63,7 @@
         "token_name": "SPR",
         "gauge": "0xe5d5Aa1Bbe72F68dF42432813485cA1Fc998DE32",
         "should_claim": "false",
-        "split_threshold": 5000e18
+        "split_threshold": 500e18
     },
     "0xA1f82E14bc09A1b42710dF1A8a999B62f294e592": {
         "token_name": "eCFX",
