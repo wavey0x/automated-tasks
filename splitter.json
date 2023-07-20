@@ -70,5 +70,17 @@
         "gauge": "0xe5d5Aa1Bbe72F68dF42432813485cA1Fc998DE32",
         "should_claim": "false",
         "split_threshold": 200e18
+    },
+    "0x3432B6A60D23Ca0dFCa7761B7ab56459D9C964D0": {
+        "token_name": "FXS",
+        "gauge": "0xe5d5Aa1Bbe72F68dF42432813485cA1Fc998DE32",
+        "should_claim": "false",
+        "split_threshold": 200e18
+    },
+    "0xc56c2b7e71B54d38Aab6d52E94a04Cbfa8F604fA": {
+        "token_name": "ZUSD",
+        "gauge": "0x218E4678318ab5527e41135713193E5EAd73337f",
+        "should_claim": "false",
+        "split_threshold": 200e18
     }
 }
