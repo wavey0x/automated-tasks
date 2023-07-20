@@ -9,6 +9,7 @@ warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
 warnings.simplefilter("ignore", DeprecationWarning)
+warnings.simplefilter("ignore", DeprecationWarning)
 TARGET_USD_VALUE = 50
 
 exceptions = [
