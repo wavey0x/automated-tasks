@@ -1,7 +1,7 @@
 import time, re, json, requests, datetime, time, os, telebot
 from multicall import Call, Multicall
 from dotenv import load_dotenv, find_dotenv
-from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
+from brownie import (accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 from brownie.exceptions import BrownieEnvironmentWarning, BrownieCompilerWarning
 from web3._utils.events import construct_event_topic_set
 import warnings
@@ -17,6 +17,7 @@ exceptions = [
     '0xf3b9569F82B18aEf890De263B84189bd33EBe452', # CAW token not found by ypm
     '0xF24d8651578a55b0C119B9910759a351A3458895', # sdBAL
     '0x3301Ee63Fb29F863f2333Bd4466acb46CD8323E6', # AKITA
+    '0x19C39384a87eD1191A6dEc876349aa0a86b822Ff', 
 ]
 
 def needs_approval():
@@ -134,7 +135,10 @@ def write_new_token_receipts():
     )
     events = contract.events.Transfer().processReceipt({'logs': logs})
     for e in events:
-        token = Contract(e.address)
+        try:
+            token = Contract(e.address)
+        except:
+            continue
         try:
             sym = token.symbol()
             print(f'{e.address} {sym}')
