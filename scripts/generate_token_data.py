@@ -5,6 +5,7 @@ from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, Z
 from brownie.exceptions import BrownieEnvironmentWarning, BrownieCompilerWarning
 from web3._utils.events import construct_event_topic_set
 import warnings
+from y import get_price, Contract
 warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore", BrownieEnvironmentWarning)
 warnings.simplefilter("ignore", BrownieCompilerWarning)
@@ -42,7 +43,6 @@ def needs_approval():
 
 
 def generate_token_data(target_usd_value=TARGET_USD_VALUE):
-    from y import get_price, Contract
     tokens = get_tokens()
     oracle = Contract("0x83d95e0D5f402511dB06817Aff3f9eA88224B030")
     data = {}
