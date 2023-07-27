@@ -81,6 +81,6 @@
         "token_name": "ZUSD",
         "gauge": "0x218E4678318ab5527e41135713193E5EAd73337f",
         "should_claim": "false",
-        "split_threshold": 200e18
+        "split_threshold": 200e6
     }
 }
