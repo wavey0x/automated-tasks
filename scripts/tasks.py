@@ -1,6 +1,7 @@
 import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data
 from multicall import Call, Multicall
 from dotenv import load_dotenv, find_dotenv
+from datetime import datetime
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
 load_dotenv(find_dotenv())
@@ -27,8 +28,16 @@ CHAT_IDS = {
     "VEYFI": "-1001558128423",
 }
 
+ignore_tokens = [
+    '0x836A808d4828586A69364065A1e064609F5078c7', # pETH
+]
+
 def main():
-    th_sweeper()
+    while True:
+        th_sweeper()
+        dt = datetime.utcfromtimestamp(time.time()).strftime("%m/%d/%Y, %H:%M:%S")
+        print(f'{dt} Sleeping for 60 seconds...')
+        time.sleep(60)
     # stg_harvest()
     claim_votemarket()
     # claim_bribes()
@@ -239,6 +248,8 @@ def th_sweeper():
     # Use multicall to reduce http requests
     for token_address in sweep_tokens:
         if token_address == 'last_updated':
+            continue
+        if token_address in ignore_tokens:
             continue
         calls.append(
             Call(token_address, ['balanceOf(address)(uint256)', th.address], [[token_address, None]])
