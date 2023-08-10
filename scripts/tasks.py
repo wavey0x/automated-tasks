@@ -33,11 +33,7 @@ ignore_tokens = [
 ]
 
 def main():
-    while True:
-        th_sweeper()
-        dt = datetime.utcfromtimestamp(time.time()).strftime("%m/%d/%Y, %H:%M:%S")
-        print(f'{dt} Sleeping for 60 seconds...')
-        time.sleep(60)
+    th_sweeper()
     # stg_harvest()
     claim_votemarket()
     # claim_bribes()
