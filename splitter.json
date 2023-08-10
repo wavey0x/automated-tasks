@@ -43,7 +43,7 @@
     },
     "0xdBdb4d16EdA451D0503b854CF79D55697F90c8DF": {
         "token_name": "ALCX",
-        "gauge": "0x12dCD9E8D1577b5E4F066d8e7D404404Ef045342",
+        "gauge": "0xe5d5Aa1Bbe72F68dF42432813485cA1Fc998DE32",
         "should_claim": "false",
         "split_threshold": 10e18
     },
