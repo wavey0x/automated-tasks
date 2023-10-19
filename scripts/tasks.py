@@ -1,8 +1,10 @@
-import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data
+import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data, logging
 from multicall import Call, Multicall
 from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
+
+logging.basicConfig(level=logging.DEBUG) 
 
 load_dotenv(find_dotenv())
 WEEK = 60 * 60 * 24 * 7
