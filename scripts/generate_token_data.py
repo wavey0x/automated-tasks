@@ -56,6 +56,9 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
         token = Contract(t)
         p = oracle.getPriceUsdcRecommended(t) / 1e6
         if p == 0:
+            if t == '0x583019fF0f430721aDa9cfb4fac8F06cA104d0B4':
+                p = 1900
+                continue
             print(f'Starting ypm search for {t} token ....')
             block_height = chain.height
             try:

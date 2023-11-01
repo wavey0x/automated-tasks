@@ -82,5 +82,11 @@
         "gauge": "0xEEBC06d495c96E57542A6d829184A907A02ef602",
         "should_claim": "false",
         "split_threshold": 200e6
+    },
+    "0xCdF7028ceAB81fA0C6971208e83fa7872994beE5": {
+        "token_name": "ZUSD",
+        "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
+        "should_claim": "false",
+        "split_threshold": 200e6
     }
 }

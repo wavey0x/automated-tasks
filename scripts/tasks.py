@@ -1,10 +1,14 @@
 import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data, logging
 from multicall import Call, Multicall
+from multicall.utils import await_awaitable
+from y import ERC20
+import asyncio
+
 from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
-logging.basicConfig(level=logging.DEBUG) 
+# logging.basicConfig(level=logging.DEBUG) 
 
 load_dotenv(find_dotenv())
 WEEK = 60 * 60 * 24 * 7
@@ -244,17 +248,22 @@ def th_sweeper():
     th = Contract('0xb634316E06cC0B358437CbadD4dC94F1D3a92B3b', owner=worker)
     calls, token_list, balance_list = ([] for i in range(3))
     # Use multicall to reduce http requests
+    tkns = []
     for token_address in sweep_tokens:
         if token_address == 'last_updated':
             continue
         if token_address in ignore_tokens:
             continue
-        calls.append(
-            Call(token_address, ['balanceOf(address)(uint256)', th.address], [[token_address, None]])
-        )
-    return_values = Multicall(calls)()
-    for token_address in return_values:
-        balance = return_values[token_address]
+        # calls.append(
+        #     Call(token_address, ['balanceOf(address)(uint256)', th.address], [[token_address, None]])
+        # )
+        tkns.append(ERC20(token_address, asynchronous=True))
+    
+    return_values = await_awaitable(asyncio.gather(*[token.balance_of(th.address, chain.height)  for token in tkns]))
+    # return_values = Multicall(calls)()
+    for i in range(0,len(return_values)):
+        token_address = tkns[i]
+        balance = return_values[i]
         if balance >= sweep_tokens[token_address]['threshold']:
             token_list.append(token_address)
             balance_list.append(balance)
