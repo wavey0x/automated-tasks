@@ -32,6 +32,7 @@ CHAT_IDS = {
     "SEASOLVER": "-1001516144118",
     "YBRIBE": "-1001862925311",
     "VEYFI": "-1001558128423",
+    "YLOCKERS": "-1001697527660"
 }
 
 ignore_tokens = [
@@ -42,12 +43,13 @@ def main():
     th_sweeper()
     # stg_harvest()
     claim_votemarket()
-    claim_bribes()
+    # claim_bribes()
     yearn_fed()
     bribe_splitter()
     # temple_split()
     # ycrv_donator()
     claim_warden_bribes()
+    claim_prisma_hh()
     
 def stg_harvest():
     threshold = 200_000e6
@@ -228,7 +230,7 @@ def bribe_splitter():
                 tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim, tx_params)
                 m = f'🖖 {symbol} Split Detected!'
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-                send_alert(CHAT_IDS['YCRV'], m, True)
+                send_alert(CHAT_IDS['YLOCKERS'], m, True)
             except Exception as e:
                 transaction_failure(e)
 
@@ -319,3 +321,26 @@ def transaction_failure(e):
 
 def send_alert(chat_id, msg, success):
     bot.send_message(chat_id, msg, parse_mode="markdown", disable_web_page_preview = True)
+
+def claim_prisma_hh():
+    claim_contract = Contract('0xa9b08B4CeEC1EF29EdEC7F9C94583270337D6416', owner=worker)
+    voter = '0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7'
+    url = f'https://api.hiddenhand.finance/reward/0/{voter}'
+    data = requests.get(url).json()['data']
+    claims = []
+    for d in data:
+        if float(d['claimable']) > 0:
+            metadata = d['claimMetadata']
+            claim = (
+                metadata['identifier'],
+                voter,
+                int(metadata['amount']),
+                metadata['merkleProof']
+            )
+            claims.append(claim)
+
+    if len(claims) > 0:
+        tx = claim_contract.claim(claims, {'priority_fee':1e6})
+        m = f'🌈🤖 Prisma Bribe Claim Detected!'
+        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        send_alert(CHAT_IDS['YLOCKERS'], m, True)
