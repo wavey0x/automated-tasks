@@ -41,7 +41,7 @@ ignore_tokens = [
 
 def main():
     th_sweeper()
-    print(f'TEST')
+    print(f'TEST',flush=True)
     # stg_harvest()
     claim_votemarket()
     # claim_bribes()
@@ -76,7 +76,7 @@ def stg_harvest():
         print(f'❌ {"${:,.2f}".format(available/1e6)} available. Less than {"${:,.2f}".format(threshold/1e6)}')
 
 def claim_votemarket():
-    print('Claiming from vote market....')
+    print('Claiming from vote market....', flush=True)
     buffer_time = 60 * 60 * 3
     week_start = int(chain.time() / WEEK) * WEEK
     if week_start + buffer_time > chain.time():
