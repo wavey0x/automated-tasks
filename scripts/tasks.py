@@ -44,14 +44,19 @@ def main():
     print(f'TEST',flush=True)
     # stg_harvest()
     claim_votemarket()
+    print(f'TEST2',flush=True)
     # claim_bribes()
     # yearn_fed()
     bribe_splitter()
+    print(f'TEST3',flush=True)
     # temple_split()
     # ycrv_donator()
     claim_warden_bribes()
+    print(f'TEST4',flush=True)
     claim_prisma_hh()
+    print(f'TEST5',flush=True)
     distribute_yprisma_fees()
+    print(f'TEST6',flush=True)
     
 def stg_harvest():
     threshold = 200_000e6
@@ -92,7 +97,8 @@ def claim_votemarket():
             market = interface.IMarket(m)
         market = Contract(m, owner=worker)
         bribe_ids_to_claim = []
-        for i in range(0,20000):
+        for i in range(0,2000):
+            print(f'looping {i}',flush=True)
             try:
                 g = market.bribes(i).dict()['gauge']
             except:
