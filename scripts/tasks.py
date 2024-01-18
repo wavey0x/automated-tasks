@@ -98,13 +98,14 @@ def claim_votemarket():
         market = Contract(m, owner=worker)
         bribe_ids_to_claim = []
         for i in range(0,2000):
-            print(f'looping {i}',flush=True)
+            
             try:
                 g = market.bribes(i).dict()['gauge']
             except:
                 g = market.bounties(i).dict()['gauge']
             if g == ZERO_ADDRESS:
                 break
+            print(f'looping {i} - {g}',flush=True)
             if market.claimable(voter, i) > 0:
                 bribe_ids_to_claim.append(i)
         if len(bribe_ids_to_claim) > 0:
