@@ -44,12 +44,13 @@ def main():
     # stg_harvest()
     claim_votemarket()
     # claim_bribes()
-    yearn_fed()
+    # yearn_fed()
     bribe_splitter()
     # temple_split()
     # ycrv_donator()
     claim_warden_bribes()
     claim_prisma_hh()
+    distribute_yprisma_fees()
     
 def stg_harvest():
     threshold = 200_000e6
@@ -74,6 +75,7 @@ def stg_harvest():
         print(f'❌ {"${:,.2f}".format(available/1e6)} available. Less than {"${:,.2f}".format(threshold/1e6)}')
 
 def claim_votemarket():
+    print('Claiming from vote market....')
     buffer_time = 60 * 60 * 3
     week_start = int(chain.time() / WEEK) * WEEK
     if week_start + buffer_time > chain.time():
@@ -103,13 +105,14 @@ def claim_votemarket():
                 tx = market.claimAllFor(voter, bribe_ids_to_claim, tx_params)
                 m = f'🤖 {len(bribe_ids_to_claim)} Bribe Claim(s) Detected!'
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-                send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
+                send_alert(CHAT_IDS['YLOCKERS'], m, True)
             except Exception as e:
                 transaction_failure(e)
 
     
 
 def claim_bribes():
+    print('Claiming from ybribe....')
     buffer_time = 60 * 60 * 3
     week_start = int(chain.time() / WEEK) * WEEK
     if week_start + buffer_time > chain.time():
@@ -209,6 +212,7 @@ def setup_test():
     # tx = sweeper.sweep([usdt.address], [100e6], txn_params)
 
 def bribe_splitter():
+    print('Calling splitter....')
     bribe_splitter = Contract(web3.ens.resolve('bribe-splitter.ychad.eth'), owner=worker)
     ybribe = Contract(web3.ens.resolve('ybribe.ychad.eth'))
     voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'))
@@ -230,11 +234,12 @@ def bribe_splitter():
                 tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim, tx_params)
                 m = f'🖖 {symbol} Split Detected!'
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-                send_alert(CHAT_IDS['YLOCKERS'], m, True)
+                send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
             except Exception as e:
                 transaction_failure(e)
 
 def th_sweeper():
+    print('Sweeping from TH....')
     f = open('sweep_tokens_list.json')
     try:
         sweep_tokens = json.load(f)
@@ -284,6 +289,7 @@ def th_sweeper():
             transaction_failure(e)
 
 def claim_warden_bribes():
+    print('Claiming from Warden....')
     txn_params = {'max_fee':80e9, 'priority_fee':1e8}
     recipient = '0xF147b8125d2ef93FB6965Db97D6746952a133934'
     recipient = '0x527e80008D212E2891C737Ba8a2768a7337D7Fd2'
@@ -299,7 +305,6 @@ def claim_warden_bribes():
             quest_id = int(d['questId'])
             distributor = Contract('0x3682518b529e4404fb05250f9ad590c3218e5f9f', owner=worker)
         try:
-            print(f'Trying {quest_id}...')
             tx = distributor.claim(
                 quest_id,               # questID
                 int(d['period']),       # period
@@ -323,6 +328,7 @@ def send_alert(chat_id, msg, success):
     bot.send_message(chat_id, msg, parse_mode="markdown", disable_web_page_preview = True)
 
 def claim_prisma_hh():
+    print('Claiming from HH....')
     claim_contract = Contract('0xa9b08B4CeEC1EF29EdEC7F9C94583270337D6416', owner=worker)
     voter = '0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7'
     url = f'https://api.hiddenhand.finance/reward/0/{voter}'
@@ -342,5 +348,14 @@ def claim_prisma_hh():
     if len(claims) > 0:
         tx = claim_contract.claim(claims, {'priority_fee':1e6})
         m = f'🌈🤖 Prisma Bribe Claim Detected!'
+        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        send_alert(CHAT_IDS['YLOCKERS'], m, True)
+
+def distribute_yprisma_fees():
+    print('Distributing yPRISMA fees....')
+    distributor = Contract('0x1D385BEEb7B325f4A5C0a9507FD8a1071B232E4c', owner=worker)
+    if distributor.canClaim():
+        tx = distributor.distributeFees()
+        m = f'🌈🤖 Prisma Staker Yield Distributed!'
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
