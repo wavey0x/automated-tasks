@@ -264,9 +264,7 @@ def th_sweeper():
         # calls.append(
         #     Call(token_address, ['balanceOf(address)(uint256)', th.address], [[token_address, None]])
         # )
-        print(f'BEFORE CALL.... {token_address}')
         tkns.append(ERC20(token_address, asynchronous=True))
-        print(f'After CALL.')
     
     return_values = await_awaitable(asyncio.gather(*[token.balance_of(th.address, chain.height)  for token in tkns]))
     # return_values = Multicall(calls)()
@@ -289,6 +287,8 @@ def th_sweeper():
             send_alert(CHAT_IDS['SEASOLVER'], m, True)
         except Exception as e:
             transaction_failure(e)
+    else:
+        return
 
 def claim_warden_bribes():
     print('Claiming from Warden....')
