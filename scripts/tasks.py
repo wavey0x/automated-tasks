@@ -41,6 +41,7 @@ ignore_tokens = [
 
 def main():
     th_sweeper()
+    print(f'TEST')
     # stg_harvest()
     claim_votemarket()
     # claim_bribes()
