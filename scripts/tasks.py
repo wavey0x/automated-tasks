@@ -39,6 +39,15 @@ ignore_tokens = [
     '0x836A808d4828586A69364065A1e064609F5078c7', # pETH
 ]
 
+ADDRESSES = {
+    'YEARN_CURVE_VOTER': '0xF147b8125d2ef93FB6965Db97D6746952a133934',
+    'YTRADES': '0xC001d00d425Fa92C4F840baA8f1e0c27c4297a0B',
+    'SPLITTER': '0x527e80008D212E2891C737Ba8a2768a7337D7Fd2',
+    'YBRIBE': '0x03dFdBcD4056E2F92251c7B07423E1a33a7D3F6d',
+    'YCHAD': '0xFEB4acf3df3cDEA7399794D0869ef76A6EfAff52',
+    'TREASURY': '0x93A62dA5a14C80f265DAbC077fCEE437B1a0Efde',
+}
+
 def main():
     th_sweeper()
     print(f'TEST',flush=True)
@@ -86,7 +95,7 @@ def claim_votemarket():
     week_start = int(chain.time() / WEEK) * WEEK
     if week_start + buffer_time > chain.time():
         return # Only proceed if we've waited the buffer time
-    voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'),owner=worker)
+    voter = Contract(addresses['YEARN_CURVE_VOTER'],owner=worker)
     markets = {
         '0x0000000BE1d98523B5469AfF51A1e7b4891c6225': 50,
         '0x7D0F747eb583D43D41897994c983F13eF7459e1f': 25,
@@ -123,7 +132,7 @@ def claim_votemarket():
                 transaction_failure(e)
 
 def claim_bribes():
-    print('Claiming from ybribe....')
+    print('Claiming from ybribe....', flush=True)
     buffer_time = 60 * 60 * 3
     week_start = int(chain.time() / WEEK) * WEEK
     if week_start + buffer_time > chain.time():
@@ -143,8 +152,8 @@ def claim_bribes():
             'token': '0xD533a949740bb3306d119CC777fa900bA034cd52',
         },
     ]
-    ybribe = Contract(web3.ens.resolve('ybribe.ychad.eth'),owner=worker)
-    voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'),owner=worker)
+    ybribe = Contract(ADDRESSES['YBRIBE'],owner=worker)
+    voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'],owner=worker)
     claims_to_make = 0
     for c in claims:
         gauge = c['gauge']
@@ -207,15 +216,15 @@ def temple_split():
             transaction_failure(e)
 
 def setup_test():
-    ytrades = accounts.at(web3.ens.resolve('ytrades.ychad.eth'), force=True)
-    bribe_splitter = Contract(web3.ens.resolve('bribe-splitter.ychad.eth'), owner=web3.ens.resolve('ychad.eth'))
+    ytrades = accounts.at(ADDRESSES['YTRADES'], force=True)
+    bribe_splitter = Contract(ADDRESSES['SPLITTER'], owner=ADDRESSES['YCHAD'])
     bribe_splitter.setOperator(AUTOMATION_EOA, True)
     spell = Contract('0x090185f2135308BaD17527004364eBcC2D37e5F6',owner=ytrades)
     spell.transfer(bribe_splitter,spell.balanceOf(ytrades))
-    treasury = accounts.at(web3.ens.resolve('treasury.ychad.eth'), force=True)
+    treasury = accounts.at(ADDRESSES['TREASURY'], force=True)
     crv = Contract('0xD533a949740bb3306d119CC777fa900bA034cd52',owner=treasury)
     crv.transfer(bribe_splitter,crv.balanceOf(treasury))
-    ychad = accounts.at(web3.ens.resolve('ychad.eth'), force=True)
+    ychad = accounts.at(ADDRESSES['YCHAD'], force=True)
     usdt = Contract('0xdAC17F958D2ee523a2206206994597C13D831ec7', owner=ychad)
     th = '0xcADBA199F3AC26F67f660C89d43eB1820b7f7a3b'
     usdt.transfer(th, 100e6)
@@ -224,9 +233,9 @@ def setup_test():
 
 def bribe_splitter():
     print('Calling splitter....')
-    bribe_splitter = Contract(web3.ens.resolve('bribe-splitter.ychad.eth'), owner=worker)
-    ybribe = Contract(web3.ens.resolve('ybribe.ychad.eth'))
-    voter = Contract(web3.ens.resolve('curve-voter.ychad.eth'))
+    bribe_splitter = Contract(ADDRESSES['SPLITTER'], owner=worker)
+    ybribe = Contract(ADDRESSES['YBRIBE'])
+    voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'])
     f = open('splitter.json')
     data = json.load(f)
     st_balance = Contract('0x27B5739e22ad9033bcBf192059122d163b60349D').totalAssets()
