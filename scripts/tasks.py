@@ -1,7 +1,7 @@
 import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data, logging
 from multicall import Call, Multicall
 from multicall.utils import await_awaitable
-from y import ERC20
+# from y import ERC20
 import asyncio
 
 from dotenv import load_dotenv, find_dotenv
@@ -264,7 +264,9 @@ def th_sweeper():
         # calls.append(
         #     Call(token_address, ['balanceOf(address)(uint256)', th.address], [[token_address, None]])
         # )
+        print(f'BEFORE CALL.... {token_address}')
         tkns.append(ERC20(token_address, asynchronous=True))
+        print(f'After CALL.')
     
     return_values = await_awaitable(asyncio.gather(*[token.balance_of(th.address, chain.height)  for token in tkns]))
     # return_values = Multicall(calls)()
