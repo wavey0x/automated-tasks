@@ -1,7 +1,7 @@
 import time, re, json, requests, datetime, time, os, telebot, scripts.generate_token_data, logging
 from multicall import Call, Multicall
 from multicall.utils import await_awaitable
-# from y import ERC20
+from y import ERC20
 import asyncio
 
 from dotenv import load_dotenv, find_dotenv
