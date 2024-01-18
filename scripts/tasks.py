@@ -95,7 +95,7 @@ def claim_votemarket():
     week_start = int(chain.time() / WEEK) * WEEK
     if week_start + buffer_time > chain.time():
         return # Only proceed if we've waited the buffer time
-    voter = Contract(addresses['YEARN_CURVE_VOTER'],owner=worker)
+    voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'],owner=worker)
     markets = {
         '0x0000000BE1d98523B5469AfF51A1e7b4891c6225': 50,
         '0x7D0F747eb583D43D41897994c983F13eF7459e1f': 25,
