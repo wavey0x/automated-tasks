@@ -93,13 +93,13 @@ def claim_votemarket():
     print('Claiming from vote market....', flush=True)
     buffer_time = 60 * 60 * 3
     week_start = int(chain.time() / WEEK) * WEEK
-    if week_start + buffer_time > chain.time():
-        return # Only proceed if we've waited the buffer time
+    # if week_start + buffer_time > chain.time():
+    #     return # Only proceed if we've waited the buffer time
     voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'],owner=worker)
     markets = {
         '0x0000000BE1d98523B5469AfF51A1e7b4891c6225': 50,
         '0x7D0F747eb583D43D41897994c983F13eF7459e1f': 25,
-        '0x0000000895cB182E6f983eb4D8b4E0Aa0B31Ae4c': 19,
+        '0x0000000895cB182E6f983eb4D8b4E0Aa0B31Ae4c': 0,
     }
     for m in markets:
         if m == '0x0000000BE1d98523B5469AfF51A1e7b4891c6225':
@@ -107,8 +107,9 @@ def claim_votemarket():
         market = Contract(m, owner=worker)
         bribe_ids_to_claim = []
         for i in range(0,2000):
-            if i < markets[m]:
-                continue
+            print(i)
+            # if i < markets[m]:
+            #     continue
             try:
                 bribe = market.bribes(i).dict()
                 g = bribe['gauge']
@@ -117,8 +118,8 @@ def claim_votemarket():
                 g = bribe['gauge']
             if g == ZERO_ADDRESS:
                 break
-            if bribe['endTimestamp'] < chain.time():
-                continue
+            # if bribe['endTimestamp'] < chain.time():
+            #     continue
             print(f'looping {i} - {g}',flush=True)
             if market.claimable(voter, i) > 0:
                 bribe_ids_to_claim.append(i)
@@ -353,7 +354,8 @@ def claim_prisma_hh():
     print('Claiming from HH....')
     claim_contract = Contract('0xa9b08B4CeEC1EF29EdEC7F9C94583270337D6416', owner=worker)
     voter = '0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7'
-    url = f'https://api.hiddenhand.finance/reward/0/{voter}'
+    fee_receiver = '0x76DF88Aa8711822472Cb40Ed8c972A461A20ecdc'
+    url = f'https://api.hiddenhand.finance/reward/0/{fee_receiver}'
     data = requests.get(url).json()['data']
     claims = []
     for d in data:
@@ -361,7 +363,7 @@ def claim_prisma_hh():
             metadata = d['claimMetadata']
             claim = (
                 metadata['identifier'],
-                voter,
+                fee_receiver,
                 int(metadata['amount']),
                 metadata['merkleProof']
             )
