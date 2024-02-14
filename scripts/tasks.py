@@ -317,16 +317,12 @@ def claim_warden_bribes():
     recipient = '0xF147b8125d2ef93FB6965Db97D6746952a133934'
     recipient = '0x527e80008D212E2891C737Ba8a2768a7337D7Fd2'
     url = f'https://claims.warden.vote/proof/crv/address/{recipient}'
-    data = requests.get(url).json()
+    url = f'https://api.paladin.vote/quest/v2/copilot/claims/{recipient}'
+    data = requests.get(url).json()['claims']
     distributor = Contract('0x3682518b529e4404fb05250f9ad590c3218e5f9f', owner=worker)
     for d in data:
-        if d['questId'][:2] == 'd_':
-            # Use Dark Quest distributor
-            quest_id = int(d['questId'][2:len(d['questId'])])
-            distributor = Contract('0xce6dc32252d85e2e955Bfd3b85660917F040a933', owner=worker)
-        else:
-            quest_id = int(d['questId'])
-            distributor = Contract('0x3682518b529e4404fb05250f9ad590c3218e5f9f', owner=worker)
+        quest_id = int(d['questId'])
+        distributor = Contract('0x999881aA210B637ffF7d22c8566319444B38695B', owner=worker)
         try:
             tx = distributor.claim(
                 quest_id,               # questID
