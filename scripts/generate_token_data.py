@@ -67,12 +67,6 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
             except:
                 print(f'Cannot find price for {t}')
                 continue
-        # try:
-        #     block_height = chain.height
-        #     p = get_price(token, block_height)
-        # except:
-        #     print(f'Cannot find price for {t}')
-        #     continue
         try:
             decimals = token.decimals()
             if t == '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2':
@@ -81,7 +75,7 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
                 symbol = str(token.symbol())
             if p == 0:
                 continue
-            threshold = (target_usd_value / p) * 10 ** decimals
+            threshold = int((target_usd_value / p) * 10 ** decimals)
             print(f'{t} {symbol} {threshold/10**decimals}')
             data[t] = {}
             data[t]['symbol'] = symbol
@@ -91,8 +85,14 @@ def generate_token_data(target_usd_value=TARGET_USD_VALUE):
             continue
     data['last_updated'] = int(time.time())
     f = open("sweep_tokens_list.json", "w")
-    f.write(json.dumps(data, indent=2))
+    f.write(json.dumps(data, indent=2, default=decimal_default))
     f.close()
+
+def decimal_default(obj):
+    from decimal import Decimal
+    if isinstance(obj, Decimal):
+        return str(obj)
+    raise TypeError ("Type %s not serializable" % type(obj))
 
 def get_tokens():
     write_new_token_receipts()
