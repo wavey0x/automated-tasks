@@ -91,9 +91,9 @@ def stg_harvest():
 
 def claim_votemarket():
     print('Claiming from vote market....', flush=True)
-    buffer_time = 60 * 60 * 5
+    buffer_time = 60 * 60 * 6
     week_start = int(chain.time() / WEEK) * WEEK
-    if week_start + buffer_time > chain.time():
+    if week_start + buffer_time > chain.time() - 500:
         return # Only proceed if we've waited the buffer time
     voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'],owner=worker)
     markets = {
