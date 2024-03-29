@@ -32,7 +32,8 @@ CHAT_IDS = {
     "SEASOLVER": "-1001516144118",
     "YBRIBE": "-1001862925311",
     "VEYFI": "-1001558128423",
-    "YLOCKERS": "-1001697527660"
+    "YLOCKERS": "-1001697527660",
+    "PRISMA_REVOKE": "-1001992546130",
 }
 
 ignore_tokens = [
@@ -49,6 +50,7 @@ ADDRESSES = {
 }
 
 def main():
+    prisma_approvals()
     th_sweeper()
     print(f'TEST',flush=True)
     # stg_harvest()
@@ -379,3 +381,60 @@ def distribute_yprisma_fees():
         m = f'🌈🤖 Prisma Staker Yield Distributed!'
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
+
+
+def prisma_approvals():
+    # Check if the file exists
+    users = ["0x57d7e9853072ddf1e288fa4d7ee52412bfbb8347", "0x539dfe636d8ea473f093d3dc4881a80cc5fc7dff", "0x728d66a885376d1ddf0809f4254085f171b157bd", "0x14b30b46ec4fa1a993806bd5dda4195c5a82353e", "0x0424e057c2d0bc7e58c75975aaf38bf1e598cd49", "0xd0917ac1daacc35cc5aa3b5b987171723aa7230b", "0xb0f094c9e85a0ee7b89214a3a67efbc131022cc0", "0x603642f696d77a1feda2e982d87ac7f517c1f058", "0xee9536e8aea9384f1a8ddf655a7e9ee4579a160f", "0x20eadfcaf91bd98674ff8fc341d148e1731576a4", "0x1b004189e64d5b2f71d5be554470e6c49e10123b", "0x2239ac202240074b006a0cd2c201284a284dfe21", "0x4ebfcf3707e5bbc9f96d88da57ee47d1ec49820c", "0x83f6fe95067e24af601b1b822430c72c0098d208", "0x3056b7039deb4347ca9ab2abd7b5785fcdcc0ebf", "0xfc3871a15aeba37883911a825ec78b7676adebce", "0x16f570e93fdbc3a4865b7740deb052ee94d87e15", "0x85d545937db8d3bbc45288914da7286442e9a2c7", "0x262c199d993b09a9d5d35fbb8be312a8ddb48016", "0x38f2944e482a050942e5fb1652af4690017cd141", "0xcd493a43d9fb5a1b2b7d5739cc0c674c798dffe5", "0xc47fae56f3702737b69ed615950c01217ec5c7c8", "0xcbfdffd7a2819a47fcd07dfa8bcb8a5deacc9ea8", "0x844850092711b0ebbb75f6fa8b65561d4811d61d", "0x21c8f9fc8ea09a859b514a5607eac80d23f6d6fb", "0xfda1215797d29414e588b2e62fc390ee2949aaaa", "0x19562df3e7fd2ae7af4e6bd288b04c2c90405212", "0x0a9aca1ae6b4e60931a1a8ef034580074bff763c", "0xd996073019c74b2fb94ead236e32032405bc027c", "0xe0042d684fe6bfa4d897082f97b41532aa39640c", "0x46d35cb6bab2a106dae7b201be149bd4ed534348", "0xdbd5e81eb31a210459f5d4c057651ffce5f742aa", "0x1b8a9f9f5a1d9cb1c28d9120f9c2bd073ccfac04", "0x192820ce84fa9eb457fb228c386fe0ed22f7e33c", "0x93e45360f7e5b0b85d8e65dae9fa1a6f2af56819", "0x477baede70cb2e7723e010600df84674a4baafaf", "0x7bfee91193d9df2ac0bfe90191d40f23c773c060", "0x2d1ef4acf4cae6a38950971aaaa15f88d9b3f165", "0x4148310fe4544e82f176570c6c7b649290a90e17", "0x7ab5386c78c73b10d04c470315948a2983ad7b68", "0x787b24cecefec7af515f096b29d13d4d2fe9918d", "0xebc48e8db0d9203db04512ec4a8030cf2a43c384", "0xc9782d4880de737d48c75153b51e36a7b2475974", "0xe513b2b8745a83ebdc1b42b5ce70d4900b5981c7"]
+    users = [web3.toChecksumAddress(u) for u in users]
+    file_path = 'prisma_approvals.json'
+    if os.path.isfile(file_path):
+        with open(file_path, 'r') as file:
+            try:
+                data = json.load(file)
+            except:
+                data = {}
+                data['vulnerable'] = users
+                data['vulnerable_count'] = 44
+                data['last_run'] = chain.time()
+        print("JSON file loaded successfully.")
+    else:
+        data = {}
+        data['vulnerable_count'] = 44
+        data['vulnerable'] = users
+        data['last_run'] = chain.time()
+        with open(file_path, 'w') as file:
+            json.dump(data, file)
+
+    vuln = []
+    attackers = [
+        "0x4148310fe4544e82f176570C6c7B649290a90E17", 
+        "0x1b8A9F9F5a1d9cB1C28D9120F9c2bD073ccfAC04", 
+        "0xD996073019c74B2fB94eAD236e32032405bC027c"
+    ]
+    borrower_ops = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
+    zap = '0xcC7218100da61441905e0c327749972e3CBee9EE'
+    for user in users:
+        user = web3.toChecksumAddress(user)
+        approved = borrower_ops.isApprovedDelegate(user, zap)
+        if approved and user not in attackers:
+            vuln.append(user)
+            # print(user, approved)
+    
+    count = len(vuln)
+    print(f'{count}/{len(users)}')
+
+    if 'vulnerable' in data:
+        vulnerable = data['vulnerable']
+    
+    if len(data['vulnerable']) != count:
+        changed = [v for v in vulnerable if v not in vuln]
+        # changed_str = '\n- '.join(changed)
+        changed_str = '\n- '.join([f'`{item}`' for item in changed])
+        msg = f'🌈 {len(changed)} New revokes found:\n\n- {changed_str}'
+        bot.send_message(CHAT_IDS['PRISMA_REVOKE'], msg, parse_mode="markdown", disable_web_page_preview = True)
+        data['vulnerable_count'] = count
+        data['vulnerable'] = vuln
+        data['last_run'] = chain.time()
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4) 
