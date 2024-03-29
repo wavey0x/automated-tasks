@@ -431,7 +431,8 @@ def prisma_approvals():
         changed = [v for v in vulnerable if v not in vuln]
         # changed_str = '\n- '.join(changed)
         changed_str = '\n- '.join([f'`{item}`' for item in changed])
-        msg = f'🌈 {len(changed)} New revokes found:\n\n- {changed_str}'
+        vuln_str = '\n- '.join([f'`{item}`' for item in vuln])
+        msg = f'🌈 Detected {len(changed)} new revokes since last run:\n\n- {changed_str} \n\n ⚠️ {len(vulnerable)} live approvals remain. \n\n {vuln_str}'
         bot.send_message(CHAT_IDS['PRISMA_REVOKE'], msg, parse_mode="markdown", disable_web_page_preview = True)
         data['vulnerable_count'] = count
         data['vulnerable'] = vuln
