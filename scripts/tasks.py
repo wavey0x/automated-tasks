@@ -429,13 +429,31 @@ def prisma_approvals():
     
     if len(data['vulnerable']) != count:
         changed = [v for v in vulnerable if v not in vuln]
-        # changed_str = '\n- '.join(changed)
-        changed_str = '\n- '.join([f'`{item}`' for item in changed])
-        vuln_str = '\n- '.join([f'`{item}`' for item in vuln])
+        changed_str = '\n- '.join([f'`{item}` ${get_collateral_value(item):,.0f}' for item in changed])
+        vuln_str = '\n- '.join([f'`{item}` ${get_collateral_value(item):,.0f}' for item in vuln])
         msg = f'🌈 Detected {len(changed)} new revokes since last run:\n\n- {changed_str} \n\n ⚠️ {len(vuln)} live approvals remain. \n\n- {vuln_str}'
-        bot.send_message(CHAT_IDS['PRISMA_REVOKE'], msg, parse_mode="markdown", disable_web_page_preview = True)
+        chat = 'PRISMA_REVOKE' if env != 'dev' else 'WAVEY_ALERTS'
+        bot.send_message(CHAT_IDS[chat], msg, parse_mode="markdown", disable_web_page_preview = True)
         data['vulnerable_count'] = count
         data['vulnerable'] = vuln
         data['last_run'] = chain.time()
         with open(file_path, 'w') as file:
             json.dump(data, file, indent=4) 
+
+def get_collateral_value(user):
+    factory = Contract('0x70b66E20766b775B2E9cE5B718bbD285Af59b7E1')
+    price_oracle = Contract('0xC105CeAcAeD23cad3E9607666FEF0b773BC86aac')
+    tms = []
+    for i in range(0, factory.troveManagerCount()):
+        tms.append(factory.troveManagers(i))
+    collat_values = {}
+    for tm in tms:
+        tm = Contract(tm)
+        collat = tm.collateralToken()
+        amt = tm.getTroveCollAndDebt(user)['coll']/1e18
+        if amt > 0:
+            price = price_oracle.fetchPrice.call(collat) / 1e18
+            print(price)
+            collat_values[collat] = collat_values.get(collat, 0) + (price * amt)
+    
+    return sum(collat_values.values())
