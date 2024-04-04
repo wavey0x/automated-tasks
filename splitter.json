@@ -101,6 +101,6 @@
         "token_name": "INV",
         "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
         "should_claim": "false",
-        "split_threshold": 80e18
+        "split_threshold": 30e18
     }
 }
