@@ -453,7 +453,6 @@ def get_collateral_value(user):
         amt = tm.getTroveCollAndDebt(user)['coll']/1e18
         if amt > 0:
             price = price_oracle.fetchPrice.call(collat) / 1e18
-            print(price)
             collat_values[collat] = collat_values.get(collat, 0) + (price * amt)
     
     return sum(collat_values.values())

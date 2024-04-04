@@ -89,4 +89,18 @@
         "should_claim": "false",
         "split_threshold": 200e6
     }
+    ,
+    "0x04C154b66CB340F3Ae24111CC767e0184Ed00Cc6": {
+        "token_name": "pxETH",
+        "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
+        "should_claim": "false",
+        "split_threshold": 8e17
+    }
+    ,
+    "0x41D5D79431A913C4aE7d69a668ecdfE5fF9DFB68": {
+        "token_name": "INV",
+        "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
+        "should_claim": "false",
+        "split_threshold": 80e18
+    }
 }
