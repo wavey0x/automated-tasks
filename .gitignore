@@ -10,3 +10,4 @@ th_approved_tokens.json
 cache
 receipt_tokens.json
 prisma_approvals.json
+scripts/diagnostic.json

@@ -50,7 +50,7 @@ ADDRESSES = {
 }
 
 def main():
-    prisma_approvals()
+    # prisma_approvals()
     th_sweeper()
     print(f'TEST',flush=True)
     # stg_harvest()
@@ -66,7 +66,7 @@ def main():
     print(f'TEST4',flush=True)
     claim_prisma_hh()
     print(f'TEST5',flush=True)
-    distribute_yprisma_fees()
+    # distribute_yprisma_fees()
     print(f'TEST6',flush=True)
     
 def stg_harvest():
@@ -275,6 +275,7 @@ def th_sweeper():
         last_update = 0
     # if time.time() - last_update > 60 * 60 * 24:
         # scripts.generate_token_data.generate_token_data(target_usd_value=TARGET_USD_VALUE)
+        
     th = Contract('0xb634316E06cC0B358437CbadD4dC94F1D3a92B3b', owner=worker)
     calls, token_list, balance_list = ([] for i in range(3))
     # Use multicall to reduce http requests
@@ -433,7 +434,8 @@ def prisma_approvals():
         vuln_str = '\n- '.join([f'`{item}` ${get_collateral_value(item):,.0f}' for item in vuln])
         msg = f'🌈 Detected {len(changed)} new revokes since last run:\n\n- {changed_str} \n\n ⚠️ {len(vuln)} live approvals remain. \n\n- {vuln_str}'
         chat = 'PRISMA_REVOKE' if env != 'dev' else 'WAVEY_ALERTS'
-        bot.send_message(CHAT_IDS[chat], msg, parse_mode="markdown", disable_web_page_preview = True)
+        if os.environ.get('ENVIRONMENT2') == 'PROD':
+            bot.send_message(CHAT_IDS[chat], msg, parse_mode="markdown", disable_web_page_preview = True)
         data['vulnerable_count'] = count
         data['vulnerable'] = vuln
         data['last_run'] = chain.time()
