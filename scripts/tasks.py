@@ -369,7 +369,7 @@ def claim_prisma_hh():
             claims.append(claim)
 
     if len(claims) > 0:
-        tx = claim_contract.claim(claims, {'priority_fee':1e6})
+        tx = claim_contract.claim(claims, tx_params)
         m = f'🌈🤖 Prisma Bribe Claim Detected!'
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
