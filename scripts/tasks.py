@@ -52,22 +52,16 @@ ADDRESSES = {
 def main():
     # prisma_approvals()
     th_sweeper()
-    print(f'TEST',flush=True)
     # stg_harvest()
     claim_votemarket()
-    print(f'TEST2',flush=True)
     # claim_bribes()
     # yearn_fed()
     bribe_splitter()
-    print(f'TEST3',flush=True)
     # temple_split()
     # ycrv_donator()
     claim_warden_bribes()
-    print(f'TEST4',flush=True)
     claim_prisma_hh()
-    print(f'TEST5',flush=True)
     # distribute_yprisma_fees()
-    print(f'TEST6',flush=True)
     
 def stg_harvest():
     threshold = 200_000e6
