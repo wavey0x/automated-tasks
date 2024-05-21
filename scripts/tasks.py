@@ -255,7 +255,6 @@ def bribe_splitter():
                 transaction_failure(e)
 
 def th_sweeper():
-    print('Sweeping from TH....')
     f = open('sweep_tokens_list.json')
     try:
         sweep_tokens = json.load(f)
@@ -291,12 +290,8 @@ def th_sweeper():
         if balance >= sweep_tokens[token_address]['threshold']:
             token_list.append(token_address)
             balance_list.append(balance)
-    print(f'{len(token_list)}/{len(sweep_tokens)} tokens eligible for sweep',flush=True)
+    print(f'Sweeper {len(token_list)}/{len(sweep_tokens)} tokens eligible for sweep',flush=True)
     if len(token_list) > 0:
-        print(f'Sweeping...')
-        syms = ""
-        for t in token_list:
-            print(t)
         try:
             tx = th.sweep(token_list, balance_list, tx_params)
             m = f'🧹 Sweep Detected!'
@@ -343,7 +338,6 @@ def send_alert(chat_id, msg, success):
     bot.send_message(chat_id, msg, parse_mode="markdown", disable_web_page_preview = True)
 
 def claim_prisma_hh():
-    print('Claiming from HH....')
     claim_contract = Contract('0xa9b08B4CeEC1EF29EdEC7F9C94583270337D6416', owner=worker)
     voter = '0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7'
     fee_receiver = '0x76DF88Aa8711822472Cb40Ed8c972A461A20ecdc'
@@ -352,6 +346,7 @@ def claim_prisma_hh():
     claims = []
     for d in data:
         if float(d['claimable']) > 0:
+            print('Claiming from HH....')
             metadata = d['claimMetadata']
             claim = (
                 metadata['identifier'],
@@ -368,9 +363,9 @@ def claim_prisma_hh():
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
 
 def distribute_yprisma_fees():
-    print('Distributing yPRISMA fees....')
     distributor = Contract('0x1D385BEEb7B325f4A5C0a9507FD8a1071B232E4c', owner=worker)
     if distributor.canClaim():
+        print('Distributing yPRISMA fees....')
         tx = distributor.distributeFees()
         m = f'🌈🤖 Prisma Staker Yield Distributed!'
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
@@ -391,7 +386,6 @@ def prisma_approvals():
                 data['vulnerable'] = users
                 data['vulnerable_count'] = 44
                 data['last_run'] = chain.time()
-        print("JSON file loaded successfully.")
     else:
         data = {}
         data['vulnerable_count'] = 44
