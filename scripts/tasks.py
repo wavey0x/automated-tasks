@@ -109,7 +109,6 @@ def claim_votemarket():
         market = Contract(m, owner=worker)
         bribe_ids_to_claim = []
         for i in range(0,2000):
-            print(i)
             # if i < markets[m]:
             #     continue
             try:
@@ -122,7 +121,7 @@ def claim_votemarket():
                 break
             # if bribe['endTimestamp'] < chain.time():
             #     continue
-            print(f'looping {i} - {g}',flush=True)
+            # print(f'looping {i} - {g}',flush=True)
             if market.claimable(voter, i) > 0:
                 bribe_ids_to_claim.append(i)
         if len(bribe_ids_to_claim) > 0:
