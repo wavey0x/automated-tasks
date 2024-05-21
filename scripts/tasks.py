@@ -228,7 +228,6 @@ def setup_test():
     # tx = sweeper.sweep([usdt.address], [100e6], txn_params)
 
 def bribe_splitter():
-    print('Calling splitter....')
     bribe_splitter = Contract(ADDRESSES['SPLITTER'], owner=worker)
     ybribe = Contract(ADDRESSES['YBRIBE'])
     voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'])
@@ -242,7 +241,7 @@ def bribe_splitter():
         split_threshold = data[token_address]['split_threshold']
         balance = token.balanceOf(bribe_splitter)
         symbol = token.symbol()
-        print(f'{symbol} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}',flush=True)
+        # print(f'{symbol} balance: {balance/10**token.decimals()} threshold: {split_threshold/10**token.decimals()}',flush=True)
         if balance > split_threshold:
             if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
                 should_claim = False # Override if claim not worth it
