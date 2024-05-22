@@ -61,7 +61,7 @@ def main():
     # ycrv_donator()
     claim_warden_bribes()
     claim_prisma_hh()
-    # distribute_yprisma_fees()
+    distribute_yprisma_fees()
     
 def stg_harvest():
     threshold = 200_000e6
@@ -362,7 +362,8 @@ def claim_prisma_hh():
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
 
 def distribute_yprisma_fees():
-    distributor = Contract('0x1D385BEEb7B325f4A5C0a9507FD8a1071B232E4c', owner=worker)
+    # distributor = Contract('0x1D385BEEb7B325f4A5C0a9507FD8a1071B232E4c', owner=worker)
+    distributor = Contract('0x5aA86e9558F7701A90f343D90e0bC55AEb0046Df', owner=worker)
     if distributor.canClaim():
         print('Distributing yPRISMA fees....')
         tx = distributor.distributeFees()
