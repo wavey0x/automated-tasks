@@ -62,6 +62,7 @@ def main():
     claim_warden_bribes()
     claim_prisma_hh()
     distribute_yprisma_fees()
+    test()
     
 def stg_harvest():
     threshold = 200_000e6
@@ -445,3 +446,7 @@ def get_collateral_value(user):
             collat_values[collat] = collat_values.get(collat, 0) + (price * amt)
     
     return sum(collat_values.values())
+
+def test():
+    m = 'test'
+    send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
