@@ -52,6 +52,7 @@ ADDRESSES = {
 
 def main():
     # prisma_approvals()
+    ybs_alerts()
     th_sweeper()
     # stg_harvest()
     claim_votemarket()
@@ -447,7 +448,7 @@ def get_collateral_value(user):
     
     return sum(collat_values.values())
 
-def ybs():
+def ybs_alerts():
     THRESHOLD = 100_000
     registry = Contract('0x262be1d31d0754399d8d5dc63B99c22146E9f738')
     tokens = [
