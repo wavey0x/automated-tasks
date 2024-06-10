@@ -471,7 +471,6 @@ def ybs_alerts():
                 from_block = data['last_run_block']+1
             except:
                 data = {}
-    from_block = max(block, data['last_run_block'])
 
     for token in tokens:
         token = Contract(token)
