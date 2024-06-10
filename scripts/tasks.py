@@ -507,7 +507,7 @@ def abbreviate_address(address):
         abbr = KNOWN_ADDRESSES[address]
         markdown = f'[{abbr}]({link})'
     else:
-        abbr = address[0:7]
-        markdown = f'[{abbr}...]({link})'
+        abbr = f'{address[0:5]}...{address[-4:]}'
+        markdown = f'[{abbr}]({link})'
     return abbr, link, markdown
 
