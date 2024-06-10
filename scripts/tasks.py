@@ -34,6 +34,7 @@ CHAT_IDS = {
     "VEYFI": "-1001558128423",
     "YLOCKERS": "-1001697527660",
     "PRISMA_REVOKE": "-1001992546130",
+    "MCKINSEY": "-1002118993173",
 }
 
 ignore_tokens = [
@@ -445,3 +446,68 @@ def get_collateral_value(user):
             collat_values[collat] = collat_values.get(collat, 0) + (price * amt)
     
     return sum(collat_values.values())
+
+def ybs():
+    THRESHOLD = 100_000
+    registry = Contract('0x262be1d31d0754399d8d5dc63B99c22146E9f738')
+    tokens = [
+        '0xFCc5c47bE19d06BF83eB04298b026F81069ff65b', # yCRV
+    ]
+
+    block = chain.height
+    from_block = block - 10_000
+    to_block = block
+    data = {}
+    ts = chain.time()
+    data['last_run_block'] = block
+    data['last_run_ts'] = ts
+    data['last_run_dt'] = dt = datetime.utcfromtimestamp(ts).strftime("%m/%d/%Y, %H:%M:%S")
+    file_path = 'local_data.json'
+    if os.path.isfile(file_path):
+        with open(file_path, 'r') as file:
+            try:
+                data = json.load(file)
+                from_block = data['last_run_block']+1
+            except:
+                data = {}
+    assert block != data['last_run_block']
+    from_block = max(block, data['last_run_block'])
+
+    for token in tokens:
+        token = Contract(token)
+        deployment = registry.deployments(token)
+        ybs = Contract(deployment['yearnBoostedStaker'])
+        rewards = Contract(deployment['rewardDistributor'])
+        utils = Contract(deployment['utilities'])
+        logs = ybs.events.Staked.getLogs(fromBlock=from_block, toBlock=to_block)
+        logs += ybs.events.Unstaked.getLogs(fromBlock=from_block, toBlock=to_block)
+        for log in logs:
+            account = log.args['account']
+            txn_hash = log.transactionHash.hex()
+            amount = log.args['amount'] / 1e18
+            if amount < THRESHOLD:
+                continue
+            ts = ybs.totalSupply() / 1e18
+            global_weight = ybs.getGlobalWeight() / 1e18
+            avg_multiplier = global_weight / ts
+            abbr, link, markdown = abbreviate_address(account)
+            event = log['event']
+            msg = f'🌈 Large YBS stake detected\n\n{markdown} {event} {amount:,.0f} {token.symbol()}\n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
+            bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
+
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4) 
+
+def abbreviate_address(address):
+    KNOWN_ADDRESSES = {
+
+    }
+    link = f'https://etherscan.io/address/{address}'
+    if address in KNOWN_ADDRESSES:
+        abbr = KNOWN_ADDRESSES[address]
+        markdown = f'[{abbr}]({link})'
+    else:
+        abbr = address[0:7]
+        markdown = f'[{abbr}...]({link})'
+    return abbr, link, markdown
+
