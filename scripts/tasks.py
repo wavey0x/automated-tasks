@@ -460,9 +460,7 @@ def ybs_alerts():
     to_block = block
     data = {}
     ts = chain.time()
-    data['last_run_block'] = block
-    data['last_run_ts'] = ts
-    data['last_run_dt'] = dt = datetime.utcfromtimestamp(ts).strftime("%m/%d/%Y, %H:%M:%S")
+    dt = datetime.utcfromtimestamp(ts).strftime("%m/%d/%Y, %H:%M:%S")
     file_path = 'local_data.json'
     if os.path.isfile(file_path):
         with open(file_path, 'r') as file:
@@ -470,7 +468,10 @@ def ybs_alerts():
                 data = json.load(file)
                 from_block = data['last_run_block']+1
             except:
-                data = {}
+                print('Error reading local data file.')
+    data['last_run_block'] = block
+    data['last_run_ts'] = ts
+    data['last_run_dt'] = dt
 
     for token in tokens:
         token = Contract(token)
