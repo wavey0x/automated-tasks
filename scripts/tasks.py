@@ -449,7 +449,7 @@ def get_collateral_value(user):
     return sum(collat_values.values())
 
 def ybs_alerts():
-    THRESHOLD = 100_000
+    THRESHOLD = 500_000
     registry = Contract('0x262be1d31d0754399d8d5dc63B99c22146E9f738')
     tokens = [
         '0xFCc5c47bE19d06BF83eB04298b026F81069ff65b', # yCRV
