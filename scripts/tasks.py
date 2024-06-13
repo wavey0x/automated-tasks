@@ -228,14 +228,17 @@ def setup_test():
     usdt.transfer(th, 100e6)
     # sweeper = Contract('0xCca030157c6378eD2C18b46e194f10e9Ad01fa8d', owner=worker)
     # tx = sweeper.sweep([usdt.address], [100e6], txn_params)
-
+    
 def bribe_splitter():
     bribe_splitter = Contract(ADDRESSES['SPLITTER'], owner=worker)
     ybribe = Contract(ADDRESSES['YBRIBE'])
     voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'])
     f = open('splitter.json')
     data = json.load(f)
-    st_balance = Contract('0x27B5739e22ad9033bcBf192059122d163b60349D').totalAssets()
+    st = Contract('0x27B5739e22ad9033bcBf192059122d163b60349D')
+    ycrv = Contract(st.token())
+    ybs = Contract('0xE9A115b77A1057C918F997c32663FdcE24FB873f')
+    ybs_balance = ycrv.balanceOf(ybs) + ycrv.balanceOf(st)
     for token_address in data:
         token = Contract(token_address)
         gauge = data[token_address]['gauge']
@@ -248,7 +251,7 @@ def bribe_splitter():
             if should_claim and ybribe.claimable(voter, gauge, token_address) < 1e18:
                 should_claim = False # Override if claim not worth it
             try:
-                tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, st_balance, should_claim, tx_params)
+                tx = bribe_splitter.bribesSplitWithManualStBalance(token_address, gauge, ybs_balance, should_claim, tx_params)
                 m = f'🖖 {symbol} Split Detected!'
                 m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
                 send_alert(CHAT_IDS['WAVEY_ALERTS'], m, True)
