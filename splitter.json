@@ -108,5 +108,23 @@
         "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
         "should_claim": "false",
         "split_threshold": 30e9
+    },
+    "0x8207c1FfC5B6804F6024322CcF34F29c3541Ae26": {
+        "token_name": "OGN",
+        "gauge": "0xEEBC06d495c96E57542A6d829184A907A02ef602",
+        "should_claim": "false",
+        "split_threshold": 1000e18
+    },
+    "0x30D20208d987713f46DFD34EF128Bb16C404D10f": {
+        "token_name": "SD",
+        "gauge": "0xEEBC06d495c96E57542A6d829184A907A02ef602",
+        "should_claim": "false",
+        "split_threshold": 1000e18
+    },
+    "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB": {
+        "token_name": "ETHFI",
+        "gauge": "0xEEBC06d495c96E57542A6d829184A907A02ef602",
+        "should_claim": "false",
+        "split_threshold": 200e18
     }
 }
