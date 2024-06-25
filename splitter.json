@@ -103,6 +103,12 @@
         "should_claim": "false",
         "split_threshold": 30e18
     },
+    "0x34635280737b5BFe6c7DC2FC3065D60d66e78185": {
+        "token_name": "cvxPRISMA",
+        "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
+        "should_claim": "false",
+        "split_threshold": 10000e18
+    },
     "0x1BB9b64927e0C5e207C9DB4093b3738Eef5D8447": {
         "token_name": "VEC",
         "gauge": "0x6070fBD4E608ee5391189E7205d70cc4A274c017",
