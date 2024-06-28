@@ -11,7 +11,8 @@ from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, Z
 # logging.basicConfig(level=logging.DEBUG) 
 
 load_dotenv(find_dotenv())
-WEEK = 60 * 60 * 24 * 7
+DAY = 60 * 60 * 24
+WEEK = DAY * 7
 TARGET_USD_VALUE = 10
 AUTOMATION_EOA = '0xA009Cf8B0eDddf58A3c32Be2D85859fA494b12e3'
 telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
@@ -55,7 +56,7 @@ def main():
     ybs_alerts()
     th_sweeper()
     # stg_harvest()
-    # claim_votemarket()
+    claim_votemarket()
     # claim_bribes()
     # yearn_fed()
     # bribe_splitter()
@@ -63,7 +64,8 @@ def main():
     # ycrv_donator()
     claim_warden_bribes()
     claim_prisma_hh()
-    distribute_yprisma_fees()
+    deposit_ybs_rewards()
+    new_ycrv_splitter()
     
 def stg_harvest():
     threshold = 200_000e6
@@ -366,14 +368,25 @@ def claim_prisma_hh():
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
 
-def distribute_yprisma_fees():
+def deposit_ybs_rewards():
     # distributor = Contract('0x1D385BEEb7B325f4A5C0a9507FD8a1071B232E4c', owner=worker)
-    distributor = Contract('0x5aA86e9558F7701A90f343D90e0bC55AEb0046Df', owner=worker)
-    if distributor.canClaim():
-        print('Distributing yPRISMA fees....')
-        tx = distributor.distributeFees()
-        m = f'🌈🤖 Prisma Staker Yield Distributed!'
+    yprisma_distributor = Contract('0x5aA86e9558F7701A90f343D90e0bC55AEb0046Df', owner=worker)
+    ycrv_receiver = Contract('0x642a16A7885d7a8b9353E2a4B68834f31389dC2c', owner=worker)
+    if yprisma_distributor.canClaim():
+        print('Depositing yPRISMA fees....')
+        tx = yprisma_distributor.distributeFees()
+        m = f'🌈🤖 Prisma Yield Deposited!'
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        send_alert(CHAT_IDS['YLOCKERS'], m, True)
+
+    reward_token = Contract(ycrv_receiver.REWARD_TOKEN())
+    balance = reward_token.balanceOf(ycrv_receiver)
+    THRESHOLD = 100e18
+    if balance > THRESHOLD:
+        print('Depositing yCRV rewards....')
+        tx = ycrv_receiver.depositRewards()
+        m = f'🌀🤖 yCRV Yield Deposited!'
+        m += f'\n\nAmount: {balance/1e18:,.2f}\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
 
 
@@ -514,3 +527,26 @@ def abbreviate_address(address):
         markdown = f'[{abbr}]({link})'
     return abbr, link, markdown
 
+def new_ycrv_splitter():
+    THRESHOLD = 2_000 # Minimum amount of crvUSD worth splitting
+    ts = time.time()
+    split_target_ts = int(ts / WEEK) * WEEK + (DAY * 2) # Saturday 00:00 UTC
+    fee_burner = Contract('0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8')
+    splitter = Contract('0x05Fc8174050f0A41dEB7e562187911d45cd5e401', owner=worker)
+    proxy = Contract('0x78eDcb307AC1d1F8F5Fd070B377A6e69C8dcFC34')
+    crvusd_balance = Contract(proxy.crvUSD()).balanceOf(fee_burner) / 1e18
+
+    if (
+        ts > split_target_ts and
+        (
+            proxy.canClaim() or
+            crvusd_balance >= THRESHOLD
+        )
+    ):
+        tx = splitter.executeSplit()
+        msg = f'✂️ yCRV Split Executed \n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
+
+
+
+    
