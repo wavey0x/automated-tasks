@@ -369,12 +369,13 @@ def claim_prisma_hh():
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
 
 def deposit_ybs_rewards():
+    txn_params = {'priority_fee':1e6}
     # distributor = Contract('0x1D385BEEb7B325f4A5C0a9507FD8a1071B232E4c', owner=worker)
     yprisma_distributor = Contract('0x5aA86e9558F7701A90f343D90e0bC55AEb0046Df', owner=worker)
     ycrv_receiver = Contract('0x642a16A7885d7a8b9353E2a4B68834f31389dC2c', owner=worker)
     if yprisma_distributor.canClaim():
         print('Depositing yPRISMA fees....')
-        tx = yprisma_distributor.distributeFees()
+        tx = yprisma_distributor.distributeFees(txn_params)
         m = f'🌈🤖 Prisma Yield Deposited!'
         m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
@@ -384,7 +385,7 @@ def deposit_ybs_rewards():
     THRESHOLD = 100e18
     if balance > THRESHOLD:
         print('Depositing yCRV rewards....')
-        tx = ycrv_receiver.depositRewards()
+        tx = ycrv_receiver.depositRewards(txn_params)
         m = f'🌀🤖 yCRV Yield Deposited!'
         m += f'\n\nAmount: {balance/1e18:,.2f}\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         send_alert(CHAT_IDS['YLOCKERS'], m, True)
@@ -530,6 +531,7 @@ def abbreviate_address(address):
 def new_ycrv_splitter():
     THRESHOLD = 2_000 # Minimum amount of crvUSD worth splitting
     ts = time.time()
+    txn_params = {'priority_fee':1e6}
     split_target_ts = int(ts / WEEK) * WEEK + (DAY * 2) # Saturday 00:00 UTC
     fee_burner = Contract('0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8')
     splitter = Contract('0x05Fc8174050f0A41dEB7e562187911d45cd5e401', owner=worker)
@@ -543,7 +545,7 @@ def new_ycrv_splitter():
             crvusd_balance >= THRESHOLD
         )
     ):
-        tx = splitter.executeSplit()
+        tx = splitter.executeSplit(txn_params)
         msg = f'✂️ yCRV Split Executed \n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
