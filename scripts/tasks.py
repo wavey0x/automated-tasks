@@ -553,15 +553,15 @@ def new_ycrv_splitter():
         if 'AdminFeeSplit' in tx.events:
             amts = tx.events['AdminFeeSplit'][0]
             msg += f'\n --- Admin Fee Splits ---'
-            msg += f'\nUser: {amts['ybs']} | {admin_fee_splits[0]*100:,.2f}%'
-            msg += f'\nTreasury: {amts['treasury']} | {admin_fee_splits[1]*100:,.2f}%'
-            msg += f'\nRemainders: {amts['remainder']} | {admin_fee_splits[2]*100:,.2f}%'
+            msg += f'\nUser: {amts['ybs']/1e18:,.2f} | {admin_fee_splits[0]/1e16:,.2f}%'
+            msg += f'\nTreasury: {amts['treasury']/1e18:,.2f} | {admin_fee_splits[1]/1e16:,.2f}%'
+            msg += f'\nRemainders: {amts['remainder']/1e18:,.2f} | {admin_fee_splits[2]/1e16:,.2f}%'
         if 'VoteIncentiveSplit' in tx.events:
             amts = tx.events['VoteIncentiveSplit'][0]
             msg += f'\n --- Vote Incentive Splits ---'
-            msg += f'\nUser: {amts['ybs']} | {vote_incentive_splits[0]*100:,.2f}%'
-            msg += f'\nTreasury: {amts['treasury']} | {vote_incentive_splits[1]*100:,.2f}%'
-            msg += f'\nRemainders: {amts['remainder']} | {vote_incentive_splits[2]*100:,.2f}%'
+            msg += f'\nUser: {amts['ybs']/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
+            msg += f'\nTreasury: {amts['treasury']/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
+            msg += f'\nRemainders: {amts['remainder']/1e18:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
         msg += '\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
