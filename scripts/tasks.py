@@ -529,7 +529,7 @@ def abbreviate_address(address):
     return abbr, link, markdown
 
 def new_ycrv_splitter():
-    THRESHOLD = 2_000 # Minimum amount of crvUSD worth splitting
+    THRESHOLD = 4_000 # Minimum amount of crvUSD worth splitting
     ts = time.time()
     txn_params = {'priority_fee':1e6}
     split_target_ts = int(ts / WEEK) * WEEK + (DAY * 2) # Saturday 00:00 UTC
