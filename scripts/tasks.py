@@ -562,7 +562,7 @@ def new_ycrv_splitter():
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
             msg += f'\nRemainders: {amts["remainder"]/1e18:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
-        msg += '\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        msg += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
 
