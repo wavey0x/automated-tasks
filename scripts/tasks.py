@@ -559,7 +559,7 @@ def new_ycrv_splitter():
         if 'VoteIncentiveSplit' in tx.events:
             amts = tx.events['VoteIncentiveSplit'][0]
             msg += f'\n --- Vote Incentive Splits ---'
-            total = vote_incentive_splits[0]/1e18 * amts["ybs"]/1e18
+            total =  amts["ybs"]/1e18 / vote_incentive_splits[0]/1e18
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
             msg += f'\nRemainders: {total*vote_incentive_splits[2]/1e18:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
