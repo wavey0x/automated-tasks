@@ -496,8 +496,8 @@ def ybs_alerts():
         ybs = Contract(deployment['yearnBoostedStaker'])
         rewards = Contract(deployment['rewardDistributor'])
         utils = Contract(deployment['utilities'])
-        logs = ybs.events.Staked.getLogs(fromBlock=from_block, toBlock=to_block)
-        logs += ybs.events.Unstaked.getLogs(fromBlock=from_block, toBlock=to_block)
+        logs = ybs.events.Staked.get_logs(fromBlock=from_block, toBlock=to_block)
+        logs += ybs.events.Unstaked.get_logs(fromBlock=from_block, toBlock=to_block)
         for log in logs:
             account = log.args['account']
             txn_hash = log.transactionHash.hex()
