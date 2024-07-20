@@ -563,13 +563,13 @@ def new_ycrv_splitter():
         tx = splitter.executeSplit(txn_params)
         if 'AdminFeeSplit' in tx.events:
             amts = tx.events['AdminFeeSplit'][0]
-            msg += f'\n --- Admin Fee Splits ---'
+            msg += f'\n👔 Admin Fee Splits'
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {admin_fee_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {admin_fee_splits[1]/1e16:,.2f}%'
             msg += f'\nRemainders: {amts["remainder"]/1e18:,.2f} | {admin_fee_splits[2]/1e16:,.2f}%'
         if 'VoteIncentiveSplit' in tx.events:
             amts = tx.events['VoteIncentiveSplit'][0]
-            msg += f'\n --- Vote Incentive Splits ---'
+            msg += f'\n\n 🗳️  Vote Incentive Splits'
             total =  amts["ybs"]/1e18 / vote_incentive_splits[0]/1e18
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
