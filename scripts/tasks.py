@@ -49,6 +49,8 @@ ADDRESSES = {
     'YBRIBE': '0x03dFdBcD4056E2F92251c7B07423E1a33a7D3F6d',
     'YCHAD': '0xFEB4acf3df3cDEA7399794D0869ef76A6EfAff52',
     'TREASURY': '0x93A62dA5a14C80f265DAbC077fCEE437B1a0Efde',
+    'CURVE_VE': '0x5f3b5DfEb7B28CDbD7FAba78963EE202a494e2A2',
+
 }
 
 def main():
@@ -509,7 +511,7 @@ def ybs_alerts():
             avg_multiplier = global_weight / ts
             abbr, link, markdown = abbreviate_address(account)
             event = log['event']
-            msg = f'🌈 Large YBS stake detected\n\n{markdown} {event} {amount:,.0f} {token.symbol()}\n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
+            msg = f'🌈 Large YBS {event[:-1]} detected\n\n{markdown} {event} {amount:,.0f} {token.symbol()}\n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
             bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
     with open(file_path, 'w') as file:
@@ -527,6 +529,15 @@ def abbreviate_address(address):
         abbr = f'{address[0:5]}...{address[-4:]}'
         markdown = f'[{abbr}]({link})'
     return abbr, link, markdown
+
+def lock_crv():
+    txn_params = {'priority_fee':1e6}
+    voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'], owner=worker)
+    proxy = Contract(voter.strategy(), owner=worker)
+    crv = Contract(voter.crv())
+
+    if crv.balanceOf(voter) > 100e18:
+        proxy.lock(txn_params)
 
 def new_ycrv_splitter():
     THRESHOLD = 4_000 # Minimum amount of crvUSD worth splitting
@@ -562,7 +573,7 @@ def new_ycrv_splitter():
             total =  amts["ybs"]/1e18 / vote_incentive_splits[0]/1e18
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
-            msg += f'\nRemainders: {total*vote_incentive_splits[2]/1e18:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
+            msg += f'\nRemainders: {total*vote_incentive_splits[2]:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
         msg += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
