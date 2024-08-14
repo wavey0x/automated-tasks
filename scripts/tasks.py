@@ -321,6 +321,7 @@ def claim_quest_bribes():
     url = f'https://api.paladin.vote/quest/v2/copilot/claims/{recipient}'
     url = f'https://api.paladin.vote/quest/v3/copilot/claims/{recipient}'
     data = requests.get(url).json()['claims']
+    claim_data = []
     for d in data:
         quest_id = int(d['questId'])
         if env != 'PROD':
@@ -336,12 +337,16 @@ def claim_quest_bribes():
                 d['proofs'],            # proofs
                 txn_params,             # txn params
             )
-            m = f'Quest Bribe Claim Detected!'
-            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-            send_alert(CHAT_IDS['YLOCKERS'], m, True)
+            claim_data.append(d)
         except:
             pass
-
+    
+    num_claims = len(claim_data)
+    if num_claims > 0:
+        m = f'{num_claims} Quest Bribe Claim(s) Detected!'
+        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+        send_alert(CHAT_IDS['YLOCKERS'], m, True)
+ 
 def transaction_failure(e):
     worker = accounts.at(AUTOMATION_EOA, force=True)
     print(e,flush=True)
