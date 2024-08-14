@@ -1,2 +1,4 @@
-multicall
+eth-brownie==1.20.6
 pyTelegramBotAPI
+multicall
+ypricemagic

@@ -64,7 +64,7 @@ def main():
     # bribe_splitter()
     # temple_split()
     # ycrv_donator()
-    claim_warden_bribes()
+    claim_quest_bribes()
     claim_prisma_hh()
     deposit_ybs_rewards()
     new_ycrv_splitter()
@@ -310,18 +310,22 @@ def th_sweeper():
     else:
         return
 
-def claim_warden_bribes():
-    print('Claiming from Warden....')
-    txn_params = {'max_fee':80e9, 'priority_fee':1e8}
+def claim_quest_bribes():
+    print('Claiming from Quest....',flush=True)
+    txn_params = {'max_fee':40e9, 'priority_fee':1e5}
     recipient = '0xF147b8125d2ef93FB6965Db97D6746952a133934'
     recipient = '0x527e80008D212E2891C737Ba8a2768a7337D7Fd2'
+    recipient = '0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8'
+    # recipient = '0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8'
     url = f'https://claims.warden.vote/proof/crv/address/{recipient}'
     url = f'https://api.paladin.vote/quest/v2/copilot/claims/{recipient}'
+    url = f'https://api.paladin.vote/quest/v3/copilot/claims/{recipient}'
     data = requests.get(url).json()['claims']
-    distributor = Contract('0x3682518b529e4404fb05250f9ad590c3218e5f9f', owner=worker)
     for d in data:
         quest_id = int(d['questId'])
-        distributor = Contract('0x999881aA210B637ffF7d22c8566319444B38695B', owner=worker)
+        if env != 'PROD':
+            print(f'Attempting claim on quest ID: {quest_id}')
+        distributor = Contract(d['distributor'], owner=worker)
         try:
             tx = distributor.claim(
                 quest_id,               # questID
@@ -332,6 +336,9 @@ def claim_warden_bribes():
                 d['proofs'],            # proofs
                 txn_params,             # txn params
             )
+            m = f'Quest Bribe Claim Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['YLOCKERS'], m, True)
         except:
             pass
 
@@ -512,7 +519,8 @@ def ybs_alerts():
             abbr, link, markdown = abbreviate_address(account)
             event = log['event']
             msg = f'🌈 Large YBS {event[:-1]} detected\n\n{markdown} {event} {amount:,.0f} {token.symbol()}\n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
-            bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
+            if env == 'PROD':
+                bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4) 
@@ -570,7 +578,7 @@ def new_ycrv_splitter():
         if 'VoteIncentiveSplit' in tx.events:
             amts = tx.events['VoteIncentiveSplit'][0]
             msg += f'\n\n 🗳️  Vote Incentive Splits'
-            total =  amts["ybs"]/1e18 / vote_incentive_splits[0]/1e18
+            total =  amts["ybs"]/1e18 / (vote_incentive_splits[0] / 1e18)
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
             msg += f'\nRemainders: {total*vote_incentive_splits[2]:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
