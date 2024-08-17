@@ -323,29 +323,37 @@ def claim_quest_bribes():
     data = requests.get(url).json()['claims']
     claim_data = []
     for d in data:
+        distributor = Contract(d['distributor'], owner=worker)
         quest_id = int(d['questId'])
+        period = int(d['period'])
+        index = int(d['index'])
+
+        if distributor.isClaimed(quest_id,period,index):
+            continue
+
         if env != 'PROD':
             print(f'Attempting claim on quest ID: {quest_id}')
-        distributor = Contract(d['distributor'], owner=worker)
-        try:
-            tx = distributor.claim(
-                quest_id,               # questID
-                int(d['period']),       # period
-                int(d['index']),        # index
-                d['user'],              # account
-                int(d['amount']),       # amount
-                d['proofs'],            # proofs
-                txn_params,             # txn params
-            )
-            claim_data.append(d)
-        except:
-            pass
+
+        claim_data.append(
+            quest_id,
+            period,
+            index,
+            d['amount'],
+            d['proofs']
+        )
     
     num_claims = len(claim_data)
     if num_claims > 0:
-        m = f'{num_claims} Quest Bribe Claim(s) Detected!'
-        m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-        send_alert(CHAT_IDS['YLOCKERS'], m, True)
+        try:
+            tx = distributor.multiClaim(
+                d['user'],              # account
+                claim_data
+            )
+            m = f'{num_claims} Quest Bribe Claim(s) Detected!'
+            m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+            send_alert(CHAT_IDS['YLOCKERS'], m, True)
+        except Exception as e:
+            transaction_failure(e)
  
 def transaction_failure(e):
     worker = accounts.at(AUTOMATION_EOA, force=True)
@@ -584,9 +592,10 @@ def new_ycrv_splitter():
             amts = tx.events['VoteIncentiveSplit'][0]
             msg += f'\n\n 🗳️  Vote Incentive Splits'
             total =  amts["ybs"]/1e18 / (vote_incentive_splits[0] / 1e18)
+            remainders_amount = total * vote_incentive_splits[2] / 1e18
             msg += f'\nUser: {amts["ybs"]/1e18:,.2f} | {vote_incentive_splits[0]/1e16:,.2f}%'
             msg += f'\nTreasury: {amts["treasury"]/1e18:,.2f} | {vote_incentive_splits[1]/1e16:,.2f}%'
-            msg += f'\nRemainders: {total*vote_incentive_splits[2]:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
+            msg += f'\nRemainders: {remainders_amount:,.2f} | {vote_incentive_splits[2]/1e16:,.2f}%'
         msg += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
         bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
