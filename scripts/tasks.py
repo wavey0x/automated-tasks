@@ -333,13 +333,13 @@ def claim_quest_bribes():
         if env != 'PROD':
             print(f'Attempting claim on quest ID: {quest_id}')
 
-        claim_data.append({
+        claim_data.append((
             quest_id,
             period,
             index,
             d['amount'],
             d['proofs']
-        })
+        ))
     
     num_claims = len(claim_data)
     if num_claims > 0:
