@@ -24,7 +24,6 @@ tx_params = {}
 tx_params['max_fee'] = max_fee
 tx_params['priority_fee'] = priority_fee
 
-telegram_bot_key = os.environ.get('WAVEY_ALERTS_BOT_KEY')
 env = 'PROD' if os.environ.get('ENV') == 'PROD' else 'DEV'
 bot = telebot.TeleBot(telegram_bot_key)
 CHAT_IDS = {
@@ -334,13 +333,13 @@ def claim_quest_bribes():
         if env != 'PROD':
             print(f'Attempting claim on quest ID: {quest_id}')
 
-        claim_data.append(
+        claim_data.append({
             quest_id,
             period,
             index,
             d['amount'],
             d['proofs']
-        )
+        })
     
     num_claims = len(claim_data)
     if num_claims > 0:
