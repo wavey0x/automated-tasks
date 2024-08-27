@@ -98,19 +98,30 @@ def claim_votemarket():
         return # Only proceed if we've waited the buffer time
     voter = Contract(ADDRESSES['YEARN_CURVE_VOTER'],owner=worker)
     markets = {
-        '0x0000000BE1d98523B5469AfF51A1e7b4891c6225': 50,
-        '0x7D0F747eb583D43D41897994c983F13eF7459e1f': 25,
+        # '0x0000000BE1d98523B5469AfF51A1e7b4891c6225': 50,
+        # '0x7D0F747eb583D43D41897994c983F13eF7459e1f': 25,
         '0x0000000895cB182E6f983eb4D8b4E0Aa0B31Ae4c': 0,
         '0x000000073D065Fc33a3050C2d0E19C393a5699ba': 0,
     }
+    helper = Contract('0xD0108D6bC206eCFE38E496F0ed95fD9E9F96beE0')
     for m in markets:
+        market = Contract(m)
+        ids_from_helper = list(helper.getClaimableIds(m, voter))
+        if len(ids_from_helper) > 0:
+            try:
+                tx = market.claimAllFor(voter, ids_from_helper, tx_params)
+                m = f'🤖 {len(ids_from_helper)} Bribe Claim(s) Detected!'
+                m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
+                send_alert(CHAT_IDS['YLOCKERS'], m, True)
+            except Exception as e:
+                transaction_failure(e)
+        
+        continue
         if m == '0x0000000BE1d98523B5469AfF51A1e7b4891c6225':
             market = interface.IMarket(m)
         market = Contract(m, owner=worker)
         bribe_ids_to_claim = []
         for i in range(0,2000):
-            # if i < markets[m]:
-            #     continue
             try:
                 bribe = market.bribes(i).dict()
                 g = bribe['gauge']
@@ -119,9 +130,6 @@ def claim_votemarket():
                 g = bribe['gauge']
             if g == ZERO_ADDRESS:
                 break
-            # if bribe['endTimestamp'] < chain.time():
-            #     continue
-            # print(f'looping {i} - {g}',flush=True)
             if market.claimable(voter, i) > 0:
                 bribe_ids_to_claim.append(i)
         if len(bribe_ids_to_claim) > 0:
