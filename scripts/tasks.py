@@ -115,31 +115,6 @@ def claim_votemarket():
                 send_alert(CHAT_IDS['YLOCKERS'], m, True)
             except Exception as e:
                 transaction_failure(e)
-        
-        continue
-        if m == '0x0000000BE1d98523B5469AfF51A1e7b4891c6225':
-            market = interface.IMarket(m)
-        market = Contract(m, owner=worker)
-        bribe_ids_to_claim = []
-        for i in range(0,2000):
-            try:
-                bribe = market.bribes(i).dict()
-                g = bribe['gauge']
-            except:
-                bribe = market.bounties(i).dict()
-                g = bribe['gauge']
-            if g == ZERO_ADDRESS:
-                break
-            if market.claimable(voter, i) > 0:
-                bribe_ids_to_claim.append(i)
-        if len(bribe_ids_to_claim) > 0:
-            try:
-                tx = market.claimAllFor(voter, bribe_ids_to_claim, tx_params)
-                m = f'🤖 {len(bribe_ids_to_claim)} Bribe Claim(s) Detected!'
-                m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
-                send_alert(CHAT_IDS['YLOCKERS'], m, True)
-            except Exception as e:
-                transaction_failure(e)
 
 def claim_bribes():
     print('Claiming from ybribe....', flush=True)
