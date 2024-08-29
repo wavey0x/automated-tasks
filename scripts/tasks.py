@@ -105,7 +105,7 @@ def claim_votemarket():
     for m in markets:
         ids_from_helper = list(helper.getClaimableIds(m, voter))
         if len(ids_from_helper) > 0:
-            market = Contract(m)
+            market = Contract(m, owner=worker)
             tx = market.claimAllFor(voter, ids_from_helper, tx_params)
             m = f'🤖 {len(ids_from_helper)} Votemarket Bribe Claim(s) Detected!'
             m += f'\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{tx.txid})'
