@@ -293,8 +293,8 @@ def claim_quest_bribes():
     txn_params = {'max_fee':40e9, 'priority_fee':1e5}
     recipient = '0xF147b8125d2ef93FB6965Db97D6746952a133934'
     recipient = '0x527e80008D212E2891C737Ba8a2768a7337D7Fd2'
-    recipient = '0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8'
     # recipient = '0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8'
+    recipient = '0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8'
     url = f'https://claims.warden.vote/proof/crv/address/{recipient}'
     url = f'https://api.paladin.vote/quest/v2/copilot/claims/{recipient}'
     url = f'https://api.paladin.vote/quest/v3/copilot/claims/{recipient}'
