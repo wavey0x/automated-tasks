@@ -2,3 +2,10 @@ networks:
   default: mainnet-fork
   
 autofetch_sources: True
+
+compiler:
+  # evm_version: shanghai
+  solc:
+    # version: 0.8.0
+    remappings:
+      - '@openzeppelin/contracts=OpenZeppelin/openzeppelin-contracts@4.9.2/contracts'

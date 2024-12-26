@@ -8,7 +8,20 @@ from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
 from brownie import (Contract, accounts, ZERO_ADDRESS, chain, web3, interface, ZERO_ADDRESS)
 
-# logging.basicConfig(level=logging.DEBUG) 
+class TroveOperation:
+    OPEN = 0
+    CLOSE = 1
+    ADJUST = 2
+
+    @staticmethod
+    def to_string(operation):
+        if operation == TroveOperation.OPEN:
+            return "Open"
+        elif operation == TroveOperation.CLOSE:
+            return "Close"
+        elif operation == TroveOperation.ADJUST:
+            return "Adjust"
+        return "Unknown"
 
 load_dotenv(find_dotenv())
 DAY = 60 * 60 * 24
@@ -67,6 +80,7 @@ def main():
     claim_prisma_hh()
     deposit_ybs_rewards()
     new_ycrv_splitter()
+    prisma_tm_alerts()
     
 def stg_harvest():
     threshold = 200_000e6
@@ -578,5 +592,64 @@ def new_ycrv_splitter():
         bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
 
 
+def prisma_tm_alerts():
+    from web3._utils.events import construct_event_topic_set
+    managers = get_tvl_by_manager()
+    total_tvl = sum(managers.values())
+    bo = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
+    prisma_bo = ['0x72c590349535AD52e6953744cb2A36B409542719','0xeCabcF7d41Ca644f87B25704cF77E3011D9a70a1']
+    last_run_block = get_last_run_block()
+    last_run_block = last_run_block if last_run_block > 0 else 20989076# 21489076
+    contract = web3.eth.contract(bo.address, abi=bo.abi)
+    topics = construct_event_topic_set(
+        contract.events.TroveUpdated().abi, 
+        web3.codec,
+        {}
+    )
+    logs = web3.eth.get_logs(
+        { 'topics': topics, 'fromBlock': last_run_block, 'toBlock': chain.height }
+    )
+    events = contract.events.TroveUpdated().process_receipt({'logs': logs})
 
-    
+
+    for event in events:
+        if event.address not in prisma_bo:
+            continue
+        borrower = event.args['_borrower']
+        block_number = event.blockNumber
+        txn_hash = event.transactionHash.hex()
+        collateral = event.args['_coll']
+        debt = event.args['_debt']
+        operation = event.args['operation']
+        print(
+            borrower, 
+            collateral/1e18, 
+            debt/1e18, 
+            TroveOperation.to_string(operation)
+        )
+        msg = f'🌈 Prisma Repayment Detected\n\n{borrower[:4]}...{borrower[-2:]} \nCollateral remaining: {collateral/1e18:,.2f} \nDebt remaining: {debt/1e18:,.2f}'
+        msg += f'\n\n💰 Total TVL Remaining: ${total_tvl:,.2f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
+        send_alert(CHAT_IDS['YLOCKERS'], msg, True)
+
+def get_tvl_by_manager():
+    factories = [Contract('0x70b66E20766b775B2E9cE5B718bbD285Af59b7E1'), Contract('0xDb2222735e926f3a18D7d1D0CFeEf095A66Aea2A')]
+    managers = {}
+    for factory in factories:
+        count = factory.troveManagerCount() 
+        for i in range (0, count):
+            tm = factory.troveManagers(i)
+            if tm == ZERO_ADDRESS:
+                break
+            managers[tm] = Contract(tm).getTotalActiveDebt()/1e18
+    return managers
+
+def get_last_run_block():
+    file_path = 'local_data.json'
+    if os.path.isfile(file_path):
+        with open(file_path, 'r') as file:
+            try:
+                data = json.load(file)
+                return data['last_run_block']
+            except:
+                print('Error reading local data file.')
+    return 0
