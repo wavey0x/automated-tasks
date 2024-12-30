@@ -595,6 +595,8 @@ def new_ycrv_splitter():
 def prisma_tm_alerts():
     print('Checking for Prisma Trove updates....')
     from web3._utils.events import construct_event_topic_set
+    trove_helper1 = Contract('0xc9C2D0bFb9860AD89a91D2069A8d73A6f903e9C4')
+    trove_helper2 = Contract('0x4404ff820dad76afc4f931079eb13fd418c9ae7a')
     managers = get_tvl_by_manager()
     total_tvl = sum(managers.values())
     bo = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
@@ -617,6 +619,19 @@ def prisma_tm_alerts():
             continue
         borrower = event.args['_borrower']
         block_number = event.blockNumber
+        debtToken = 'mkUSD'
+        for helper in [trove_helper1, trove_helper2]:
+            tms = helper.getActiveTroveManagersForAccount(borrower, block_identifier=block_number - 1)
+            if len(tms) > 0:
+                for tm in tms:
+                    tm = Contract(tm)
+                    collat_symbol = Contract(tm.collateralToken()).symbol()
+                    pre_debt = tm.getTroveCollAndDebt(borrower, block_identifier=block_number - 1)['debt']
+                    post_debt = tm.getTroveCollAndDebt(borrower, block_identifier=block_number)['debt']
+                    repayment = pre_debt - post_debt
+                    if repayment == 0:
+                        continue
+                    debtToken = Contract(tm.debtToken()).symbol()
         txn_hash = event.transactionHash.hex()
         collateral = event.args['_coll']
         debt = event.args['_debt']
@@ -627,7 +642,9 @@ def prisma_tm_alerts():
             debt/1e18,
             operation
         )
-        msg = f'🌈 Prisma Repayment Detected\n\n[{borrower[:5]}...{borrower[-3:]}](https://etherscan.io/address/{borrower}) {operation} their trove \nUser collat: {collateral/1e18:,.2f} \nUser debt: {debt/1e18:,.2f}'
+        msg = f'🌈 Prisma Repayment Detected\n\n[{borrower[:5]}...{borrower[-3:]}](https://etherscan.io/address/{borrower}) {operation} their {collat_symbol} trove \n'
+        # msg += f'User collat: {collateral/1e18:,.2f} \nUser debt: {debt/1e18:,.2f}'
+        msg += f'\nRepayment: {repayment/1e18:,.2f} {debtToken}'
         msg += f'\n\n💰 TVL Remaining: ${total_tvl:,.2f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
         send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, True)
 
