@@ -597,8 +597,6 @@ def prisma_tm_alerts():
     from web3._utils.events import construct_event_topic_set
     trove_helper1 = Contract('0xc9C2D0bFb9860AD89a91D2069A8d73A6f903e9C4')
     trove_helper2 = Contract('0x4404ff820dad76afc4f931079eb13fd418c9ae7a')
-    managers = get_tvl_by_manager()
-    total_tvl = sum(managers.values())
     bo = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
     prisma_bo = ['0x72c590349535AD52e6953744cb2A36B409542719','0xeCabcF7d41Ca644f87B25704cF77E3011D9a70a1']
     last_run_block = get_last_run_block()
@@ -629,24 +627,26 @@ def prisma_tm_alerts():
                     pre_debt = tm.getTroveCollAndDebt(borrower, block_identifier=block_number - 1)['debt']
                     post_debt = tm.getTroveCollAndDebt(borrower, block_identifier=block_number)['debt']
                     repayment = pre_debt - post_debt
+                    operation = TroveOperation.to_string(event.args['operation'])
+                    debt = event.args['_debt']
+                    collateral = event.args['_coll']
+                    print(
+                        borrower, 
+                        collateral/1e18, 
+                        debt/1e18,
+                        operation
+                    )
                     if repayment == 0:
                         continue
-                    debtToken = Contract(tm.debtToken()).symbol()
-        txn_hash = event.transactionHash.hex()
-        collateral = event.args['_coll']
-        debt = event.args['_debt']
-        operation = TroveOperation.to_string(event.args['operation'])
-        print(
-            borrower, 
-            collateral/1e18, 
-            debt/1e18,
-            operation
-        )
-        msg = f'🌈 Prisma Repayment Detected\n\n[{borrower[:5]}...{borrower[-3:]}](https://etherscan.io/address/{borrower}) {operation} their {collat_symbol} trove \n'
-        # msg += f'User collat: {collateral/1e18:,.2f} \nUser debt: {debt/1e18:,.2f}'
-        msg += f'\nRepayment: {repayment/1e18:,.2f} {debtToken}'
-        msg += f'\n\n💰 TVL Remaining: ${total_tvl:,.2f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
-        send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, True)
+                    else:
+                        debtToken = Contract(tm.debtToken()).symbol()
+                        txn_hash = event.transactionHash.hex()
+                        managers = get_tvl_by_manager()
+                        total_tvl = sum(managers.values())
+                        msg = f'🌈 Prisma Repayment Detected\n\n[{borrower[:5]}...{borrower[-3:]}](https://etherscan.io/address/{borrower}) {operation} their {collat_symbol} trove \n'
+                        msg += f'\nRepayment: {repayment/1e18:,.2f} {debtToken}'
+                        msg += f'\n\n💰 TVL Remaining: ${total_tvl:,.2f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
+                        send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, True)
 
 def get_tvl_by_manager():
     factories = [Contract('0x70b66E20766b775B2E9cE5B718bbD285Af59b7E1'), Contract('0xDb2222735e926f3a18D7d1D0CFeEf095A66Aea2A')]
