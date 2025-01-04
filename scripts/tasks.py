@@ -600,7 +600,7 @@ def prisma_tm_alerts():
     bo = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
     prisma_bo = ['0x72c590349535AD52e6953744cb2A36B409542719','0xeCabcF7d41Ca644f87B25704cF77E3011D9a70a1']
     last_run_block = get_last_run_block()
-    last_run_block = last_run_block if last_run_block > 0 else 21289076# 21489076
+    last_run_block = last_run_block if last_run_block > 0 else 21548724# 21489076
     contract = web3.eth.contract(bo.address, abi=bo.abi)
     topics = construct_event_topic_set(
         contract.events.TroveUpdated().abi, 
@@ -619,6 +619,8 @@ def prisma_tm_alerts():
         block_number = event.blockNumber
         debtToken = 'mkUSD'
         for helper in [trove_helper1, trove_helper2]:
+            if helper == trove_helper2 and block_number < 21455404:
+                continue
             tms = helper.getActiveTroveManagersForAccount(borrower, block_identifier=block_number - 1)
             if len(tms) > 0:
                 for tm in tms:
@@ -627,37 +629,38 @@ def prisma_tm_alerts():
                     pre_debt = tm.getTroveCollAndDebt(borrower, block_identifier=block_number - 1)['debt']
                     post_debt = tm.getTroveCollAndDebt(borrower, block_identifier=block_number)['debt']
                     repayment = pre_debt - post_debt
-                    operation = TroveOperation.to_string(event.args['operation'])
-                    debt = event.args['_debt']
-                    collateral = event.args['_coll']
-                    print(
-                        borrower, 
-                        collateral/1e18, 
-                        debt/1e18,
-                        operation
-                    )
-                    if repayment == 0:
+                    if repayment <= 0:
                         continue
                     else:
+                        operation = TroveOperation.to_string(event.args['operation'])
+                        debt = event.args['_debt']
+                        collateral = event.args['_coll']
+                        print(
+                            block_number,
+                            borrower, 
+                            collateral/1e18, 
+                            debt/1e18,
+                            operation
+                        )
                         debtToken = Contract(tm.debtToken()).symbol()
                         txn_hash = event.transactionHash.hex()
-                        managers = get_tvl_by_manager()
+                        managers = get_tvl_by_manager(block_number)
                         total_tvl = sum(managers.values())
                         msg = f'🌈 Prisma Repayment Detected\n\n[{borrower[:5]}...{borrower[-3:]}](https://etherscan.io/address/{borrower}) {operation} their {collat_symbol} trove \n'
                         msg += f'\nRepayment: {repayment/1e18:,.2f} {debtToken}'
                         msg += f'\n\n💰 TVL Remaining: ${total_tvl:,.2f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
                         send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, True)
 
-def get_tvl_by_manager():
+def get_tvl_by_manager(block_number):
     factories = [Contract('0x70b66E20766b775B2E9cE5B718bbD285Af59b7E1'), Contract('0xDb2222735e926f3a18D7d1D0CFeEf095A66Aea2A')]
     managers = {}
     for factory in factories:
-        count = factory.troveManagerCount() 
+        count = factory.troveManagerCount(block_identifier=block_number) 
         for i in range (0, count):
-            tm = factory.troveManagers(i)
+            tm = factory.troveManagers(i, block_identifier=block_number)
             if tm == ZERO_ADDRESS:
                 break
-            managers[tm] = Contract(tm).getTotalActiveDebt()/1e18
+            managers[tm] = Contract(tm).getTotalActiveDebt(block_identifier=block_number)/1e18
     return managers
 
 def get_last_run_block():
