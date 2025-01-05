@@ -602,7 +602,7 @@ def prisma_tm_alerts():
     prisma_bo = ['0x72c590349535AD52e6953744cb2A36B409542719','0xeCabcF7d41Ca644f87B25704cF77E3011D9a70a1']
     last_run_block = get_last_run_block()
     last_run_block = last_run_block if last_run_block > 0 else 21548724# 21489076
-    last_run_block = 21554160
+    # last_run_block = 21554160
     contract = web3.eth.contract(bo.address, abi=bo.abi)
     topics = construct_event_topic_set(
         contract.events.TroveUpdated().abi, 
