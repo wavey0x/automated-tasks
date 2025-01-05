@@ -595,12 +595,14 @@ def new_ycrv_splitter():
 def prisma_tm_alerts():
     print('Checking for Prisma Trove updates....')
     from web3._utils.events import construct_event_topic_set
+    ultra = Contract('0x35282d87011f87508D457F08252Bc5bFa52E10A0')
     trove_helper1 = Contract('0xc9C2D0bFb9860AD89a91D2069A8d73A6f903e9C4')
     trove_helper2 = Contract('0x4404ff820dad76afc4f931079eb13fd418c9ae7a')
     bo = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
     prisma_bo = ['0x72c590349535AD52e6953744cb2A36B409542719','0xeCabcF7d41Ca644f87B25704cF77E3011D9a70a1']
     last_run_block = get_last_run_block()
     last_run_block = last_run_block if last_run_block > 0 else 21548724# 21489076
+    last_run_block = 21554160
     contract = web3.eth.contract(bo.address, abi=bo.abi)
     topics = construct_event_topic_set(
         contract.events.TroveUpdated().abi, 
@@ -613,7 +615,7 @@ def prisma_tm_alerts():
     events = contract.events.TroveUpdated().process_receipt({'logs': logs})
     print(f'{len(events)} events detected')
     for event in events:
-        if event.address not in prisma_bo:
+        if event.address not in prisma_bo and not ultra.troveManager(event.address):
             continue
         borrower = event.args['_borrower']
         block_number = event.blockNumber
