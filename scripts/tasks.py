@@ -644,19 +644,21 @@ def prisma_tm_alerts():
                         )
                         debtToken = Contract(tm.debtToken()).symbol()
                         txn_hash = event.transactionHash.hex()
-                        managers = get_tvl_by_manager(block_number)
-                        total_tvl = sum(managers.values())
+                        managers = get_tvl_by_manager(False, block_number)
+                        managers_lrt = get_tvl_by_manager(True, block_number)
+                        total_mkusd_debt = sum(managers.values())
+                        total_ultra_debt = sum(managers_lrt.values())
                         msg = f'🌈 Prisma Repayment Detected\n\n[{borrower[:5]}...{borrower[-3:]}](https://etherscan.io/address/{borrower}) {operation} their {collat_symbol} trove \n'
                         msg += f'\nRepayment: {repayment/1e18:,.2f} {debtToken}'
-                        msg += f'\n\n💰 TVL Remaining: ${total_tvl:,.2f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
+                        msg += f'\n\n💰 mkUSD Debt Remaining: ${total_mkusd_debt:,.0f}\n💰 Ultra Debt Remaining: ${total_ultra_debt:,.0f}\n\n🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
                         send_alert(CHAT_IDS['WAVEY_ALERTS'], msg, True)
 
-def get_tvl_by_manager(block_number):
+def get_tvl_by_manager(lrt, block_number):
     factories = [Contract('0x70b66E20766b775B2E9cE5B718bbD285Af59b7E1'), Contract('0xDb2222735e926f3a18D7d1D0CFeEf095A66Aea2A')]
     managers = {}
-    for factory in factories:
-        count = factory.troveManagerCount(block_identifier=block_number) 
-        for i in range (0, count):
+    factory = factories[0] if not lrt else factories[1]
+    count = factory.troveManagerCount(block_identifier=block_number) 
+    for i in range (0, count):
             tm = factory.troveManagers(i, block_identifier=block_number)
             if tm == ZERO_ADDRESS:
                 break
