@@ -65,17 +65,26 @@ ADDRESSES = {
 
 }
 
+last_run_block = 0
+chain_height = 0
+
 def main():
-    # prisma_approvals()
+    global last_run_block, chain_height
+    last_run_block = get_last_run_block()
+    chain_height = chain.height
+    print(f'Setting last run block to {last_run_block:,} and chain height to {chain_height:,}')
+    file_path = 'local_data.json'
+    data = {
+        'last_run_block': chain_height,
+        'last_run_ts': chain.time(),
+        'last_run_dt': datetime.utcfromtimestamp(chain.time()).strftime("%m/%d/%Y, %H:%M:%S"),
+    }
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4) 
+    
     ybs_alerts()
     th_sweeper()
-    # stg_harvest()
     claim_votemarket()
-    # claim_bribes()
-    # yearn_fed()
-    # bribe_splitter()
-    # temple_split()
-    # ycrv_donator()
     claim_quest_bribes()
     claim_prisma_hh()
     deposit_ybs_rewards()
@@ -479,6 +488,17 @@ def get_collateral_value(user):
     
     return sum(collat_values.values())
 
+def get_last_run_block():
+    file_path = 'local_data.json'
+    if os.path.isfile(file_path):
+        with open(file_path, 'r') as file:
+            try:
+                data = json.load(file)
+                return data['last_run_block']
+            except:
+                print('Error reading local data file.')
+    return 0
+
 def ybs_alerts():
     THRESHOLD = 500_000
     registry = Contract('0x262be1d31d0754399d8d5dc63B99c22146E9f738')
@@ -486,32 +506,14 @@ def ybs_alerts():
         '0xFCc5c47bE19d06BF83eB04298b026F81069ff65b', # yCRV
     ]
 
-    block = chain.height
-    from_block = block - 10_000
-    to_block = block
-    data = {}
-    ts = chain.time()
-    dt = datetime.utcfromtimestamp(ts).strftime("%m/%d/%Y, %H:%M:%S")
-    file_path = 'local_data.json'
-    if os.path.isfile(file_path):
-        with open(file_path, 'r') as file:
-            try:
-                data = json.load(file)
-                from_block = data['last_run_block']+1
-            except:
-                print('Error reading local data file.')
-    data['last_run_block'] = block
-    data['last_run_ts'] = ts
-    data['last_run_dt'] = dt
-
     for token in tokens:
         token = Contract(token)
         deployment = registry.deployments(token)
         ybs = Contract(deployment['yearnBoostedStaker'])
         rewards = Contract(deployment['rewardDistributor'])
         utils = Contract(deployment['utilities'])
-        logs = ybs.events.Staked.get_logs(fromBlock=from_block, toBlock=to_block)
-        logs += ybs.events.Unstaked.get_logs(fromBlock=from_block, toBlock=to_block)
+        logs = ybs.events.Staked.get_logs(fromBlock=last_run_block, toBlock=chain_height)
+        logs += ybs.events.Unstaked.get_logs(fromBlock=last_run_block, toBlock=chain_height)
         for log in logs:
             account = log.args['account']
             txn_hash = log.transactionHash.hex()
@@ -526,9 +528,6 @@ def ybs_alerts():
             msg = f'🌈 Large YBS {event[:-1]} detected\n\n{markdown} {event} {amount:,.0f} {token.symbol()}\n\n 🔗 [View on Etherscan](https://etherscan.io/tx/{txn_hash})'
             if env == 'PROD':
                 bot.send_message(CHAT_IDS['MCKINSEY'], msg, parse_mode="markdown", disable_web_page_preview = True)
-
-    with open(file_path, 'w') as file:
-        json.dump(data, file, indent=4) 
 
 def abbreviate_address(address):
     KNOWN_ADDRESSES = {
@@ -593,6 +592,11 @@ def new_ycrv_splitter():
 
 
 def prisma_tm_alerts():
+    global chain_height, last_run_block  # Add this line to access the global variable
+    if last_run_block == 0:
+        last_run_block = get_last_run_block()
+    if chain_height == 0:
+        chain_height = chain.height
     print('Checking for Prisma Trove updates....')
     from web3._utils.events import construct_event_topic_set
     ultra = Contract('0x35282d87011f87508D457F08252Bc5bFa52E10A0')
@@ -600,17 +604,15 @@ def prisma_tm_alerts():
     trove_helper2 = Contract('0x4404ff820dad76afc4f931079eb13fd418c9ae7a')
     bo = Contract('0x72c590349535AD52e6953744cb2A36B409542719')
     prisma_bo = ['0x72c590349535AD52e6953744cb2A36B409542719','0xeCabcF7d41Ca644f87B25704cF77E3011D9a70a1']
-    last_run_block = get_last_run_block()
-    last_run_block = last_run_block if last_run_block > 0 else 21548724# 21489076
-    # last_run_block = 21554160
     contract = web3.eth.contract(bo.address, abi=bo.abi)
     topics = construct_event_topic_set(
         contract.events.TroveUpdated().abi, 
         web3.codec,
         {}
     )
+    print(f'Checking for Prisma Trove updates from block {last_run_block:,} to {chain_height:,}')
     logs = web3.eth.get_logs(
-        { 'topics': topics, 'fromBlock': last_run_block, 'toBlock': chain.height }
+        { 'topics': topics, 'fromBlock': last_run_block, 'toBlock': chain_height }
     )
     events = contract.events.TroveUpdated().process_receipt({'logs': logs})
     print(f'{len(events)} events detected')
