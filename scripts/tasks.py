@@ -72,7 +72,7 @@ def main():
     global last_run_block, chain_height
     last_run_block = get_last_run_block()
     chain_height = chain.height
-    print(f'Setting last run block to {last_run_block:,} and chain height to {chain_height:,}')
+    print(f'Searching from block: {last_run_block:,} to chain height: {chain_height:,}', flush=True)
     file_path = 'local_data.json'
     data = {
         'last_run_block': chain_height,
